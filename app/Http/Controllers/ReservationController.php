@@ -106,6 +106,7 @@ class ReservationController extends Controller
             $payment->amount = $request->advance;
             $payment->reservation_id = $reservation->id;
             $payment->advance = 1;
+            $payment->type = $request->payment_type;
             $payment->save();
         }
     

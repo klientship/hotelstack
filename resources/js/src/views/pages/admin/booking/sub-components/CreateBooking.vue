@@ -5,7 +5,7 @@
         <div class="p-4">
           <div class="vx-row mb-4">
             <div class="vx-col w-full">
-              Room Type
+              <p>Room Type</p>
               <v-select
                 label="label"
                 :options="options"
@@ -216,7 +216,7 @@
           </div>
 
           <div class="vx-row mb-4">
-            <div class="vx-col w-1/2">
+            <div class="vx-col w-1/3">
               <vs-input
                 :danger="form.errors.has('discount')"
                 type="text"
@@ -231,7 +231,7 @@
               >
             </div>
 
-            <div class="vx-col w-1/2">
+            <div class="vx-col w-1/3">
               <vs-input
                 :danger="form.errors.has('advance')"
                 type="text"
@@ -243,6 +243,20 @@
                 class="text-danger text-sm"
                 v-show="form.errors.has('advance')"
                 >{{ form.errors.get("advance") }}</span
+              >
+            </div>
+            <div class="vx-col w-1/3">
+              <p class="text-xs text-opacity-25s">Payment type</p>
+              <v-select
+                :options="['Cash', 'Card']"
+                :dir="$vs.rtl ? 'rtl' : 'ltr'"
+                v-model="form.payment_type"
+                class="mt-2"
+              />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('payment_type')"
+                >{{ form.errors.get("payment_type") }}</span
               >
             </div>
           </div>
@@ -335,6 +349,7 @@ export default {
         gst_no: "",
         checked_in: 0,
         status: true,
+        payment_type: "Cash",
       }),
       configdateTimePicker: {
         enableTime: true,
