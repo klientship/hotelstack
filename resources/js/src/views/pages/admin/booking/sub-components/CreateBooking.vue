@@ -1,10 +1,6 @@
 <template>
   <vs-tabs>
     <vs-tab :label="label">
-      <!-- ERRORS -->
-      <display-error :form="form"></display-error>
-      <!-- end Errors -->
-
       <form @keydown="form.errors.clear()">
         <div class="p-4">
           <div class="vx-row mb-4">
@@ -28,6 +24,11 @@
                 class="w-full"
                 @input="getAvailableRooms"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('check_in')"
+                >{{ form.errors.get("check_in") }}</span
+              >
             </div>
             <div class="vx-col w-1/2">
               <flat-pickr
@@ -37,6 +38,11 @@
                 class="w-full"
                 @input="getAvailableRooms"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('check_out')"
+                >{{ form.errors.get("check_out") }}</span
+              >
             </div>
           </div>
 
@@ -75,6 +81,11 @@
                         {{ room.number }}
                       </button>
                     </div>
+                    <span
+                      class="text-danger text-sm"
+                      v-show="form.errors.has('rooms')"
+                      >{{ form.errors.get("rooms") }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -84,18 +95,31 @@
           <div class="vx-row mb-4">
             <div class="vx-col w-1/2">
               <vs-input
+                :danger="form.errors.has('adults')"
                 class="w-full"
                 label-placeholder="Adults"
                 v-model="form.adults"
               />
+
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('adults')"
+                >{{ form.errors.get("adults") }}</span
+              >
             </div>
             <div class="vx-col w-1/2">
               <vs-input
+                :danger="form.errors.has('kids')"
                 type="text"
                 class="w-full"
                 label-placeholder="Kids"
                 v-model="form.kids"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('kids')"
+                >{{ form.errors.get("kids") }}</span
+              >
             </div>
           </div>
 
@@ -104,74 +128,126 @@
           <div class="vx-row mb-4">
             <div class="vx-col w-1/3">
               <vs-input
+                :danger="form.errors.has('name')"
                 type="text"
                 class="w-full"
                 label-placeholder="Name"
                 v-model="form.name"
               />
+
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('name')"
+                >{{ form.errors.get("name") }}</span
+              >
             </div>
             <div class="vx-col w-1/3">
               <vs-input
+                :danger="form.errors.has('phone')"
                 type="text"
                 class="w-full"
                 label-placeholder="Phone"
                 v-model="form.phone"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('phone')"
+                >{{ form.errors.get("phone") }}</span
+              >
             </div>
             <div class="vx-col w-1/3">
               <vs-input
+                :danger="form.errors.has('email')"
                 type="text"
                 class="w-full"
                 label-placeholder="Email"
                 v-model="form.email"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('email')"
+                >{{ form.errors.get("email") }}</span
+              >
             </div>
           </div>
           <div class="vx-row mb-4">
             <div class="vx-col w-1/2">
               <vs-input
+                :danger="form.errors.has('company_name')"
                 type="text"
                 class="w-full"
                 label-placeholder="Company Name"
                 v-model="form.company_name"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('company_name')"
+                >{{ form.errors.get("company_name") }}</span
+              >
             </div>
             <div class="vx-col w-1/2">
               <vs-input
+                :danger="form.errors.has('gst_no')"
                 type="text"
                 class="w-full"
                 label-placeholder="GST No"
                 v-model="form.gst_no"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('gst_no')"
+                >{{ form.errors.get("gst_no") }}</span
+              >
             </div>
           </div>
           <div class="vx-row mb-4">
             <div class="vx-col w-full">
-              <vs-textarea label="Address" v-model="form.address" />
+              <vs-textarea
+                :danger="form.errors.has('address')"
+                label="Address"
+                v-model="form.address"
+              />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('address')"
+                >{{ form.errors.get("address") }}</span
+              >
             </div>
           </div>
 
           <div class="vx-row mb-4">
             <div class="vx-col w-1/2">
               <vs-input
+                :danger="form.errors.has('discount')"
                 type="text"
                 class="w-full"
                 label-placeholder="Discount"
                 v-model="form.discount"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('discount')"
+                >{{ form.errors.get("discount") }}</span
+              >
             </div>
 
             <div class="vx-col w-1/2">
               <vs-input
+                :danger="form.errors.has('advance')"
                 type="text"
                 class="w-full"
                 label-placeholder="Advance"
                 v-model="form.advance"
               />
+              <span
+                class="text-danger text-sm"
+                v-show="form.errors.has('advance')"
+                >{{ form.errors.get("advance") }}</span
+              >
             </div>
           </div>
 
-          <div class="vx-row mt-4">
+          <!-- <div class="vx-row mt-4">
             <div class="vx-col w-full">
               <ul class="switch-container">
                 <li>
@@ -180,7 +256,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div> -->
 
           <div class="vx-row mb-4">
             <div class="vx-col w-1/2">
@@ -209,6 +285,9 @@
           </div>
         </div>
       </form>
+      <!-- ERRORS -->
+      <display-error :form="form"></display-error>
+      <!-- end Errors -->
     </vs-tab>
     <vs-tab label="Selected Rooms">
       <EditRooms></EditRooms>
@@ -238,9 +317,9 @@ export default {
         { label: "OTHER", value: "other_price" },
       ],
       form: new Form({
-        adults: "",
+        adults: 1,
         type: "",
-        kids: "",
+        kids: 0,
         check_in: "",
         check_out: "",
         total: 0,
@@ -307,6 +386,7 @@ export default {
     },
 
     onSubmit() {
+      console.log(this.form.errors.has("adults"));
       this.form.rooms = this.selectedRooms;
       this.form.total = this.total;
       this.form.balance = this.balance;
