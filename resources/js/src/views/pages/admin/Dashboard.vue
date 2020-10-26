@@ -2,14 +2,22 @@
   <div id="dashboard-analytics">
     <!-- add new -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="Create Checkin" :active.sync="isAddNewPopup">
+      <vs-popup
+        classContent="popup-example"
+        title="Create Checkin"
+        :active.sync="isAddNewPopup"
+      >
         <CreateBooking title="Checkin"></CreateBooking>
       </vs-popup>
     </div>
 
     <!-- view booking -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="View Checkin" :active.sync="isViewPopup">
+      <vs-popup
+        classContent="popup-example"
+        title="View Checkin"
+        :active.sync="isViewPopup"
+      >
         <ViewBooking title="Checkin" :data="data"></ViewBooking>
       </vs-popup>
     </div>
@@ -18,7 +26,10 @@
     <div class="vx-row">
       <!-- CARD 1: CONGRATS -->
       <div class="vx-col w-full lg:w-1/2 mb-base">
-        <vx-card slot="no-body" class="text-center bg-primary-gradient greet-user">
+        <vx-card
+          slot="no-body"
+          class="text-center bg-primary-gradient greet-user"
+        >
           <img
             src="@assets/images/elements/decore-left.png"
             class="decore-left"
@@ -36,34 +47,49 @@
             class="p-6 mb-8 bg-primary inline-flex rounded-full text-white shadow"
             svgClasses="h-8 w-8"
           ></feather-icon>
-          <h1 class="mb-6 text-white">{{greeting}} {{hotelDetails.name}},</h1>
+          <h1 class="mb-6 text-white">
+            {{ greeting }} {{ hotelDetails.name }},
+          </h1>
           <p class="xl:w-3/4 lg:w-4/5 md:w-2/3 w-4/5 mx-auto text-white">
             You have gained
-            <strong>{{dashboardDetails.gain_percentage}}%</strong>
-            income compared to yesterday. Today's total expense is &#8377;{{dashboardDetails.total_expense}}.
+            <strong>{{ dashboardDetails.gain_percentage }}%</strong>
+            income compared to yesterday. Today's total expense is &#8377;{{
+              dashboardDetails.total_expense
+            }}.
           </p>
         </vx-card>
       </div>
 
-      <!-- CARD 2: SUBSCRIBERS GAINED -->
+      <!-- Total of all bookings and other payment received -->
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
           :statistic="dashboardDetails.total_payment"
-          statisticTitle="Payments Received"
+          statisticTitle="Todays Business"
           :chartData="dashboardDetails.payments.series"
           type="area"
         ></statistics-card-line>
       </div>
 
-      <!-- CARD 3: ORDER RECIEVED -->
+      <!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChart2Icon"
+          :statistic="dashboardDetails.income"
+          statisticTitle="Profit"
+          :chartData="dashboardDetails.expenses.series"
+          color="success"
+          type="area"
+        ></statistics-card-line>
+      </div> -->
+
+      <!-- total expense -->
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChart2Icon"
           :statistic="dashboardDetails.income"
-          statisticTitle="Income Gained"
+          statisticTitle="Todays Expense"
           :chartData="dashboardDetails.expenses.series"
-          color="success"
+          color="danger"
           type="area"
         ></statistics-card-line>
       </div>
@@ -78,7 +104,7 @@
         v-if="roomTypes && roomTypes.length"
       >
         <div class="vx-col">
-          <h5 class="mb-2 ml-2">{{type.title}}</h5>
+          <h5 class="mb-2 ml-2">{{ type.title }}</h5>
           <vs-button
             v-for="room in type.rooms"
             :color="getColor(room.id)"
@@ -86,10 +112,131 @@
             :key="room.id"
             @click="clicked(room)"
             size="large"
-          >{{room.number}}</vs-button>
+            >{{ room.number }}</vs-button
+          >
         </div>
       </div>
     </vx-card>
+
+    <div class="vx-row mt-4">
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Payments Received"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Pending Payments"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Walkin Business"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Oyo Business"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+    </div>
+
+    <!-- numbers -->
+    <div class="vx-row mt-4">
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Soft drinks"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Paid Services"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Total Walkins"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Oyo Bookings"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+    </div>
+
+    <div class="vx-row mt-4">
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Profit"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+          color="success"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Total Checkin"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Total Checkout"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Future Bookings"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+    </div>
+
     <vx-card title="RECENT CHECKIN'S" title-color="primary" class="mt-4">
       <template>
         <vs-table :data="recent_checkins">
@@ -103,23 +250,31 @@
             <vs-th>STATUS</vs-th>
           </template>
 
-          <template slot-scope="{data}">
+          <template slot-scope="{ data }">
             <vs-tr :key="indextr" v-for="(tr, indextr) in data">
               <vs-td :data="data[indextr].email">{{ data[indextr].uid }}</vs-td>
 
-              <vs-td :data="data[indextr].username">{{ data[indextr].name }}</vs-td>
+              <vs-td :data="data[indextr].username">{{
+                data[indextr].name
+              }}</vs-td>
 
-              <vs-td
-                :data="data[indextr].id"
-              >{{ data[indextr].adults }} Adults & {{ data[indextr].kids }} Kids</vs-td>
-              <vs-td :data="data[indextr].id">{{ data[indextr].number_of_room }}</vs-td>
-              <vs-td :data="data[indextr].id">{{ data[indextr].check_out }}</vs-td>
+              <vs-td :data="data[indextr].id"
+                >{{ data[indextr].adults }} Adults &
+                {{ data[indextr].kids }} Kids</vs-td
+              >
+              <vs-td :data="data[indextr].id">{{
+                data[indextr].number_of_room
+              }}</vs-td>
+              <vs-td :data="data[indextr].id">{{
+                data[indextr].check_out
+              }}</vs-td>
               <vs-td :data="data[indextr].id">{{ data[indextr].total }}</vs-td>
               <vs-td>
                 <vs-chip
                   :color="getStatusColor(tr)"
                   class="product-order-status"
-                >{{ getStatus(tr) }}</vs-chip>
+                  >{{ getStatus(tr) }}</vs-chip
+                >
               </vs-td>
             </vs-tr>
           </template>
@@ -140,23 +295,31 @@
             <vs-th>STATUS</vs-th>
           </template>
 
-          <template slot-scope="{data}">
+          <template slot-scope="{ data }">
             <vs-tr :key="indextr" v-for="(tr, indextr) in data">
               <vs-td :data="data[indextr].email">{{ data[indextr].uid }}</vs-td>
 
-              <vs-td :data="data[indextr].username">{{ data[indextr].name }}</vs-td>
+              <vs-td :data="data[indextr].username">{{
+                data[indextr].name
+              }}</vs-td>
 
-              <vs-td
-                :data="data[indextr].id"
-              >{{ data[indextr].adults }} Adults & {{ data[indextr].kids }} Kids</vs-td>
-              <vs-td :data="data[indextr].id">{{ data[indextr].number_of_room }}</vs-td>
-              <vs-td :data="data[indextr].id">{{ data[indextr].check_out }}</vs-td>
+              <vs-td :data="data[indextr].id"
+                >{{ data[indextr].adults }} Adults &
+                {{ data[indextr].kids }} Kids</vs-td
+              >
+              <vs-td :data="data[indextr].id">{{
+                data[indextr].number_of_room
+              }}</vs-td>
+              <vs-td :data="data[indextr].id">{{
+                data[indextr].check_out
+              }}</vs-td>
               <vs-td :data="data[indextr].id">{{ data[indextr].total }}</vs-td>
               <vs-td>
                 <vs-chip
                   :color="getStatusColor(tr)"
                   class="product-order-status"
-                >{{ getStatus(tr) }}</vs-chip>
+                  >{{ getStatus(tr) }}</vs-chip
+                >
               </vs-td>
             </vs-tr>
           </template>
@@ -178,23 +341,31 @@
             <vs-th>STATUS</vs-th>
           </template>
 
-          <template slot-scope="{data}">
+          <template slot-scope="{ data }">
             <vs-tr :key="indextr" v-for="(tr, indextr) in data">
               <vs-td :data="data[indextr].email">{{ data[indextr].uid }}</vs-td>
 
-              <vs-td :data="data[indextr].username">{{ data[indextr].name }}</vs-td>
+              <vs-td :data="data[indextr].username">{{
+                data[indextr].name
+              }}</vs-td>
 
-              <vs-td
-                :data="data[indextr].id"
-              >{{ data[indextr].adults }} Adults & {{ data[indextr].kids }} Kids</vs-td>
-              <vs-td :data="data[indextr].id">{{ data[indextr].number_of_room }}</vs-td>
-              <vs-td :data="data[indextr].id">{{ data[indextr].check_in }}</vs-td>
+              <vs-td :data="data[indextr].id"
+                >{{ data[indextr].adults }} Adults &
+                {{ data[indextr].kids }} Kids</vs-td
+              >
+              <vs-td :data="data[indextr].id">{{
+                data[indextr].number_of_room
+              }}</vs-td>
+              <vs-td :data="data[indextr].id">{{
+                data[indextr].check_in
+              }}</vs-td>
               <vs-td :data="data[indextr].id">{{ data[indextr].total }}</vs-td>
               <vs-td>
                 <vs-chip
                   :color="getStatusColor(tr)"
                   class="product-order-status"
-                >{{ getStatus(tr) }}</vs-chip>
+                  >{{ getStatus(tr) }}</vs-chip
+                >
               </vs-td>
             </vs-tr>
           </template>

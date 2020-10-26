@@ -129,10 +129,9 @@ export default [
     icon: 'PackageIcon',
     i18n: 'Apps',
     items: [
-
       {
         url: null,
-        name: 'Reports',
+        name: 'Accounts',
         icon: 'LayersIcon',
         i18n: 'Restaurant',
         submenu: [
@@ -150,6 +149,14 @@ export default [
             icon: 'TrendingUpIcon',
             i18n: 'payments'
           },
+          // amount, desc, hotel name
+          {
+            url: '/admin/commission',
+            name: 'Commission',
+            slug: 'commission',
+            icon: 'TrendingUpIcon',
+            i18n: 'commission'
+          },
           {
             url: '/admin/expenses',
             name: 'Expenses',
@@ -157,6 +164,28 @@ export default [
             icon: 'TrendingDownIcon',
             i18n: 'expense'
           },
+
+
+        ]
+      },
+
+      {
+        url: null,
+        name: 'Reports',
+        icon: 'LayersIcon',
+        i18n: 'Restaurant',
+        submenu: [
+
+
+
+          {
+            url: '/admin/invoices',
+            name: 'Invoices',
+            slug: 'invoice',
+            icon: 'FileTextIcon',
+            i18n: 'invoices'
+          },
+
           {
             url: '/admin/reservation_paid_services',
             name: 'Paid Services',
@@ -165,15 +194,22 @@ export default [
             i18n: 'Chat'
           },
           {
-            url: '/admin/invoices',
-            name: 'Invoices',
-            slug: 'invoice',
-            icon: 'FileTextIcon',
-            i18n: 'invoices'
+            url: '/admin/oyo_reports',
+            name: 'Oyo Reports',
+            slug: 'oyo-reports',
+            icon: 'LayersIcon',
+            i18n: 'oyo-reports'
+          },
+          {
+            url: '/admin/walkin_reports',
+            name: 'Walkin Reports',
+            slug: 'walkin-reports',
+            icon: 'LayersIcon',
+            i18n: 'walkin-reports'
           },
           {
             url: '/admin/reports',
-            name: 'Reports',
+            name: 'General Reports',
             slug: 'reports',
             icon: 'LayersIcon',
             i18n: 'reports'
@@ -181,6 +217,9 @@ export default [
         ]
       },
 
+
     ]
   },
+
+
 ]
