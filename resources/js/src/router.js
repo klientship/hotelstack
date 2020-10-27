@@ -157,6 +157,14 @@ const router = new Router({
             requiresAuth: true
           }
         },
+        {
+          path: '/admin/oyo_reports',
+          name: 'oyo_reports',
+          component: () => import('@/views/pages/admin/Reports/OyoReports.vue'),
+          meta: {
+            requiresAuth: true
+          }
+        },
         // restaurant
 
         {

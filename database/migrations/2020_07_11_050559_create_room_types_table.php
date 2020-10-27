@@ -20,6 +20,7 @@ class CreateRoomTypesTable extends Migration
             $table->longText('description')->nullable();
             $table->float('base_price',8,2)->default(0);
             $table->float('ac_price',8,2)->default(0);
+            $table->float('oyo_price',8,2)->default(0);
             $table->float('other_price',8,2)->default(0);
             $table->float('tax_1',8,2)->default(0);
             $table->float('tax_2',8,2)->default(0);

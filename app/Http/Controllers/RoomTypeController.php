@@ -44,6 +44,9 @@ class RoomTypeController extends Controller
             'short_code'=>'required|max:191|unique:room_types',
             'description'=>'max:500',
             'base_price'=>'required|numeric|min:0',
+            'ac_price'=>'required|numeric|min:0',
+            'oyo_price'=>'required|numeric|min:0',
+            'other_price'=>'required|numeric|min:0',
             'tax_1'=>'required|numeric',
             'tax_2'=>'required|numeric',
             'status'=>'required|boolean',
@@ -55,6 +58,7 @@ class RoomTypeController extends Controller
         $roomType->description = $request->description;
         $roomType->base_price = $request->base_price;
         $roomType->ac_price = $request->ac_price;
+        $roomType->oyo_price = $request->oyo_price;
         $roomType->other_price = $request->other_price;
         $roomType->tax_1 = $request->tax_1;
         $roomType->tax_2 = $request->tax_2;
@@ -100,6 +104,9 @@ class RoomTypeController extends Controller
             'short_code'=>"required|max:191|unique:room_types,short_code,$roomType->id",
             'description'=>'max:500',
             'base_price'=>'required|numeric|min:0',
+            'ac_price'=>'required|numeric|min:0',
+            'oyo_price'=>'required|numeric|min:0',
+            'other_price'=>'required|numeric|min:0',
             'tax_1'=>'required|numeric',
             'tax_2'=>'required|numeric',
             'status'=>'required|boolean',
@@ -110,6 +117,7 @@ class RoomTypeController extends Controller
         $roomType->description = $request->description;
         $roomType->base_price = $request->base_price;
         $roomType->ac_price = $request->ac_price;
+        $roomType->oyo_price = $request->oyo_price;
         $roomType->other_price = $request->other_price;
         $roomType->tax_1 = $request->tax_1;
         $roomType->tax_2 = $request->tax_2;
