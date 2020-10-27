@@ -149,6 +149,14 @@ const router = new Router({
             requiresAuth: true
           }
         },
+        {
+          path: '/admin/reports',
+          name: 'invoices',
+          component: () => import('@/views/pages/admin/Reports/Reports.vue'),
+          meta: {
+            requiresAuth: true
+          }
+        },
         // restaurant
 
         {

@@ -1,101 +1,172 @@
 
 
 <template>
-  <div id="ag-grid-demo">
-    <vx-card>
-      <!-- TABLE ACTION ROW -->
-      <div class="flex flex-wrap justify-between items-center">
-        <!-- ITEMS PER PAGE -->
-        <div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
-          <vs-dropdown vs-trigger-click class="dd-actions cursor-pointer mr-4 mb-4">
-            <div
-              class="p-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer flex items-center justify-center text-lg font-medium w-full"
-            >
-              <span class="mr-2">Filter</span>
-              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-            </div>
-
-            <vs-dropdown-menu>
-              <vs-dropdown-item @click="thisMonth">
-                <span class="flex items-center">
-                  <!-- <feather-icon icon="TrashIcon" svgClasses="h-4 w-4" class="mr-2" /> -->
-                  <span :class="[filter == 'this_month' ? 'text-primary': '']">This Month</span>
-                </span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="lastMonth">
-                <span class="flex items-center">
-                  <span :class="[filter == 'last_month' ? 'text-primary': '']">Last Month</span>
-                </span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="all">
-                <span class="flex items-center">
-                  <span :class="[filter == 'all' ? 'text-primary': '']">All</span>
-                </span>
-              </vs-dropdown-item>
-            </vs-dropdown-menu>
-          </vs-dropdown>
-
-          <vs-dropdown vs-trigger-click class="cursor-pointer">
-            <div
-              class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
-            >
-              <span
-                class="mr-2"
-              >{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ paid_services.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : paid_services.length }} of {{ paid_services.length }}</span>
-              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-            </div>
-
-            <vs-dropdown-menu>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(20)">
-                <span>20</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(50)">
-                <span>50</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(100)">
-                <span>100</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(150)">
-                <span>150</span>
-              </vs-dropdown-item>
-            </vs-dropdown-menu>
-          </vs-dropdown>
-        </div>
-
-        <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
-        <div class="flex flex-wrap items-center justify-between ag-grid-table-actions-right">
-          <vs-input
-            class="mb-4 md:mb-0 mr-4"
-            v-model="searchQuery"
-            @input="updateSearchQuery"
-            placeholder="Search..."
-          />
-          <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button>
-        </div>
+  <div>
+    <div class="vx-row mt-4">
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Total Services"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+          color="success"
+        ></statistics-card-line>
       </div>
-      <ag-grid-vue
-        ref="agGridTable"
-        :gridOptions="gridOptions"
-        class="ag-theme-material w-100 my-4 ag-grid-table"
-        :columnDefs="columnDefs"
-        :defaultColDef="defaultColDef"
-        :rowData="paid_services"
-        rowSelection="multiple"
-        colResizeDefault="shift"
-        :animateRows="true"
-        :floatingFilter="true"
-        :pagination="true"
-        :paginationPageSize="paginationPageSize"
-        :suppressPaginationPanel="true"
-        :enableRtl="$vs.rtl"
-      ></ag-grid-vue>
-      <vs-pagination :total="totalPages" :max="maxPageNumbers" v-model="currentPage" />
-    </vx-card>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Monthly Services"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Total Amount"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_payment"
+          statisticTitle="Monthly Total"
+          :chartData="dashboardDetails.payments.series"
+          type="area"
+        ></statistics-card-line>
+      </div>
+    </div>
+
+    <div id="ag-grid-demo">
+      <vx-card>
+        <!-- TABLE ACTION ROW -->
+        <div class="flex flex-wrap justify-between items-center">
+          <!-- ITEMS PER PAGE -->
+          <div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
+            <vs-dropdown
+              vs-trigger-click
+              class="dd-actions cursor-pointer mr-4 mb-4"
+            >
+              <div
+                class="p-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer flex items-center justify-center text-lg font-medium w-full"
+              >
+                <span class="mr-2">Filter</span>
+                <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
+              </div>
+
+              <vs-dropdown-menu>
+                <vs-dropdown-item @click="thisMonth">
+                  <span class="flex items-center">
+                    <!-- <feather-icon icon="TrashIcon" svgClasses="h-4 w-4" class="mr-2" /> -->
+                    <span
+                      :class="[filter == 'this_month' ? 'text-primary' : '']"
+                      >This Month</span
+                    >
+                  </span>
+                </vs-dropdown-item>
+                <vs-dropdown-item @click="lastMonth">
+                  <span class="flex items-center">
+                    <span
+                      :class="[filter == 'last_month' ? 'text-primary' : '']"
+                      >Last Month</span
+                    >
+                  </span>
+                </vs-dropdown-item>
+                <vs-dropdown-item @click="all">
+                  <span class="flex items-center">
+                    <span :class="[filter == 'all' ? 'text-primary' : '']"
+                      >All</span
+                    >
+                  </span>
+                </vs-dropdown-item>
+              </vs-dropdown-menu>
+            </vs-dropdown>
+
+            <vs-dropdown vs-trigger-click class="cursor-pointer">
+              <div
+                class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
+              >
+                <span class="mr-2"
+                  >{{
+                    currentPage * paginationPageSize - (paginationPageSize - 1)
+                  }}
+                  -
+                  {{
+                    paid_services.length - currentPage * paginationPageSize > 0
+                      ? currentPage * paginationPageSize
+                      : paid_services.length
+                  }}
+                  of {{ paid_services.length }}</span
+                >
+                <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
+              </div>
+
+              <vs-dropdown-menu>
+                <vs-dropdown-item @click="gridApi.paginationSetPageSize(20)">
+                  <span>20</span>
+                </vs-dropdown-item>
+                <vs-dropdown-item @click="gridApi.paginationSetPageSize(50)">
+                  <span>50</span>
+                </vs-dropdown-item>
+                <vs-dropdown-item @click="gridApi.paginationSetPageSize(100)">
+                  <span>100</span>
+                </vs-dropdown-item>
+                <vs-dropdown-item @click="gridApi.paginationSetPageSize(150)">
+                  <span>150</span>
+                </vs-dropdown-item>
+              </vs-dropdown-menu>
+            </vs-dropdown>
+          </div>
+
+          <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
+          <div
+            class="flex flex-wrap items-center justify-between ag-grid-table-actions-right"
+          >
+            <vs-input
+              class="mb-4 md:mb-0 mr-4"
+              v-model="searchQuery"
+              @input="updateSearchQuery"
+              placeholder="Search..."
+            />
+            <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()"
+              >Export as CSV</vs-button
+            >
+          </div>
+        </div>
+        <ag-grid-vue
+          ref="agGridTable"
+          :gridOptions="gridOptions"
+          class="ag-theme-material w-100 my-4 ag-grid-table"
+          :columnDefs="columnDefs"
+          :defaultColDef="defaultColDef"
+          :rowData="paid_services"
+          rowSelection="multiple"
+          colResizeDefault="shift"
+          :animateRows="true"
+          :floatingFilter="true"
+          :pagination="true"
+          :paginationPageSize="paginationPageSize"
+          :suppressPaginationPanel="true"
+          :enableRtl="$vs.rtl"
+        ></ag-grid-vue>
+        <vs-pagination
+          :total="totalPages"
+          :max="maxPageNumbers"
+          v-model="currentPage"
+        />
+      </vx-card>
+    </div>
   </div>
 </template>
 
 <script>
 import { AgGridVue } from "ag-grid-vue";
+import StatisticsCardLine from "@/components/statistics-cards/StatisticsCardLine.vue";
 
 import "@sass/vuexy/extraComponents/agGridStyleOverride.scss";
 import { mapGetters } from "vuex";
@@ -103,6 +174,7 @@ import { mapGetters } from "vuex";
 export default {
   components: {
     AgGridVue,
+    StatisticsCardLine,
   },
   data() {
     return {
@@ -160,6 +232,16 @@ export default {
   computed: {
     ...mapGetters({ paid_services: "getAllReservationPaidServices" }),
 
+    // test
+    ...mapGetters({ roomTypes: "getRoomTypesWithRooms" }),
+    ...mapGetters({ recent_checkins: "getRecentCheckins" }),
+    ...mapGetters({ todays_checkins: "getTodaysCheckins" }),
+    ...mapGetters({ todays_checkouts: "getTodaysCheckouts" }),
+    ...mapGetters({ availableRooms: "getAvailableRoomsToday" }),
+    ...mapGetters({ houseKeepings: "getHouseKeepings" }),
+    ...mapGetters({ hotelDetails: "getHotelDetails" }),
+    ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
+
     paginationPageSize() {
       if (this.gridApi) return this.gridApi.paginationGetPageSize();
       else return 50;
@@ -211,6 +293,15 @@ export default {
   },
   created() {
     this.$store.dispatch("RETRIEVE_THIS_MONTH_RESERVATION_PAID_SERVICES");
+  },
+  mounted() {
+    this.$store.dispatch("retrieveAvailableRoomsToday");
+    this.$store.dispatch("retrieveHouseKeepingRooms");
+    this.$store.dispatch("retrieveRoomTypesWithRooms");
+    this.$store.dispatch("retrieveRecentCheckins");
+    this.$store.dispatch("retrieveTodaysCheckins");
+    this.$store.dispatch("retrieveTodaysCheckouts");
+    this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
   },
 };
 </script>
