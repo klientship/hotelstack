@@ -9,10 +9,18 @@
       search
       :data="products"
     >
-      <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
-        <div class="flex flex-wrap-reverse items-center data-list-btn-container">
+      <div
+        slot="header"
+        class="flex flex-wrap-reverse items-center flex-grow justify-between"
+      >
+        <div
+          class="flex flex-wrap-reverse items-center data-list-btn-container"
+        >
           <!-- ACTION - DROPDOWN -->
-          <vs-dropdown vs-trigger-click class="dd-actions cursor-pointer mr-4 mb-4">
+          <vs-dropdown
+            vs-trigger-click
+            class="dd-actions cursor-pointer mr-4 mb-4"
+          >
             <div
               class="p-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer flex items-center justify-center text-lg font-medium w-full"
             >
@@ -23,7 +31,11 @@
             <vs-dropdown-menu>
               <vs-dropdown-item @click="deleteSelected">
                 <span class="flex items-center">
-                  <feather-icon icon="TrashIcon" svgClasses="h-4 w-4" class="mr-2" />
+                  <feather-icon
+                    icon="TrashIcon"
+                    svgClasses="h-4 w-4"
+                    class="mr-2"
+                  />
                   <span>Delete</span>
                 </span>
               </vs-dropdown-item>
@@ -48,27 +60,36 @@
         </div>
 
         <!-- ITEMS PER PAGE -->
-        <vs-dropdown vs-trigger-click class="cursor-pointer mb-4 mr-4 items-per-page-handler">
+        <vs-dropdown
+          vs-trigger-click
+          class="cursor-pointer mb-4 mr-4 items-per-page-handler"
+        >
           <div
             class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
           >
-            <span
-              class="mr-2"
-            >{{ currentPage * itemsPerPage - (itemsPerPage - 1) }} - {{ products.length - currentPage * itemsPerPage > 0 ? currentPage * itemsPerPage : products.length }} of {{ queriedItems }}</span>
+            <span class="mr-2"
+              >{{ currentPage * itemsPerPage - (itemsPerPage - 1) }} -
+              {{
+                products.length - currentPage * itemsPerPage > 0
+                  ? currentPage * itemsPerPage
+                  : products.length
+              }}
+              of {{ queriedItems }}</span
+            >
             <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
           </div>
           <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
           <vs-dropdown-menu>
-            <vs-dropdown-item @click="itemsPerPage=4">
+            <vs-dropdown-item @click="itemsPerPage = 4">
               <span>4</span>
             </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=10">
+            <vs-dropdown-item @click="itemsPerPage = 10">
               <span>10</span>
             </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=15">
+            <vs-dropdown-item @click="itemsPerPage = 15">
               <span>15</span>
             </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=20">
+            <vs-dropdown-item @click="itemsPerPage = 20">
               <span>20</span>
             </vs-dropdown-item>
           </vs-dropdown-menu>
@@ -81,12 +102,13 @@
         <vs-th sort-key="description">Description</vs-th>
         <vs-th sort-key="base_price">Base Price</vs-th>
         <vs-th sort-key="base_price">AC Price</vs-th>
+        <vs-th sort-key="base_price">Oyo Price</vs-th>
         <vs-th sort-key="base_price">Other Price</vs-th>
         <vs-th sort-key="status">Status</vs-th>
         <vs-th>Action</vs-th>
       </template>
 
-      <template slot-scope="{data}">
+      <template slot-scope="{ data }">
         <tbody>
           <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
             <vs-td>
@@ -97,22 +119,25 @@
               <p class="product-category">{{ tr.short_code }}</p>
             </vs-td>
             <vs-td>
-              <p class="product-category">{{ tr.description}}</p>
+              <p class="product-category">{{ tr.description }}</p>
             </vs-td>
             <vs-td>
-              <p class="product-category">&#8377; {{ tr.base_price}}</p>
+              <p class="product-category">&#8377; {{ tr.base_price }}</p>
             </vs-td>
             <vs-td>
-              <p class="product-category">&#8377; {{ tr.ac_price}}</p>
+              <p class="product-category">&#8377; {{ tr.ac_price }}</p>
             </vs-td>
             <vs-td>
-              <p class="product-category">&#8377; {{ tr.other_price}}</p>
+              <p class="product-category">&#8377; {{ tr.oyo_price }}</p>
+            </vs-td>
+            <vs-td>
+              <p class="product-category">&#8377; {{ tr.other_price }}</p>
             </vs-td>
             <vs-td>
               <p class="product-category">
-                1000 to 2499 - {{ tr.tax_1}} %
+                1000 to 2499 - {{ tr.tax_1 }} %
                 <br />
-                2500 - {{ tr.tax_2}} %
+                2500 - {{ tr.tax_2 }} %
               </p>
             </vs-td>
 
@@ -120,7 +145,8 @@
               <vs-chip
                 :color="getStatusColor(tr.status)"
                 class="product-order-status"
-              >{{ getStatus(tr.status) }}</vs-chip>
+                >{{ getStatus(tr.status) }}</vs-chip
+              >
             </vs-td>
 
             <vs-td class="whitespace-no-wrap">
@@ -143,7 +169,11 @@
 
     <!-- add new -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="Create Room Type" :active.sync="isAddNewPopup">
+      <vs-popup
+        classContent="popup-example"
+        title="Create Room Type"
+        :active.sync="isAddNewPopup"
+      >
         <!-- ERRORS -->
         <display-error :form="form"></display-error>
         <!-- End ERRORS -->
@@ -152,7 +182,11 @@
           <div class="p-4">
             <div class="vx-row mb-4">
               <div class="vx-col w-full">
-                <vs-input class="w-full" label-placeholder="Title" v-model="form.title" />
+                <vs-input
+                  class="w-full"
+                  label-placeholder="Title"
+                  v-model="form.title"
+                />
               </div>
             </div>
             <div class="vx-row mb-4">
@@ -166,7 +200,7 @@
               </div>
             </div>
             <div class="vx-row mb-4">
-              <div class="vx-col w-1/3">
+              <div class="vx-col w-1/4">
                 <vs-input
                   type="text"
                   class="w-full"
@@ -174,7 +208,7 @@
                   v-model="form.base_price"
                 />
               </div>
-              <div class="vx-col w-1/3">
+              <div class="vx-col w-1/4">
                 <vs-input
                   type="text"
                   class="w-full"
@@ -182,7 +216,15 @@
                   v-model="form.ac_price"
                 />
               </div>
-              <div class="vx-col w-1/3">
+              <div class="vx-col w-1/4">
+                <vs-input
+                  type="text"
+                  class="w-full"
+                  label-placeholder="Oyo Price"
+                  v-model="form.oyo_price"
+                />
+              </div>
+              <div class="vx-col w-1/4">
                 <vs-input
                   type="text"
                   class="w-full"
@@ -234,13 +276,19 @@
                   class="mr-3 mb-4"
                   @click.prevent="onSubmit"
                   :disabled="form.errors.any()"
-                >Submit</vs-button>
+                  >Submit</vs-button
+                >
                 <vs-button
                   color="warning"
                   type="border"
                   class="mb-4"
-                  @click="form.title = form.short_code = form.description = form.base_price =  ''; form.status= 1;"
-                >Reset</vs-button>
+                  @click="
+                    form.title = form.short_code = form.description = form.base_price =
+                      '';
+                    form.status = 1;
+                  "
+                  >Reset</vs-button
+                >
               </div>
             </div>
           </div>
@@ -252,7 +300,11 @@
 
     <!-- update -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="Edit Room Type" :active.sync="isUpdatePopup">
+      <vs-popup
+        classContent="popup-example"
+        title="Edit Room Type"
+        :active.sync="isUpdatePopup"
+      >
         <!-- ERRORS -->
         <display-error :form="form"></display-error>
         <!-- End ERRORS -->
@@ -261,7 +313,11 @@
           <div class="p-4">
             <div class="vx-row mb-4">
               <div class="vx-col w-full">
-                <vs-input class="w-full" label-placeholder="Title" v-model="form.title" />
+                <vs-input
+                  class="w-full"
+                  label-placeholder="Title"
+                  v-model="form.title"
+                />
               </div>
             </div>
             <div class="vx-row mb-4">
@@ -275,7 +331,7 @@
               </div>
             </div>
             <div class="vx-row mb-4">
-              <div class="vx-col w-1/3">
+              <div class="vx-col w-1/4">
                 <vs-input
                   type="text"
                   class="w-full"
@@ -283,7 +339,7 @@
                   v-model="form.base_price"
                 />
               </div>
-              <div class="vx-col w-1/3">
+              <div class="vx-col w-1/4">
                 <vs-input
                   type="text"
                   class="w-full"
@@ -291,7 +347,15 @@
                   v-model="form.ac_price"
                 />
               </div>
-              <div class="vx-col w-1/3">
+              <div class="vx-col w-1/4">
+                <vs-input
+                  type="text"
+                  class="w-full"
+                  label-placeholder="Oyo Price"
+                  v-model="form.oyo_price"
+                />
+              </div>
+              <div class="vx-col w-1/4">
                 <vs-input
                   type="text"
                   class="w-full"
@@ -343,13 +407,20 @@
                   class="mr-3 mb-4"
                   @click.prevent="onUpdate"
                   :disabled="form.errors.any()"
-                >Update</vs-button>
+                  >Update</vs-button
+                >
                 <vs-button
                   color="warning"
                   type="border"
                   class="mb-4"
-                  @click="form.title = form.short_code = form.description = form.base_price =  ''; form.status= 1; form.tax = 0;"
-                >Reset</vs-button>
+                  @click="
+                    form.title = form.short_code = form.description = form.base_price = form.ac_price = form.oyo_price = form.other_price =
+                      '';
+                    form.status = 1;
+                    form.tax = 0;
+                  "
+                  >Reset</vs-button
+                >
               </div>
             </div>
           </div>
@@ -387,6 +458,7 @@ export default {
         description: "",
         base_price: "",
         ac_price: "",
+        oyo_price: "",
         other_price: "",
         tax_1: 0,
         tax_2: 0,

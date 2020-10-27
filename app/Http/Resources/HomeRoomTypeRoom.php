@@ -19,6 +19,7 @@ class HomeRoomTypeRoom extends JsonResource
             'type' => $this->room_type->title,
             'price' => $this->room_type->base_price,
             'ac_price' => $this->room_type->ac_price,
+            'oyo_price' => $this->room_type->oyo_price,
             'other_price' => $this->room_type->other_price,
             'room_type_id' => $this->room_type->id,
             'floor' => $this->floor->name,

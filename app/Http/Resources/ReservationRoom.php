@@ -19,6 +19,7 @@ class ReservationRoom extends JsonResource
             'type' => $this->room->room_type->title,
             'price' => $this->price,
             'ac_price' => $this->room->room_type->ac_price,
+            'oyo_price' => $this->room->room_type->oyo_price,
             'other_price' => $this->room->room_type->other_price,
             'room_type_id' => $this->room->room_type->id,
             'floor' => $this->room->floor->name,

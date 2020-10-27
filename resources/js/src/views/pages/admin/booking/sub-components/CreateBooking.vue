@@ -328,6 +328,7 @@ export default {
       options: [
         { label: "AC", value: "ac_price" },
         { label: "NON AC", value: "price" },
+        { label: "OYO", value: "oyo_price" },
         { label: "OTHER", value: "other_price" },
       ],
       form: new Form({

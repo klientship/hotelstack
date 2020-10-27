@@ -42,7 +42,14 @@
 
           <div class="contained-example-container">
             <div id="div-with-loading" class="vs-con-loading__container">
-              <div v-if="availableRoomTypes && availableRoomTypes.length && check_in && check_out">
+              <div
+                v-if="
+                  availableRoomTypes &&
+                  availableRoomTypes.length &&
+                  check_in &&
+                  check_out
+                "
+              >
                 <p class="mb-4">Select Room</p>
 
                 <div class="vx-row mb-4">
@@ -51,16 +58,22 @@
                     v-for="roomtype in availableRoomTypes"
                     :key="roomtype.id"
                   >
-                    <p>{{roomtype.title}}</p>
+                    <p>{{ roomtype.title }}</p>
                     <div class="mt-2">
                       <button
                         type="button"
                         class="mr-2 pl-2 pr-2 pt-1 pb-1 small room-button"
-                        :class="selectedRooms.some(el => el.id == room.id) ? 'room-selected' :''"
+                        :class="
+                          selectedRooms.some((el) => el.id == room.id)
+                            ? 'room-selected'
+                            : ''
+                        "
                         v-for="room in roomtype.rooms"
                         @click.prevent="selectRoom(room, roomtype)"
                         :key="room.id"
-                      >{{room.number}}</button>
+                      >
+                        {{ room.number }}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -70,10 +83,19 @@
 
           <div class="vx-row mb-4">
             <div class="vx-col w-1/2">
-              <vs-input class="w-full" label-placeholder="Adults" v-model="data.adults" />
+              <vs-input
+                class="w-full"
+                label-placeholder="Adults"
+                v-model="data.adults"
+              />
             </div>
             <div class="vx-col w-1/2">
-              <vs-input type="text" class="w-full" label-placeholder="Kids" v-model="data.kids" />
+              <vs-input
+                type="text"
+                class="w-full"
+                label-placeholder="Kids"
+                v-model="data.kids"
+              />
             </div>
           </div>
 
@@ -81,13 +103,28 @@
 
           <div class="vx-row mb-4">
             <div class="vx-col w-1/3">
-              <vs-input type="text" class="w-full" label-placeholder="Name" v-model="data.name" />
+              <vs-input
+                type="text"
+                class="w-full"
+                label-placeholder="Name"
+                v-model="data.name"
+              />
             </div>
             <div class="vx-col w-1/3">
-              <vs-input type="text" class="w-full" label-placeholder="Phone" v-model="data.phone" />
+              <vs-input
+                type="text"
+                class="w-full"
+                label-placeholder="Phone"
+                v-model="data.phone"
+              />
             </div>
             <div class="vx-col w-1/3">
-              <vs-input type="text" class="w-full" label-placeholder="Email" v-model="data.email" />
+              <vs-input
+                type="text"
+                class="w-full"
+                label-placeholder="Email"
+                v-model="data.email"
+              />
             </div>
           </div>
           <div class="vx-row mb-4">
@@ -117,7 +154,12 @@
 
           <div class="vx-row mb-4">
             <div class="vx-col w-1/2">
-              <vs-input type="text" class="w-full" label-placeholder="UID" v-model="data.uid" />
+              <vs-input
+                type="text"
+                class="w-full"
+                label-placeholder="UID"
+                v-model="data.uid"
+              />
             </div>
             <div class="vx-col w-1/2">
               <vs-input
@@ -146,12 +188,22 @@
                 class="mr-3 mb-4"
                 @click.prevent="onUpdate"
                 :disabled="data.errors.any()"
-              >Update</vs-button>
-              <vs-button color="warning" type="border" class="mb-4" @click="reset">Reset</vs-button>
+                >Update</vs-button
+              >
+              <vs-button
+                color="warning"
+                type="border"
+                class="mb-4"
+                @click="reset"
+                >Reset</vs-button
+              >
             </div>
             <div class="vx-col">
               <div class="mt-4">
-                <h5>Total: &#8377; {{total}} |&nbsp;&nbsp;Balance: &#8377; {{balance}}</h5>
+                <h5>
+                  Total: &#8377; {{ total }} |&nbsp;&nbsp;Balance: &#8377;
+                  {{ balance }}
+                </h5>
               </div>
             </div>
           </div>
@@ -202,6 +254,7 @@ export default {
       options: [
         { label: "AC", value: "ac_price" },
         { label: "NON AC", value: "price" },
+        { label: "OYO", value: "oyo_price" },
         { label: "OTHER", value: "other_price" },
       ],
     };
