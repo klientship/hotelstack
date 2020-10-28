@@ -86,6 +86,13 @@ export default [
         i18n: 'Restaurant',
         submenu: [
           {
+            url: '/admin/cold_drinks',
+            name: 'Cold Drinks',
+            slug: 'cold-drinks',
+            icon: 'LayersIcon',
+            i18n: 'cold-drinks'
+          },
+          {
             url: '/admin/restaurant_pos',
             name: 'POS',
             slug: 'check-in',

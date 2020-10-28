@@ -175,6 +175,14 @@ const router = new Router({
             requiresAuth: true
           }
         },
+        {
+          path: '/admin/cold_drinks',
+          name: 'cold_drinks',
+          component: () => import('@/views/pages/admin/restaurant/ColdDrinks.vue'),
+          meta: {
+            requiresAuth: true
+          }
+        },
 
       ]
     },
