@@ -9,10 +9,18 @@
       search
       :data="products"
     >
-      <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
-        <div class="flex flex-wrap-reverse items-center data-list-btn-container">
+      <div
+        slot="header"
+        class="flex flex-wrap-reverse items-center flex-grow justify-between"
+      >
+        <div
+          class="flex flex-wrap-reverse items-center data-list-btn-container"
+        >
           <!-- ACTION - DROPDOWN -->
-          <vs-dropdown vs-trigger-click class="dd-actions cursor-pointer mr-4 mb-4">
+          <vs-dropdown
+            vs-trigger-click
+            class="dd-actions cursor-pointer mr-4 mb-4"
+          >
             <div
               class="p-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer flex items-center justify-center text-lg font-medium w-full"
             >
@@ -23,7 +31,11 @@
             <vs-dropdown-menu>
               <vs-dropdown-item @click="deleteSelected">
                 <span class="flex items-center">
-                  <feather-icon icon="TrashIcon" svgClasses="h-4 w-4" class="mr-2" />
+                  <feather-icon
+                    icon="TrashIcon"
+                    svgClasses="h-4 w-4"
+                    class="mr-2"
+                  />
                   <span>Delete</span>
                 </span>
               </vs-dropdown-item>
@@ -41,26 +53,35 @@
         </div>
 
         <!-- ITEMS PER PAGE -->
-        <vs-dropdown vs-trigger-click class="cursor-pointer mb-4 mr-4 items-per-page-handler">
+        <vs-dropdown
+          vs-trigger-click
+          class="cursor-pointer mb-4 mr-4 items-per-page-handler"
+        >
           <div
             class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
           >
-            <span
-              class="mr-2"
-            >{{ currentPage * itemsPerPage - (itemsPerPage - 1) }} - {{ products.length - currentPage * itemsPerPage > 0 ? currentPage * itemsPerPage : products.length }} of {{ queriedItems }}</span>
+            <span class="mr-2"
+              >{{ currentPage * itemsPerPage - (itemsPerPage - 1) }} -
+              {{
+                products.length - currentPage * itemsPerPage > 0
+                  ? currentPage * itemsPerPage
+                  : products.length
+              }}
+              of {{ queriedItems }}</span
+            >
             <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
           </div>
           <vs-dropdown-menu>
-            <vs-dropdown-item @click="itemsPerPage=4">
+            <vs-dropdown-item @click="itemsPerPage = 4">
               <span>4</span>
             </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=10">
+            <vs-dropdown-item @click="itemsPerPage = 10">
               <span>10</span>
             </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=15">
+            <vs-dropdown-item @click="itemsPerPage = 15">
               <span>15</span>
             </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=20">
+            <vs-dropdown-item @click="itemsPerPage = 20">
               <span>20</span>
             </vs-dropdown-item>
           </vs-dropdown-menu>
@@ -80,41 +101,54 @@
         <vs-th>Action</vs-th>
       </template>
 
-      <template slot-scope="{data}">
+      <template slot-scope="{ data }">
         <tbody>
           <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
             <vs-td>
               <vs-chip
                 color="success"
-                v-if="tr.rooms && tr.rooms.length "
+                v-if="tr.rooms && tr.rooms.length"
                 v-for="room in tr.rooms"
                 :key="room.id"
-              >{{room.number}}</vs-chip>
+                >{{ room.number }}</vs-chip
+              >
             </vs-td>
             <vs-td>
-              <p class="product-category">{{ getDateFormat(tr.date, "DD/MM/YYYY h:mm a") }}</p>
+              <p class="product-category">
+                {{ getDateFormat(tr.date, "DD/MM/YYYY h:mm a") }}
+              </p>
             </vs-td>
             <vs-td>
-              <p class="product-category">{{ tr.name}}</p>
+              <p class="product-category">{{ tr.name }}</p>
             </vs-td>
             <vs-td>
-              <p class="product-category">{{ tr.adults}} Aduts {{ tr.kids}} kids</p>
+              <p class="product-category">
+                {{ tr.adults }} Aduts {{ tr.kids }} kids
+              </p>
             </vs-td>
             <vs-td>
-              <p class="product-category">{{ tr.number_of_room}}</p>
+              <p class="product-category">{{ tr.number_of_room }}</p>
             </vs-td>
             <vs-td>
-              <p class="product-category">{{ getDateFormat(tr.check_in, "DD/MM/YYYY h:mm a") }}</p>
+              <p class="product-category">
+                {{ getDateFormat(tr.check_in, "DD/MM/YYYY h:mm a") }}
+              </p>
             </vs-td>
             <vs-td>
-              <p class="product-category">{{ getDateFormat(tr.check_out, "DD/MM/YYYY h:mm a") }}</p>
+              <p class="product-category">
+                {{ getDateFormat(tr.check_out, "DD/MM/YYYY h:mm a") }}
+              </p>
             </vs-td>
             <vs-td>
               <p class="product-category">&#8377; {{ tr.total }}</p>
             </vs-td>
 
             <vs-td>
-              <vs-chip :color="getStatusColor(tr)" class="product-order-status">{{ getStatus(tr) }}</vs-chip>
+              <vs-chip
+                :color="getStatusColor(tr)"
+                class="product-order-status"
+                >{{ getStatus(tr) }}</vs-chip
+              >
             </vs-td>
 
             <vs-td class="whitespace-no-wrap">
@@ -136,7 +170,10 @@
                 @click.stop="deleteData(tr.id)"
               />
 
-              <vs-dropdown vs-trigger-click class="dd-actions cursor-pointer mr-4 mb-4">
+              <vs-dropdown
+                vs-trigger-click
+                class="dd-actions cursor-pointer mr-4 mb-4"
+              >
                 <feather-icon
                   icon="ChevronDownIcon"
                   svgClasses="w-5 h-5 hover:text-danger stroke-current"
@@ -185,7 +222,11 @@
 
     <!-- view booking -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="View Checkin" :active.sync="isViewPopup">
+      <vs-popup
+        classContent="popup-example"
+        title="View Checkin"
+        :active.sync="isViewPopup"
+      >
         <ViewBooking title="Checkin" :data="form"></ViewBooking>
       </vs-popup>
     </div>
@@ -193,7 +234,11 @@
 
     <!-- add new -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="Create Checkin" :active.sync="isAddNewPopup">
+      <vs-popup
+        classContent="popup-example"
+        title="Create Checkin"
+        :active.sync="isAddNewPopup"
+      >
         <CreateBooking title="Checkin"></CreateBooking>
       </vs-popup>
     </div>
@@ -202,7 +247,11 @@
 
     <!-- update -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="Edit Checkin" :active.sync="isUpdatePopup">
+      <vs-popup
+        classContent="popup-example"
+        title="Edit Checkin"
+        :active.sync="isUpdatePopup"
+      >
         <EditBooking title="Checkin" :data="form"></EditBooking>
       </vs-popup>
     </div>
@@ -211,7 +260,11 @@
 
     <!-- add paid service -->
     <div class="demo-alignment">
-      <vs-popup classContent="popup-example" title="Paid Service" :active.sync="isPaidServicePopup">
+      <vs-popup
+        classContent="popup-example"
+        title="Paid Service"
+        :active.sync="isPaidServicePopup"
+      >
         <PaidService title="Checkin" :id="form.id"></PaidService>
       </vs-popup>
     </div>
@@ -259,6 +312,7 @@ export default {
         uid: "",
         invoice: "",
         nights: "",
+        oyo_id: "",
       }),
       backgroundLoading: "primary",
       colorLoading: "#fff",

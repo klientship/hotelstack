@@ -16,6 +16,7 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique();
+            $table->string('oyo_id')->nullable();
             $table->boolean('active')->default(1);
             $table->boolean('checked_in')->default(0);
             $table->boolean('checked_out')->default(0);    

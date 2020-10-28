@@ -65,6 +65,7 @@ class ReservationController extends Controller
             'name'=>'required|max:255',
             'phone'=>'required|max:255',
             'rooms'=>'required|max:255',
+            'oyo_id'=>'nullable|max:255',
 
         ]);
 
@@ -94,6 +95,7 @@ class ReservationController extends Controller
         $reservation->total = $request->total;
         $reservation->discount = $request->discount;
         $reservation->checked_in = $request->checked_in;
+        $reservation->oyo_id = $request->oyo_id;
         $reservation->status = 'SUCCESS';
         $reservation->save();
         
@@ -169,7 +171,8 @@ class ReservationController extends Controller
             'phone'=>'required|max:255',
             'rooms'=>'required',
             'uid' => 'required|max:255',
-            'payments'=>'nullable'
+            'payments'=>'nullable',
+            'oyo_id'=>'nullable|max:255'
 
         ]);
 
@@ -196,6 +199,7 @@ class ReservationController extends Controller
      
         
         $reservation->uid = $request->uid;
+        $reservation->oyo_id = $request->oyo_id;
         $reservation->guest_id = $user->id;
         $reservation->adults = $request->adults;
         $reservation->kids = $request->kids;

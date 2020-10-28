@@ -3,8 +3,8 @@
     <vs-tab :label="label">
       <form @keydown="form.errors.clear()">
         <div class="p-4">
-          <div class="vx-row mb-4">
-            <div class="vx-col w-full">
+          <div class="vx-row">
+            <div class="vx-col w-1/2">
               <p>Room Type</p>
               <v-select
                 label="label"
@@ -14,7 +14,17 @@
               />
               <br />
             </div>
+            <div class="vx-col w-1/2">
+              <vs-input
+                :danger="form.errors.has('oyo_id')"
+                class="w-full"
+                label-placeholder="Oyo ID"
+                v-model="form.oyo_id"
+                v-show="display_oyo_id"
+              />
+            </div>
           </div>
+
           <div class="vx-row mb-4">
             <div class="vx-col w-1/2">
               <flat-pickr
@@ -325,6 +335,7 @@ export default {
   },
   data() {
     return {
+      display_oyo_id: false,
       options: [
         { label: "AC", value: "ac_price" },
         { label: "NON AC", value: "price" },
@@ -351,6 +362,7 @@ export default {
         checked_in: 0,
         status: true,
         payment_type: "Cash",
+        oyo_id: "",
       }),
       configdateTimePicker: {
         enableTime: true,
@@ -402,7 +414,6 @@ export default {
     },
 
     onSubmit() {
-      console.log(this.form.errors.has("adults"));
       this.form.rooms = this.selectedRooms;
       this.form.total = this.total;
       this.form.balance = this.balance;
@@ -468,6 +479,11 @@ export default {
     },
     selectType(data) {
       this.form.type = data.value;
+      if (data.value === "oyo_price") {
+        this.display_oyo_id = true;
+      } else {
+        this.display_oyo_id = false;
+      }
       this.$store.dispatch("selectRoomType", data.value);
     },
     getNights(check_in, check_out) {

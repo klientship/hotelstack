@@ -8,7 +8,7 @@
       <form @keydown="data.errors.clear()">
         <div class="p-4">
           <div class="vx-row mb-4">
-            <div class="vx-col w-full">
+            <div class="vx-col w-1/2">
               Room Type
               <v-select
                 label="label"
@@ -17,6 +17,15 @@
                 :dir="$vs.rtl ? 'rtl' : 'ltr'"
               />
               <br />
+            </div>
+            <div class="vx-col w-1/2">
+              <vs-input
+                :danger="data.errors.has('oyo_id')"
+                class="w-full"
+                label-placeholder="Oyo ID"
+                v-model="data.oyo_id"
+                v-show="display_oyo_id"
+              />
             </div>
           </div>
           <div class="vx-row mb-4">
@@ -241,6 +250,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      display_oyo_id: false,
       configdateTimePicker: {
         enableTime: true,
         dateFormat: "d-m-Y H:i",
@@ -315,11 +325,16 @@ export default {
   methods: {
     selectType(data) {
       this.type = data.value;
+      if (data.value === "oyo_price") {
+        this.display_oyo_id = true;
+      } else {
+        this.display_oyo_id = false;
+      }
       this.$store.dispatch("selectRoomType", data.value);
     },
     reset() {
-      this.check_in = this.check_out = this.data.adults = this.data.kids = this.data.name = this.data.phone = this.data.email =
-        "";
+      this.check_in = this.check_out = this.data.adults = this.data.kids = this.data.name = this.data.phone = this.data.email = this.data.oyo_id;
+      ("");
       this.data.status = true;
       this.data.rooms = [];
       this.data.total = this.data.balance = this.data.discount = 0;
