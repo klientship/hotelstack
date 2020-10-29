@@ -55,16 +55,24 @@ const state = {
     //     mobile: "0824 2293333",
     //     gst: "NULL",
     // },
+    // hotelDetails: {
+    //     name: "Hotel Surya",
+    //     addressLine1: "Near Mulky Bus Station, Bappanad Temple Road",
+    //     addressLine2: "Opp Fish Market, Mangaluru, Karnataka",
+    //     zipcode: "574154",
+    //     mailId: "surya@gmail.com",
+    //     mobile: "0824 0000000",
+    //     gst: "NULL",
+    // },
     hotelDetails: {
-        name: "Hotel Surya",
-        addressLine1: "Near Mulky Bus Station, Bappanad Temple Road",
-        addressLine2: "Opp Fish Market, Mangaluru, Karnataka",
-        zipcode: "574154",
-        mailId: "surya@gmail.com",
-        mobile: "0824 0000000",
-        gst: "NULL",
+        name: "Sai Arya",
+        addressLine1: "Lodging and Party Hall",
+        addressLine2: "Opp Ganesh Medicals, Pumpwell, Mangalore",
+        zipcode: "575002",
+        mailId: "saiarya@gmail.com",
+        mobile: "0824-2433644, 2435644",
+        gst: "29ADPFS5012G1ZV",
     },
-
 }
 
 export default state

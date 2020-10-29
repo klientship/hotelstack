@@ -336,11 +336,6 @@ export default {
         Number(header.style.transform.slice(11, -3)) + 9
       )}px`;
     }
-  },
-  created() {
-    this.$store.dispatch("RETRIEVE_ALL_REPORTS");
-  },
-  mounted() {
     this.$store.dispatch("retrieveAvailableRoomsToday");
     this.$store.dispatch("retrieveHouseKeepingRooms");
     this.$store.dispatch("retrieveRoomTypesWithRooms");
@@ -348,6 +343,9 @@ export default {
     this.$store.dispatch("retrieveTodaysCheckins");
     this.$store.dispatch("retrieveTodaysCheckouts");
     this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
+  },
+  created() {
+    this.$store.dispatch("RETRIEVE_ALL_REPORTS");
   },
 };
 </script>

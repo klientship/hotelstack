@@ -117,3 +117,6 @@ Route::apiResource("transactions", 'TransactionController');
 Route::post("/transactions/initiate_payment", 'TransactionController@initiate');
 Route::post("/transactions/verify", 'TransactionController@verify');
 Route::post("/transactions/complete", 'TransactionController@Complete');
+
+// cold drinks
+Route::apiResource('/cold_drinks', 'ColdDrinkController');

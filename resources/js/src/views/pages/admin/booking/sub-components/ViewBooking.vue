@@ -11,14 +11,21 @@
                 type="filled"
                 size="small"
                 @click="check_out(data.id)"
-              >Check out</vs-button>
+                >Check out</vs-button
+              >
               <vs-button
                 color="success"
                 type="filled"
                 size="small"
                 v-print="'#printMe'"
-              >Print Checkin</vs-button>
-              <vs-button color="primary" type="filled" size="small" @click="generateInvoice">
+                >Print Checkin</vs-button
+              >
+              <vs-button
+                color="primary"
+                type="filled"
+                size="small"
+                @click="generateInvoice"
+              >
                 <span v-if="data.invoice">View Invoice</span>
                 <span v-else>Generate Invoice</span>
               </vs-button>
@@ -27,29 +34,47 @@
                 type="filled"
                 size="small"
                 @click="generatePaidServiceBill"
-              >Paid Service Bill</vs-button>
+                >Paid Service Bill</vs-button
+              >
+
+              <vs-button color="primary" type="filled" size="small" class="mt-2"
+                >Edit</vs-button
+              >
             </div>
           </div>
           <div id="printMe">
             <div class="only-print">
               <div class="vx-col">
-                <h3>{{hotelDetails.name}}</h3>
+                <h3>{{ hotelDetails.name }}</h3>
                 <h5 class="mt-4 mb-4">CHECK IN RECEIPT</h5>
               </div>
             </div>
             <div class="vx-row mb-4 mt-4">
               <div class="vx-col w-1/2">
-                <h5 class="mt-2">ID: {{data.uid}}</h5>
+                <h5 class="mt-2">ID: {{ data.uid }}</h5>
 
-                <p class="mt-2">Check in: {{data.check_in}}</p>
-                <p class="mt-2">Check out: {{data.check_out}}</p>
+                <p class="mt-2">Check in: {{ data.check_in }}</p>
+                <p class="mt-2">Check out: {{ data.check_out }}</p>
               </div>
               <div class="vx-col w-1/2">
                 <h6 class="mt-2">People:</h6>
                 <p class="mt-2">
-                  Adults: {{data.adults}} &amp;
-                  Kids: {{data.kids}}
+                  Adults: {{ data.adults }} &amp; Kids: {{ data.kids }}
                 </p>
+              </div>
+            </div>
+
+            <div class="vx-row">
+              <div class="vx-col">
+                <p>Room Details</p>
+                <vs-chip
+                  color="success"
+                  class="product-order-status"
+                  v-for="room in data.rooms"
+                  v-if="data.rooms && data.rooms.length"
+                  :key="room.id"
+                  >{{ room.number }}</vs-chip
+                >
               </div>
             </div>
 
@@ -57,21 +82,26 @@
 
             <div class="vx-row mb-4">
               <div class="vx-col w-1/2">
-                <p class="mt-2">Name: {{data.name}}</p>
-                <p class="mt-2">Phone: {{data.phone}}</p>
-                <p class="mt-2">Email: {{data.email}}</p>
+                <p class="mt-2">Name: {{ data.name }}</p>
+                <p class="mt-2">Phone: {{ data.phone }}</p>
+                <p class="mt-2">Email: {{ data.email }}</p>
               </div>
 
               <div class="vx-col w-1/2">
-                <p class="mt-2">Company Name: {{data.company_name}}</p>
-                <p class="mt-2">Gst: {{data.gst_no}}</p>
+                <p class="mt-2">Company Name: {{ data.company_name }}</p>
+                <p class="mt-2">Gst: {{ data.gst_no }}</p>
               </div>
             </div>
 
             <div class="vx-row mb-4">
               <div class="vx-col">
                 <div class="mt-4">
-                  <h5>Total: &#8377; {{total}}&nbsp;&nbsp;| Exta: &#8377; {{extra}}&nbsp;&nbsp;|&nbsp;&nbsp;Discount: &#8377; {{data.discount}} |&nbsp;&nbsp;Balance: &#8377; {{balance}}</h5>
+                  <h5>
+                    Total: &#8377; {{ total }}&nbsp;&nbsp;| Exta: &#8377;
+                    {{ extra }}&nbsp;&nbsp;|&nbsp;&nbsp;Discount: &#8377;
+                    {{ data.discount }} |&nbsp;&nbsp;Balance: &#8377;
+                    {{ balance }}
+                  </h5>
                 </div>
               </div>
             </div>
@@ -100,10 +130,16 @@
         <PaidService :title="title" :id="data.id"></PaidService>
       </div>
     </vs-tab>
+    <vs-tab label="Cold Drinks">
+      <div class="tab-text">
+        <BuyColdDrinks :title="title" :id="data.id"></BuyColdDrinks>
+      </div>
+    </vs-tab>
   </vs-tabs>
 </template>
 
 <script>
+import BuyColdDrinks from "./BuyColdDrinks";
 import EditRooms from "./EditRooms";
 import Payments from "./Payments";
 import AddPayment from "./AddPayment";
@@ -134,6 +170,7 @@ export default {
     AddPayment,
     "v-select": vSelect,
     PaidService,
+    BuyColdDrinks,
   },
   props: ["title", "data"],
   computed: {
