@@ -1,7 +1,7 @@
-<template></template>a<template>
+<template>
   <div>
     <!-- ERRORS -->
-    <display-error :form="form"></display-error>
+    <!-- <display-error :form="form"></display-error> -->
     <!-- end Errors -->
 
     <form @keydown="form.errors.clear()">
@@ -15,6 +15,7 @@
               v-model="form.product_id"
               :dir="$vs.rtl ? 'rtl' : 'ltr'"
               :danger="form.errors.has('product_id')"
+              :reduce="(data) => data.value"
             />
             <span
               class="text-danger text-sm"
@@ -68,7 +69,7 @@ export default {
     return {
       form: new Form({
         product_id: "",
-        quantity: 0,
+        quantity: 1,
         reservation_id: "",
       }),
     };
@@ -79,7 +80,7 @@ export default {
   methods: {
     reset() {
       this.form.product_id = "";
-      this.form.quantity = 0;
+      this.form.quantity = 1;
       this.form.reservation_id = "";
     },
 
@@ -87,9 +88,9 @@ export default {
       this.form.reservation_id = this.id;
 
       this.form
-        .submit("post", "/api/reservation_paid_services")
+        .submit("post", "/api/reservation_cold_drinks")
         .then(() => {
-          this.$store.dispatch("retrieveReservationPaidServices", this.id);
+          this.$store.dispatch("RETRIEVE_RESERVATION_COLD_DRINKS", this.id);
 
           this.$vs.notify({
             color: "success",

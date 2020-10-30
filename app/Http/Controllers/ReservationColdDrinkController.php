@@ -18,7 +18,16 @@ class ReservationColdDrinkController extends Controller
         $cold_drinks = ReservationColdDrink::latest()->get();
         return ReservationColdDrinkResource::collection($cold_drinks);
     }
+    
+    public function reservation_cold_drinks($id)
+    {
 
+        $cold_drinks = ReservationColdDrink::where('reservation_id', $id)->latest()->get();
+        return ReservationColdDrinkResource::collection($cold_drinks);
+    }
+
+
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -40,7 +49,7 @@ class ReservationColdDrinkController extends Controller
         $this->validate($request,[
             'reservation_id'=>'required|integer',
             'product_id'=>'required|integer',
-            'quantity'=>'required|integer',
+            'quantity'=>'required|integer|min:1',
         ]);
 
         $cold_drink = new ReservationColdDrink;
@@ -86,7 +95,7 @@ class ReservationColdDrinkController extends Controller
         $this->validate($request,[
             'reservation_id'=>'required|integer',
             'product_id'=>'required|integer',
-            'quantity'=>'required|integer',
+            'quantity'=>'required|integer|min:1',
         ]);
 
      

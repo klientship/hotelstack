@@ -19,6 +19,7 @@ class ReservationColdDrink extends JsonResource
             "name" => $this->product->product_name,
             "quantity" => $this->quantity,
             "price" => $this->product->price,
+            "reservation_id" => $this->reservation_id,
             "total" => (int)$this->product->price * (int)$this->quantity,
             "created_at" => $this->created_at
         ];

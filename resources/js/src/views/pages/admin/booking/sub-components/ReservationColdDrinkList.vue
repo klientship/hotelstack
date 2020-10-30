@@ -1,8 +1,10 @@
 <template>
   <vs-table ref="table" search :data="products">
     <template slot="thead">
-      <vs-th sort-key="description">Description</vs-th>
-      <vs-th sort-key="base_price">Price</vs-th>
+      <vs-th sort-key="description">Product Name</vs-th>
+      <vs-th sort-key="description">Quantity</vs-th>
+      <vs-th sort-key="description">Price</vs-th>
+      <vs-th sort-key="description">Total</vs-th>
 
       <vs-th>Action</vs-th>
     </template>
@@ -11,10 +13,16 @@
       <tbody>
         <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
           <vs-td>
-            <p class="product-category">{{ tr.description }}</p>
+            <p class="product-category">{{ tr.name }}</p>
+          </vs-td>
+          <vs-td>
+            <p class="product-category">{{ tr.quantity }}</p>
           </vs-td>
           <vs-td>
             <p class="product-category">&#8377; {{ tr.price }}</p>
+          </vs-td>
+          <vs-td>
+            <p class="product-category">&#8377; {{ tr.total }}</p>
           </vs-td>
 
           <vs-td class="whitespace-no-wrap">
@@ -40,16 +48,16 @@ export default {
   },
   methods: {
     deleteData(id) {
-      this.$http.delete(`/api/reservation_paid_services/${id}`).then((res) => {
-        this.$store.dispatch("retrieveReservationPaidServices", this.id);
+      this.$http.delete(`/api/reservation_cold_drinks/${id}`).then((res) => {
+        this.$store.dispatch("RETRIEVE_RESERVATION_COLD_DRINKS", this.id);
       });
     },
   },
   computed: {
-    ...mapGetters({ products: "getReservationPaidServices" }),
+    ...mapGetters({ products: "getReservationColdDrinks" }),
   },
   created() {
-    this.$store.dispatch("retrieveReservationPaidServices", this.id);
+    this.$store.dispatch("RETRIEVE_RESERVATION_COLD_DRINKS", this.id);
   },
 };
 </script>

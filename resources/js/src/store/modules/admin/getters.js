@@ -85,6 +85,9 @@ const getters = {
     getAllColdDrinks(state) {
         return state.all_cold_drinks
     },
+    getReservationColdDrinks(state) {
+        return state.reservation_cold_drinks
+    },
 
 }
 

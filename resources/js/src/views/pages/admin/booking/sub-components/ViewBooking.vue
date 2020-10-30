@@ -132,14 +132,14 @@
     </vs-tab>
     <vs-tab label="Cold Drinks">
       <div class="tab-text">
-        <BuyColdDrinks :title="title" :id="data.id"></BuyColdDrinks>
+        <ReservationColdDrink :id="data.id"></ReservationColdDrink>
       </div>
     </vs-tab>
   </vs-tabs>
 </template>
 
 <script>
-import BuyColdDrinks from "./BuyColdDrinks";
+import ReservationColdDrink from "./ReservationColdDrink";
 import EditRooms from "./EditRooms";
 import Payments from "./Payments";
 import AddPayment from "./AddPayment";
@@ -170,7 +170,7 @@ export default {
     AddPayment,
     "v-select": vSelect,
     PaidService,
-    BuyColdDrinks,
+    ReservationColdDrink,
   },
   props: ["title", "data"],
   computed: {

@@ -447,12 +447,20 @@ const actions = {
 
             })
     },
+    RETRIEVE_RESERVATION_COLD_DRINKS(context, id) {
+        axios
+            .get(`/api/reservation/${id}/cold_drinks`)
+            .then(response => (context.commit('RETRIEVE_RESERVATION_COLD_DRINKS', response.data.data)))
+            .catch(function (error) {
+
+            })
+    },
     DELETE_COLD_DRINK(context, id) {
         axios
             .delete(`/api/cold_drinks/${id}`)
             .then()
             .catch()
-    }
+    },
 
 }
 

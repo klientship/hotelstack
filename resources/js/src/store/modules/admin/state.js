@@ -28,6 +28,7 @@ const state = {
     dashboard_details: {},
     all_paid_services: [],
     all_cold_drinks: [],
+    reservation_cold_drinks: [],
     // hotelDetails: {
     //     name: "Shri Sai Palace",
     //     addressLine1: "Kankanady pumpwell",
