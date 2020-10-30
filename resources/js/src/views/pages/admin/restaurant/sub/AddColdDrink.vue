@@ -84,6 +84,7 @@ export default {
         .submit("post", "/api/cold_drinks")
         .then(() => {
           this.reset();
+          this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
           this.$vs.notify({
             color: "success",
             title: "Created",

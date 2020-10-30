@@ -14,7 +14,13 @@
               :options="options"
               v-model="form.product_id"
               :dir="$vs.rtl ? 'rtl' : 'ltr'"
+              :danger="form.errors.has('product_id')"
             />
+            <span
+              class="text-danger text-sm"
+              v-show="form.errors.has('product_id')"
+              >{{ form.errors.get("product_id") }}</span
+            >
           </div>
         </div>
         <div class="vx-row mb-4">
@@ -24,7 +30,13 @@
               class="w-full"
               label-placeholder="Quantity"
               v-model="form.quantity"
+              :danger="form.errors.has('quantity')"
             />
+            <span
+              class="text-danger text-sm"
+              v-show="form.errors.has('quantity')"
+              >{{ form.errors.get("quantity") }}</span
+            >
           </div>
         </div>
 
@@ -48,18 +60,16 @@
 
 <script>
 import vSelect from "vue-select";
+import { mapGetters } from "vuex";
+
 export default {
   props: ["id"],
   data() {
     return {
-      options: [
-        { label: "Pepsi", value: "pepsi" },
-        { label: "Sprit", value: "sprit" },
-        { label: "Cocacola", value: "Cocacola" },
-      ],
       form: new Form({
         product_id: "",
         quantity: 0,
+        reservation_id: "",
       }),
     };
   },
@@ -68,8 +78,8 @@ export default {
   },
   methods: {
     reset() {
-      this.form.description = "";
-      this.form.price = 0;
+      this.form.product_id = "";
+      this.form.quantity = 0;
       this.form.reservation_id = "";
     },
 
@@ -84,11 +94,30 @@ export default {
           this.$vs.notify({
             color: "success",
             title: "Created",
-            text: "Paid Service created successfully.",
+            text: "Order created successfully.",
           });
         })
         .catch();
     },
+  },
+  computed: {
+    ...mapGetters({ cold_drinks: "getAllColdDrinks" }),
+    options() {
+      let op = [];
+      if (this.cold_drinks) {
+        this.cold_drinks.forEach((cold_drink) => {
+          op.push({
+            label: cold_drink.product_name,
+            value: cold_drink.id,
+          });
+        });
+      }
+
+      return op;
+    },
+  },
+  created() {
+    this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
   },
 };
 </script>

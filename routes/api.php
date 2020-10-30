@@ -120,3 +120,4 @@ Route::post("/transactions/complete", 'TransactionController@Complete');
 
 // cold drinks
 Route::apiResource('/cold_drinks', 'ColdDrinkController');
+Route::apiResource('/reservation_cold_drinks', 'ReservationColdDrinkController');

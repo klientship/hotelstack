@@ -53,8 +53,8 @@ class ReservationPaidServiceController extends Controller
         $this->validate($request,[
            
             'description'=>'required|max:1000',
-            'price'=>'required|required|max:255',
-            'reservation_id'=>'required|integer|max:100',
+            'price'=>'required|integer',
+            'reservation_id'=>'required|integer',
         ]);
 
         $paidService = new ReservationPaidService;
