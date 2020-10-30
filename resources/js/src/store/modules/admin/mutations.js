@@ -154,7 +154,6 @@ const mutations = {
         state.all_paid_services = all_paid_services;
     },
     RETRIEVE_ALL_COLD_DRINKS(state, all_cold_drinks) {
-
         state.all_cold_drinks = all_cold_drinks;
     },
 }

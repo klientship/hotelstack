@@ -27,6 +27,7 @@ const state = {
     payments: [],
     dashboard_details: {},
     all_paid_services: [],
+    all_cold_drinks: [],
     // hotelDetails: {
     //     name: "Shri Sai Palace",
     //     addressLine1: "Kankanady pumpwell",

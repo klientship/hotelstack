@@ -447,6 +447,12 @@ const actions = {
 
             })
     },
+    DELETE_COLD_DRINK(context, id) {
+        axios
+            .delete(`/api/cold_drinks/${id}`)
+            .then()
+            .catch()
+    }
 
 }
 

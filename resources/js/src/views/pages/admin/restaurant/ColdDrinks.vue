@@ -1,202 +1,153 @@
 <template>
-  <div>
-    <div class="vx-row mt-4">
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Total Products"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-          color="success"
-        ></statistics-card-line>
-      </div>
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Stock Value"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-        ></statistics-card-line>
-      </div>
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Total Sales"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-        ></statistics-card-line>
-      </div>
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Monthly Sales"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-        ></statistics-card-line>
-      </div>
-    </div>
-
-    <div id="data-list-list-view" class="data-list-container">
-      <vs-table
-        ref="table"
-        multiple
-        v-model="selected"
-        pagination
-        :max-items="itemsPerPage"
-        search
-        :data="products"
+  <div id="data-list-list-view" class="data-list-container">
+    <vs-table
+      ref="table"
+      multiple
+      v-model="selected"
+      pagination
+      :max-items="itemsPerPage"
+      search
+      :data="products"
+    >
+      <div
+        slot="header"
+        class="flex flex-wrap-reverse items-center flex-grow justify-between"
       >
         <div
-          slot="header"
-          class="flex flex-wrap-reverse items-center flex-grow justify-between"
+          class="flex flex-wrap-reverse items-center data-list-btn-container"
         >
-          <div
-            class="flex flex-wrap-reverse items-center data-list-btn-container"
-          >
-            <!-- ACTION - DROPDOWN -->
-            <vs-dropdown
-              vs-trigger-click
-              class="dd-actions cursor-pointer mr-4 mb-4"
-            >
-              <div
-                class="p-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer flex items-center justify-center text-lg font-medium w-full"
-              >
-                <span class="mr-2">Actions</span>
-                <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-              </div>
-
-              <vs-dropdown-menu>
-                <vs-dropdown-item @click="deleteSelected">
-                  <span class="flex items-center">
-                    <feather-icon
-                      icon="TrashIcon"
-                      svgClasses="h-4 w-4"
-                      class="mr-2"
-                    />
-                    <span>Delete</span>
-                  </span>
-                </vs-dropdown-item>
-              </vs-dropdown-menu>
-            </vs-dropdown>
-
-            <!-- ADD NEW -->
-            <div
-              class="btn-add-new p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-center text-lg font-medium text-primary border border-solid border-primary"
-              @click="addNewData"
-            >
-              <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
-              <span class="ml-2 text-base text-primary">Add New</span>
-            </div>
-          </div>
-
-          <!-- ITEMS PER PAGE -->
+          <!-- ACTION - DROPDOWN -->
           <vs-dropdown
             vs-trigger-click
-            class="cursor-pointer mb-4 mr-4 items-per-page-handler"
+            class="dd-actions cursor-pointer mr-4 mb-4"
           >
             <div
-              class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
+              class="p-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer flex items-center justify-center text-lg font-medium w-full"
             >
-              <span class="mr-2"
-                >{{ currentPage * itemsPerPage - (itemsPerPage - 1) }} -
-                {{
-                  products.length - currentPage * itemsPerPage > 0
-                    ? currentPage * itemsPerPage
-                    : products.length
-                }}
-                of {{ queriedItems }}</span
-              >
+              <span class="mr-2">Actions</span>
               <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
             </div>
-            <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
+
             <vs-dropdown-menu>
-              <vs-dropdown-item @click="itemsPerPage = 4">
-                <span>4</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="itemsPerPage = 10">
-                <span>10</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="itemsPerPage = 15">
-                <span>15</span>
-              </vs-dropdown-item>
-              <vs-dropdown-item @click="itemsPerPage = 20">
-                <span>20</span>
+              <vs-dropdown-item @click="deleteSelected">
+                <span class="flex items-center">
+                  <feather-icon
+                    icon="TrashIcon"
+                    svgClasses="h-4 w-4"
+                    class="mr-2"
+                  />
+                  <span>Delete</span>
+                </span>
               </vs-dropdown-item>
             </vs-dropdown-menu>
           </vs-dropdown>
+
+          <!-- ADD NEW -->
+          <div
+            class="btn-add-new p-3 mb-4 mr-4 rounded-lg cursor-pointer flex items-center justify-center text-lg font-medium text-primary border border-solid border-primary"
+            @click="addNewData"
+          >
+            <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
+            <span class="ml-2 text-base text-primary">Add New</span>
+          </div>
         </div>
 
-        <template slot="thead">
-          <vs-th sort-key="title">Product Name</vs-th>
-          <vs-th sort-key="title">Quantity</vs-th>
-          <vs-th sort-key="title">Price</vs-th>
-
-          <vs-th>Action</vs-th>
-        </template>
-
-        <template slot-scope="{ data }">
-          <tbody>
-            <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
-              <vs-td>
-                <p class="product-name font-medium truncate">
-                  {{ tr.product_name }}
-                </p>
-              </vs-td>
-
-              <vs-td>
-                <p class="product-category">{{ tr.quantity }}</p>
-              </vs-td>
-
-              <vs-td>
-                <p class="product-category">&#8377; {{ tr.price }}</p>
-              </vs-td>
-
-              <vs-td class="whitespace-no-wrap">
-                <feather-icon
-                  icon="EditIcon"
-                  svgClasses="w-5 h-5 hover:text-primary stroke-current"
-                  @click.stop="editData(tr)"
-                />
-                <feather-icon
-                  icon="TrashIcon"
-                  svgClasses="w-5 h-5 hover:text-danger stroke-current"
-                  class="ml-2"
-                  @click.stop="deleteData(tr.id)"
-                />
-              </vs-td>
-            </vs-tr>
-          </tbody>
-        </template>
-      </vs-table>
-
-      <div class="demo-alignment">
-        <vs-popup
-          classContent="popup-example"
-          title="Add Cold Drink"
-          :active.sync="isAddNewPopup"
+        <!-- ITEMS PER PAGE -->
+        <vs-dropdown
+          vs-trigger-click
+          class="cursor-pointer mb-4 mr-4 items-per-page-handler"
         >
-          <AddColdDrink></AddColdDrink>
-        </vs-popup>
-        <vs-popup
-          classContent="popup-example"
-          title="Edit Cold Drink"
-          :active.sync="isUpdatePopup"
-        >
-          <vs-tabs>
-            <vs-tab label="Edit Expense">
-              <EditColdDrink :form="form"></EditColdDrink>
-            </vs-tab>
-          </vs-tabs>
-        </vs-popup>
+          <div
+            class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
+          >
+            <span class="mr-2"
+              >{{ currentPage * itemsPerPage - (itemsPerPage - 1) }} -
+              {{
+                products.length - currentPage * itemsPerPage > 0
+                  ? currentPage * itemsPerPage
+                  : products.length
+              }}
+              of {{ queriedItems }}</span
+            >
+            <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
+          </div>
+          <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
+          <vs-dropdown-menu>
+            <vs-dropdown-item @click="itemsPerPage = 4">
+              <span>4</span>
+            </vs-dropdown-item>
+            <vs-dropdown-item @click="itemsPerPage = 10">
+              <span>10</span>
+            </vs-dropdown-item>
+            <vs-dropdown-item @click="itemsPerPage = 15">
+              <span>15</span>
+            </vs-dropdown-item>
+            <vs-dropdown-item @click="itemsPerPage = 20">
+              <span>20</span>
+            </vs-dropdown-item>
+          </vs-dropdown-menu>
+        </vs-dropdown>
       </div>
+
+      <template slot="thead">
+        <vs-th sort-key="title">Product Name</vs-th>
+        <vs-th sort-key="title">Quantity</vs-th>
+        <vs-th sort-key="title">Price</vs-th>
+
+        <vs-th>Action</vs-th>
+      </template>
+
+      <template slot-scope="{ data }">
+        <tbody>
+          <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
+            <vs-td>
+              <p class="product-category">{{ tr.product_name }}</p>
+            </vs-td>
+            <vs-td>
+              <p class="product-category">{{ tr.quantity }}</p>
+            </vs-td>
+            <vs-td>
+              <p class="product-category">{{ tr.price }}</p>
+            </vs-td>
+
+            <vs-td class="whitespace-no-wrap">
+              <feather-icon
+                icon="EditIcon"
+                svgClasses="w-5 h-5 hover:text-primary stroke-current"
+                @click.stop="editData(tr)"
+              />
+              <feather-icon
+                icon="TrashIcon"
+                svgClasses="w-5 h-5 hover:text-danger stroke-current"
+                class="ml-2"
+                @click.stop="deleteData(tr.id)"
+              />
+            </vs-td>
+          </vs-tr>
+        </tbody>
+      </template>
+    </vs-table>
+
+    <div class="demo-alignment">
+      <vs-popup
+        classContent="popup-example"
+        title="Add Cold Drink"
+        :active.sync="isAddNewPopup"
+      >
+        <AddColdDrink></AddColdDrink>
+      </vs-popup>
+      <vs-popup
+        classContent="popup-example"
+        title="Edit Cold Drink"
+        :active.sync="isUpdatePopup"
+      >
+        <EditColdDrink :form="form"></EditColdDrink>
+      </vs-popup>
     </div>
+
+    <!-- end update -->
   </div>
 </template>
-
 
 <script>
 import AddColdDrink from "./sub/AddColdDrink";
@@ -204,7 +155,6 @@ import EditColdDrink from "./sub/EditColdDrink";
 
 import StatisticsCardLine from "@/components/statistics-cards/StatisticsCardLine.vue";
 import { mapGetters } from "vuex";
-
 export default {
   components: {
     AddColdDrink,
@@ -221,59 +171,54 @@ export default {
       isAddNewPopup: false,
       isUpdatePopup: false,
       form: new Form({
-        amount: 0,
-        category_id: "",
-        date: "",
-        name: "",
-        note: "",
+        product_name: "",
+        quantity: 0,
+        price: 0,
         id: "",
       }),
     };
   },
   computed: {
-    ...mapGetters({ roomTypes: "getRoomTypesWithRooms" }),
-    ...mapGetters({ recent_checkins: "getRecentCheckins" }),
-    ...mapGetters({ todays_checkins: "getTodaysCheckins" }),
-    ...mapGetters({ todays_checkouts: "getTodaysCheckouts" }),
-    ...mapGetters({ availableRooms: "getAvailableRoomsToday" }),
-    ...mapGetters({ houseKeepings: "getHouseKeepings" }),
-    ...mapGetters({ hotelDetails: "getHotelDetails" }),
-    ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
-
     currentPage() {
       if (this.isMounted) {
         return this.$refs.table.currentx;
       }
       return 0;
     },
-    ...mapGetters({ products: "getAllColdDrinks" }),
+    products() {
+      return this.$store.getters.getAllColdDrinks;
+    },
+
     queriedItems() {
       return this.$refs.table
         ? this.$refs.table.queriedResults.length
         : this.products.length;
     },
+
+    // ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
   },
   methods: {
     addNewData() {
       this.isAddNewPopup = true;
     },
-
     deleteData(id) {
-      this.$store.dispatch("DELETE_EXPENSE", id).then(
+      this.$store.dispatch("DELETE_COLD_DRINK", id).then(
         this.$vs.notify({
           color: "danger",
           title: "Deleted",
-          text: "The expense deleted successfully.",
+          text: "The cold drink deleted successfully.",
         })
       );
 
-      this.$store.dispatch("RETRIEVE_ALL_EXPENSES");
+      this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
     },
+
     editData(data) {
       for (let property in this.form.originalData) {
         this.form[property] = data[property];
       }
-
+      console.log(data);
+      console.log(this.form);
       this.isUpdatePopup = true;
     },
 
@@ -284,36 +229,28 @@ export default {
     deleteSelected() {
       if (this.selected.length > 0) {
         this.selected.forEach((item) => {
-          this.$store.dispatch("DELETE_EXPENSE", item.id).then(
+          this.$store.dispatch("DELETE_COLD_DRINK", item.id).then(
             this.$vs.notify({
               color: "danger",
               title: "Deleted",
-              text: "The expense was deleted successfully.",
+              text: "The cold drink was deleted successfully.",
             })
           );
         });
-        this.$store.dispatch("RETRIEVE_ALL_EXPENSES");
+        this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
       } else {
         this.$vs.notify({
           color: "warning",
           title: "Warning",
-          text: "Please select expense to delete.",
+          text: "Please select cold drink to delete.",
         });
       }
     },
   },
-  created() {
-    this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
-  },
+  created() {},
   mounted() {
     this.isMounted = true;
-    this.$store.dispatch("retrieveAvailableRoomsToday");
-    this.$store.dispatch("retrieveHouseKeepingRooms");
-    this.$store.dispatch("retrieveRoomTypesWithRooms");
-    this.$store.dispatch("retrieveRecentCheckins");
-    this.$store.dispatch("retrieveTodaysCheckins");
-    this.$store.dispatch("retrieveTodaysCheckouts");
-    this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
+    this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
   },
 };
 </script>
