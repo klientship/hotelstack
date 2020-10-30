@@ -142,21 +142,17 @@
           <tbody>
             <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
               <vs-td>
-                <p class="product-name font-medium truncate">{{ tr.name }}</p>
+                <p class="product-name font-medium truncate">
+                  {{ tr.product_name }}
+                </p>
               </vs-td>
 
               <vs-td>
-                <p class="product-category">{{ tr.note }}</p>
+                <p class="product-category">{{ tr.quantity }}</p>
               </vs-td>
 
               <vs-td>
-                <p class="product-category">&#8377; {{ tr.amount }}</p>
-              </vs-td>
-              <vs-td>
-                <p class="product-category">{{ tr.category_name }}</p>
-              </vs-td>
-              <vs-td>
-                <p class="product-category">{{ tr.date }}</p>
+                <p class="product-category">&#8377; {{ tr.price }}</p>
               </vs-td>
 
               <vs-td class="whitespace-no-wrap">
@@ -243,15 +239,14 @@ export default {
     ...mapGetters({ houseKeepings: "getHouseKeepings" }),
     ...mapGetters({ hotelDetails: "getHotelDetails" }),
     ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
+
     currentPage() {
       if (this.isMounted) {
         return this.$refs.table.currentx;
       }
       return 0;
     },
-    products() {
-      return this.$store.getters.getAllExpenses;
-    },
+    ...mapGetters({ products: "getAllColdDrinks" }),
     queriedItems() {
       return this.$refs.table
         ? this.$refs.table.queriedResults.length
@@ -308,7 +303,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("RETRIEVE_ALL_EXPENSES");
+    this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
   },
   mounted() {
     this.isMounted = true;

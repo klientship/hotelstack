@@ -439,6 +439,14 @@ const actions = {
 
             })
     },
+    RETRIEVE_ALL_COLD_DRINKS(context) {
+        axios
+            .get("/api/cold_drinks")
+            .then(response => (context.commit('RETRIEVE_ALL_COLD_DRINKS', response.data.data)))
+            .catch(function (error) {
+
+            })
+    },
 
 }
 

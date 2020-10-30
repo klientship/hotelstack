@@ -82,6 +82,9 @@ const getters = {
     getAllReservationPaidServices(state) {
         return state.all_paid_services
     },
+    getAllColdDrinks(state) {
+        return state.all_cold_drinks
+    },
 
 }
 
