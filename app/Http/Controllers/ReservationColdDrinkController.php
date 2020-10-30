@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ReservationColdDrink;
+use App\ColdDrink;
 use Illuminate\Http\Request;
 use App\Http\Resources\ReservationColdDrink as ReservationColdDrinkResource;
 
@@ -52,13 +53,18 @@ class ReservationColdDrinkController extends Controller
             'quantity'=>'required|integer|min:1',
         ]);
 
-        $cold_drink = new ReservationColdDrink;
-        $cold_drink->product_id = $request->product_id;
-        $cold_drink->reservation_id = $request->reservation_id;
-        $cold_drink->quantity = $request->quantity;
+        $reservation_cold_drink = new ReservationColdDrink;
+        $reservation_cold_drink->product_id = $request->product_id;
+        $reservation_cold_drink->reservation_id = $request->reservation_id;
+        $reservation_cold_drink->quantity = $request->quantity;
+        $reservation_cold_drink->save();
+
+        // reduce stock
+        $cold_drink = ColdDrink::findOrFail($request->product_id);
+        $cold_drink->quantity--;
         $cold_drink->save();
 
-        return new ReservationColdDrinkResource($cold_drink);
+        return new ReservationColdDrinkResource($reservation_cold_drink);
     }
 
     /**
