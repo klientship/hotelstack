@@ -217,8 +217,7 @@ export default {
       for (let property in this.form.originalData) {
         this.form[property] = data[property];
       }
-      console.log(data);
-      console.log(this.form);
+
       this.isUpdatePopup = true;
     },
 

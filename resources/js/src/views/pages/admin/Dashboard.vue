@@ -64,29 +64,18 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.todays_business"
           statisticTitle="Todays Business"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.business.series"
           type="area"
         ></statistics-card-line>
       </div>
-
-      <!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChart2Icon"
-          :statistic="dashboardDetails.income"
-          statisticTitle="Profit"
-          :chartData="dashboardDetails.expenses.series"
-          color="success"
-          type="area"
-        ></statistics-card-line>
-      </div> -->
 
       <!-- total expense -->
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChart2Icon"
-          :statistic="dashboardDetails.income"
+          :statistic="dashboardDetails.total_expense"
           statisticTitle="Todays Expense"
           :chartData="dashboardDetails.expenses.series"
           color="danger"
@@ -111,7 +100,6 @@
             class="ml-2 mt-2"
             :key="room.id"
             @click="clicked(room)"
-            size="large"
             >{{ room.number }}</vs-button
           >
         </div>
@@ -126,15 +114,17 @@
           statisticTitle="Payments Received"
           :chartData="dashboardDetails.payments.series"
           type="area"
+          color="success"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.todays_pending_payment"
           statisticTitle="Pending Payments"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.pending_payments.series"
           type="area"
+          color="danger"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">

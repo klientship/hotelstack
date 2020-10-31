@@ -61,7 +61,7 @@ class ReservationColdDrinkController extends Controller
 
         // reduce stock
         $cold_drink = ColdDrink::findOrFail($request->product_id);
-        $cold_drink->quantity--;
+        $cold_drink->quantity = --$cold_drink->quantity;
         $cold_drink->save();
 
         return new ReservationColdDrinkResource($reservation_cold_drink);

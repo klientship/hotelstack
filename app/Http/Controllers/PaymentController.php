@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Payment;
 use App\Expense;
 use App\ReservationPaidService;
+use App\Reservation;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Resources\Payment as PaymentResource;
@@ -129,10 +130,14 @@ class PaymentController extends Controller
   
      $payments_array = Payment::where('created_at', 'like', $today .'%')->pluck('amount')->toArray();
      $expenses_array = Expense::where('created_at', 'like', $today .'%')->pluck('amount')->toArray();
+     $todays_business_array = Reservation::where('created_at', 'like', $today .'%')->pluck('total')->toArray();
 
      $total_expense = Expense::where('date', 'like', $today .'%')->sum('amount');
      $total_paid_service = ReservationPaidService::where('created_at', 'like', $today .'%')->sum('price');
      $total_payment = Payment::where('created_at', 'like', $today .'%')->sum('amount');
+     $todays_business = Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service;
+     $todays_pending_payment =  $todays_business - $total_payment;
+
 
      $income = (($total_payment + $total_paid_service) - $total_expense);
 
@@ -141,20 +146,28 @@ class PaymentController extends Controller
      $yesterdays_total_paid_service = ReservationPaidService::where('created_at', 'like', $yesterday .'%')->sum('price');
      $yesterday_income = ($yesterdays_total_payment+$yesterdays_total_paid_service) - $yesterdays_total_expense;
 
-     $payments = array_fill(0, 7, 0);
-     $expenses = array_fill(0, 7, 0);
+   
+    //  seven days details
+     function getSevenDays($array)
+     {
+      $data =  array_fill(0, 7, 0);
+      for ($i=0; $i < 7; $i++) { 
 
-    //  7 items
-     for ($i=0; $i < 7; $i++) { 
-         if(isset($payments_array[$i]))
-         {
-            $payments[$i] = $payments_array[$i];
-         }
-         if(isset($expenses_array[$i]))
-         {
-            $expenses[$i] = $expenses_array[$i];
-         }
+      if(isset($array[$i]))
+      {
+        $data[$i] = $array[$i];
+      }
+    }
+      return $data;
+
      }
+
+     $LastSevenPayments = getSevenDays($payments_array);
+     $LastSevenExpenses = getSevenDays($expenses_array);
+     $LastSevenBusiness = getSevenDays($todays_business_array);
+     $LastSevenPendingPayments = getSevenDays($todays_pending_payment);
+
+
 
      if($yesterday_income){
       $gain_perc = (100*$income)/$yesterday_income;
@@ -167,11 +180,24 @@ class PaymentController extends Controller
      $o = [
          'total_payment' => $total_payment,
          'total_expense' => $total_expense,
+         'todays_business' => $todays_business,
+         'todays_pending_payment' => $todays_pending_payment,
+         'business' => [
+            'series'=> [
+              [
+                'name' => "Business",
+                'data' =>  $LastSevenBusiness,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
          'payments' => [
             'series'=> [
               [
                 'name' => "Payment",
-                'data' => $payments,
+                'data' => $LastSevenPayments,
               ],
             ],
             'analyticsData' => [
@@ -182,7 +208,18 @@ class PaymentController extends Controller
             'series'=> [
               [
                 'name' => "Expense",
-                'data' => $expenses,
+                'data' =>  $LastSevenExpenses ,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
+        'pending_payments' => [
+            'series'=> [
+              [
+                'name' => "Pending Payment",
+                'data' =>  $LastSevenPendingPayments ,
               ],
             ],
             'analyticsData' => [
