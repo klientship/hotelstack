@@ -154,37 +154,41 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.total_cold_drinks"
           statisticTitle="Soft drinks"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.cold_drinks.series"
           type="area"
+          color="success"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.total_paid_services"
           statisticTitle="Paid Services"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.paid_services.series"
           type="area"
+          color="danger"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.total_no_walkin_business"
           statisticTitle="Total Walkins"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.walkin_business.series"
           type="area"
+          color="warning"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.total_no_oyo_business"
           statisticTitle="Oyo Bookings"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.oyo_business.series"
           type="area"
+          color="dark"
         ></statistics-card-line>
       </div>
     </div>
@@ -193,7 +197,7 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.income"
           statisticTitle="Profit"
           :chartData="dashboardDetails.payments.series"
           type="area"
@@ -203,28 +207,31 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.total_no_total_checkin"
           statisticTitle="Total Checkin"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.checkin_business.series"
           type="area"
+          color="danger"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.total_no_total_checkout"
           statisticTitle="Total Checkout"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.checkout_business.series"
           type="area"
+          color="warning"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.total_no_future_bookings"
           statisticTitle="Future Bookings"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.future_bookings_business.series"
           type="area"
+          color="dark"
         ></statistics-card-line>
       </div>
     </div>

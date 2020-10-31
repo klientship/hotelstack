@@ -6,6 +6,8 @@ use App\Payment;
 use App\Expense;
 use App\ReservationPaidService;
 use App\Reservation;
+use App\ReservationColdDrink;
+use App\ColdDrink;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Resources\Payment as PaymentResource;
@@ -132,19 +134,32 @@ class PaymentController extends Controller
      $expenses_array = Expense::where('created_at', 'like', $today .'%')->pluck('amount')->toArray();
      $todays_business_array = Reservation::where('created_at', 'like', $today .'%')->pluck('total')->toArray();
      $todays_pending_payment_array =  Payment::where('created_at', 'like', $today .'%')->pluck('amount')->toArray();
-     $todays_walkin_business_array = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->pluck('total')->toArray();
+     $todays_walkin_business_array = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->pluck('total')->toArray();
      $todays_oyo_business_array = Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->pluck('total')->toArray();
+     $todays_cold_drink_business_array = ReservationColdDrink::where('created_at', 'like', $today .'%')->pluck('total')->toArray();
+     $todays_paid_service_business_array = ReservationPaidService::where('created_at', 'like', $today .'%')->pluck('price')->toArray();
+     $todays_checkin_business_array = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->pluck('total')->toArray();
+     $todays_checkout_business_array = Reservation::where('created_at', 'like', $today .'%')->where('checked_out',1)->pluck('total')->toArray();
+     $todays_future_bookings_business_array = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',0)->pluck('total')->toArray();
 
      $total_expense = Expense::where('date', 'like', $today .'%')->sum('amount');
      $total_paid_service = ReservationPaidService::where('created_at', 'like', $today .'%')->sum('price');
      $total_payment = Payment::where('created_at', 'like', $today .'%')->sum('amount');
-     $todays_walkin_business = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->sum('total');
-     $todays_business = Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service;
+     $todays_walkin_business = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->sum('total');
+     $todays_cold_drink_business = ReservationColdDrink::where('created_at', 'like', $today .'%')->sum('total');
+     $todays_business = Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service + $todays_cold_drink_business;
      $todays_pending_payment =  $todays_business - $total_payment;
      $todays_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->sum('total');
+     $total_cold_drinks =  ColdDrink::all()->count();
+     $total_paid_services =  ReservationPaidService::all()->count();
+     $total_no_walkin_business =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->count();
+     $total_no_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->count();
+     $total_no_total_checkin =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->count();
+     $total_no_total_checkout =  Reservation::where('created_at', 'like', $today .'%')->where('checked_out',1)->count();
+     $total_no_future_bookings =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',0)->count();
 
 
-     $income = (($total_payment + $total_paid_service) - $total_expense);
+     $income = (($todays_business) - $total_expense);
 
      $yesterdays_total_payment = Payment::where('created_at', 'like', $yesterday .'%')->sum('amount');
      $yesterdays_total_expense = Expense::where('created_at', 'like', $yesterday .'%')->sum('amount');
@@ -173,6 +188,11 @@ class PaymentController extends Controller
      $LastSevenPendingPayments = getSevenDays($todays_pending_payment_array);
      $LastSevenWalkinBusiness = getSevenDays($todays_walkin_business_array);
      $LastSevenOyoBusiness = getSevenDays($todays_oyo_business_array);
+     $LastSevenColdDrinkBusiness = getSevenDays(  $todays_cold_drink_business_array);
+     $LastSevenColdServiceBusiness = getSevenDays($todays_paid_service_business_array);
+     $LastSevenCheckInBusiness = getSevenDays( $todays_checkin_business_array);
+     $LastSevenCheckOutBusiness = getSevenDays($todays_checkout_business_array);
+     $LastSevenFutureBookingsBusiness = getSevenDays($todays_future_bookings_business_array);
 
 
 
@@ -190,7 +210,71 @@ class PaymentController extends Controller
          'todays_business' => $todays_business,
          'todays_pending_payment' => $todays_pending_payment,
          'todays_walkin_business' => $todays_walkin_business,
+         'total_cold_drinks' => $total_cold_drinks,
          'todays_oyo_business' => $todays_oyo_business,
+         'total_paid_services' => $total_paid_services,
+         'total_no_walkin_business' => $total_no_walkin_business,
+         'total_no_oyo_business' => $total_no_oyo_business,
+         'total_no_total_checkin' => $total_no_total_checkin,
+         'total_no_total_checkout' => $total_no_total_checkout,
+         'total_no_future_bookings' => $total_no_future_bookings,
+     
+         'future_bookings_business' => [
+            'series'=> [
+              [
+                'name' => "Checkin",
+                'data' =>  $LastSevenFutureBookingsBusiness,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
+         'checkout_business' => [
+            'series'=> [
+              [
+                'name' => "Checkin",
+                'data' =>  $LastSevenCheckOutBusiness,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
+     
+         'checkin_business' => [
+            'series'=> [
+              [
+                'name' => "Checkin",
+                'data' =>  $LastSevenCheckInBusiness,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
+         'paid_services' => [
+            'series'=> [
+              [
+                'name' => "Paid Service",
+                'data' =>  $LastSevenColdServiceBusiness,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
+         'cold_drinks' => [
+            'series'=> [
+              [
+                'name' => "Cold Drink",
+                'data' =>  $LastSevenColdDrinkBusiness,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
          'oyo_business' => [
             'series'=> [
               [
