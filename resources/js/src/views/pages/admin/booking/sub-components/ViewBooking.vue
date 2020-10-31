@@ -98,8 +98,9 @@
                 <div class="mt-4">
                   <h5>
                     Total: &#8377; {{ total }}&nbsp;&nbsp;| Exta: &#8377;
-                    {{ extra }}&nbsp;&nbsp;|&nbsp;&nbsp;Discount: &#8377;
-                    {{ data.discount }} |&nbsp;&nbsp;Balance: &#8377;
+                    {{ extra }}&nbsp;&nbsp;| Cold Drinks: &#8377;
+                    {{ cold_drink_total }}&nbsp;&nbsp;| &nbsp;&nbsp;Discount:
+                    &#8377; {{ data.discount }} |&nbsp;&nbsp;Balance: &#8377;
                     {{ balance }}
                   </h5>
                 </div>
@@ -184,6 +185,7 @@ export default {
     ...mapGetters({ selectedRooms: "getSelectedRooms" }),
     ...mapGetters({ selectedPayments: "getSelectedPayments" }),
     ...mapGetters({ hotelDetails: "getHotelDetails" }),
+    ...mapGetters({ cold_drinks: "getReservationColdDrinks" }),
     total() {
       // return this.selectedRooms.reduce(
       //   (prev, next) => prev + +next[this.type],
@@ -217,8 +219,21 @@ export default {
         0
       );
     },
+    cold_drink_total() {
+      if (this.cold_drinks && this.cold_drinks.length) {
+        return this.cold_drinks.reduce((prev, next) => prev + +next.total, 0);
+      } else {
+        return 0;
+      }
+    },
     balance() {
-      return +this.extra + +this.total - +this.data.discount - this.payments;
+      return (
+        +this.cold_drink_total +
+        +this.extra +
+        +this.total -
+        +this.data.discount -
+        this.payments
+      );
     },
     availableRoomTypes() {
       return this.$store.getters.getAllAvailableRoomTypes;

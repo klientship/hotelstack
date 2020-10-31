@@ -454,6 +454,10 @@ export default {
           // // delete paid service
           this.$store.dispatch("deleteAllReservationPaidService");
           this.$store.dispatch("retrieveReservationPaidServices", this.data.id);
+          this.$store.dispatch(
+            "RETRIEVE_RESERVATION_COLD_DRINKS",
+            this.data.id
+          );
 
           this.isViewPopup = true;
         })
