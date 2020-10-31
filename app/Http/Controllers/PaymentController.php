@@ -133,6 +133,7 @@ class PaymentController extends Controller
      $todays_business_array = Reservation::where('created_at', 'like', $today .'%')->pluck('total')->toArray();
      $todays_pending_payment_array =  Payment::where('created_at', 'like', $today .'%')->pluck('amount')->toArray();
      $todays_walkin_business_array = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->pluck('total')->toArray();
+     $todays_oyo_business_array = Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->pluck('total')->toArray();
 
      $total_expense = Expense::where('date', 'like', $today .'%')->sum('amount');
      $total_paid_service = ReservationPaidService::where('created_at', 'like', $today .'%')->sum('price');
@@ -140,6 +141,7 @@ class PaymentController extends Controller
      $todays_walkin_business = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->sum('total');
      $todays_business = Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service;
      $todays_pending_payment =  $todays_business - $total_payment;
+     $todays_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->sum('total');
 
 
      $income = (($total_payment + $total_paid_service) - $total_expense);
@@ -170,6 +172,7 @@ class PaymentController extends Controller
      $LastSevenBusiness = getSevenDays($todays_business_array);
      $LastSevenPendingPayments = getSevenDays($todays_pending_payment_array);
      $LastSevenWalkinBusiness = getSevenDays($todays_walkin_business_array);
+     $LastSevenOyoBusiness = getSevenDays($todays_oyo_business_array);
 
 
 
@@ -187,6 +190,18 @@ class PaymentController extends Controller
          'todays_business' => $todays_business,
          'todays_pending_payment' => $todays_pending_payment,
          'todays_walkin_business' => $todays_walkin_business,
+         'todays_oyo_business' => $todays_oyo_business,
+         'oyo_business' => [
+            'series'=> [
+              [
+                'name' => "Oyo Business",
+                'data' =>  $LastSevenOyoBusiness,
+              ],
+            ],
+            'analyticsData' => [
+              'orders'=> 97500,
+         ],
+        ],
          'walkin_business' => [
             'series'=> [
               [
