@@ -313,6 +313,7 @@ export default {
         invoice: "",
         nights: "",
         oyo_id: "",
+        oyo: "",
       }),
       backgroundLoading: "primary",
       colorLoading: "#fff",

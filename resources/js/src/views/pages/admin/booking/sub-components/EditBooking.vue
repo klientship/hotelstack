@@ -327,8 +327,10 @@ export default {
       this.type = data.value;
       if (data.value === "oyo_price") {
         this.display_oyo_id = true;
+        this.data.oyo = true;
       } else {
         this.display_oyo_id = false;
+        this.data.oyo = false;
       }
       this.$store.dispatch("selectRoomType", data.value);
     },

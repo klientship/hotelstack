@@ -18,6 +18,7 @@ class CreateReservationColdDrinksTable extends Migration
             $table->unsignedBigInteger('reservation_id');
             $table->integer('quantity');
             $table->unsignedBigInteger('product_id');
+            $table->double('total',8,2)->default(0);
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('cold_drinks')->onDelete('cascade');

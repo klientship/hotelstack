@@ -57,6 +57,7 @@ class ReservationColdDrinkController extends Controller
         $reservation_cold_drink->product_id = $request->product_id;
         $reservation_cold_drink->reservation_id = $request->reservation_id;
         $reservation_cold_drink->quantity = $request->quantity;
+        $reservation_cold_drink->total = (int) $request->quantity * (int) ColdDrink::findOrFail($request->product_id)->price;
         $reservation_cold_drink->save();
 
         // reduce stock

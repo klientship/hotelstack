@@ -45,6 +45,7 @@ class Reservation extends JsonResource
         'id' => $this->id,
         'uid' => $this->uid,
         'oyo_id' => $this->oyo_id,
+        'oyo' => $this->oyo,
         'active' => $this->active,
         'checked_in' => $this->checked_in,
         'checked_out' => $this->checked_out,

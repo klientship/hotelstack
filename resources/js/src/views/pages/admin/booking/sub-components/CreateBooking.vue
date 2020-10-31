@@ -363,6 +363,7 @@ export default {
         status: true,
         payment_type: "Cash",
         oyo_id: "",
+        oyo: false,
       }),
       configdateTimePicker: {
         enableTime: true,
@@ -481,8 +482,10 @@ export default {
       this.form.type = data.value;
       if (data.value === "oyo_price") {
         this.display_oyo_id = true;
+        this.form.oyo = true;
       } else {
         this.display_oyo_id = false;
+        this.form.oyo = false;
       }
       this.$store.dispatch("selectRoomType", data.value);
     },

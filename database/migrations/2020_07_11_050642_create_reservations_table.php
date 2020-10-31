@@ -17,6 +17,7 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->string('uid')->unique();
             $table->string('oyo_id')->nullable();
+            $table->boolean('oyo')->default(0);
             $table->boolean('active')->default(1);
             $table->boolean('checked_in')->default(0);
             $table->boolean('checked_out')->default(0);    

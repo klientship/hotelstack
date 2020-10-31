@@ -130,10 +130,11 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="dashboardDetails.todays_walkin_business"
           statisticTitle="Walkin Business"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="dashboardDetails.walkin_business.series"
           type="area"
+          color="warning"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -143,6 +144,7 @@
           statisticTitle="Oyo Business"
           :chartData="dashboardDetails.payments.series"
           type="area"
+          color="dark"
         ></statistics-card-line>
       </div>
     </div>
