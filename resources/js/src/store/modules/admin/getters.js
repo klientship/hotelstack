@@ -88,6 +88,9 @@ const getters = {
     getReservationColdDrinks(state) {
         return state.reservation_cold_drinks
     },
+    getInvoiceCardDetails(state) {
+        return state.invoice_card_details
+    },
 
 }
 

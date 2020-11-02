@@ -98,6 +98,7 @@ Route::get('/reservations/{reservation}/invoice', 'ReservationController@getInvo
 Route::patch('/reservations/{reservation}/no_show', 'ReservationController@no_show');
 Route::patch('/reservations/{reservation}/check_in', 'ReservationController@check_in');
 Route::patch('/reservations/{reservation}/check_out', 'ReservationController@check_out');
+
 // get paid services
 Route::get('/reservations/{reservation}/paid_service', 'ReservationController@getPaidServices');
 

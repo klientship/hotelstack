@@ -176,31 +176,19 @@ class PaymentController extends Controller
 
    
     //  seven days details
-     function getSevenDays($array)
-     {
-      $data =  array_fill(0, 7, 0);
-      for ($i=0; $i < 7; $i++) { 
+  
 
-      if(isset($array[$i]))
-      {
-        $data[$i] = $array[$i];
-      }
-    }
-      return $data;
-
-     }
-
-     $LastSevenPayments = getSevenDays($payments_array);
-     $LastSevenExpenses = getSevenDays($expenses_array);
-     $LastSevenBusiness = getSevenDays($todays_business_array);
-     $LastSevenPendingPayments = getSevenDays($todays_pending_payment_array);
-     $LastSevenWalkinBusiness = getSevenDays($todays_walkin_business_array);
-     $LastSevenOyoBusiness = getSevenDays($todays_oyo_business_array);
-     $LastSevenColdDrinkBusiness = getSevenDays(  $todays_cold_drink_business_array);
-     $LastSevenColdServiceBusiness = getSevenDays($todays_paid_service_business_array);
-     $LastSevenCheckInBusiness = getSevenDays( $todays_checkin_business_array);
-     $LastSevenCheckOutBusiness = getSevenDays($todays_checkout_business_array);
-     $LastSevenFutureBookingsBusiness = getSevenDays($todays_future_bookings_business_array);
+     $LastSevenPayments = Helpers::getSevenDays($payments_array);
+     $LastSevenExpenses = Helpers::getSevenDays($expenses_array);
+     $LastSevenBusiness = Helpers::getSevenDays($todays_business_array);
+     $LastSevenPendingPayments = Helpers::getSevenDays($todays_pending_payment_array);
+     $LastSevenWalkinBusiness = Helpers::getSevenDays($todays_walkin_business_array);
+     $LastSevenOyoBusiness = Helpers::getSevenDays($todays_oyo_business_array);
+     $LastSevenColdDrinkBusiness = Helpers::getSevenDays(  $todays_cold_drink_business_array);
+     $LastSevenColdServiceBusiness = Helpers::getSevenDays($todays_paid_service_business_array);
+     $LastSevenCheckInBusiness = Helpers::getSevenDays( $todays_checkin_business_array);
+     $LastSevenCheckOutBusiness = Helpers::getSevenDays($todays_checkout_business_array);
+     $LastSevenFutureBookingsBusiness = Helpers::getSevenDays($todays_future_bookings_business_array);
 
 
 

@@ -49,18 +49,26 @@
                 <h5 class="mt-4 mb-4">CHECK IN RECEIPT</h5>
               </div>
             </div>
-            <div class="vx-row mb-4 mt-4">
+            <div class="vx-row mt-2" v-if="data.oyo">
+            
+              <div class="vx-col w-full">
+                     <vs-chip color="danger text-center">OYO BOOKING</vs-chip></br>
+              </div>
+            </div>
+            <div class="vx-row mb-4 mt-2">
               <div class="vx-col w-1/2">
+           
                 <h5 class="mt-2">ID: {{ data.uid }}</h5>
 
                 <p class="mt-2">Check in: {{ data.check_in }}</p>
                 <p class="mt-2">Check out: {{ data.check_out }}</p>
               </div>
               <div class="vx-col w-1/2">
-                <h6 class="mt-2">People:</h6>
+                <h6 class="mt-2">People: {{ +data.adults + +data.kids }}</h6>
                 <p class="mt-2">
                   Adults: {{ data.adults }} &amp; Kids: {{ data.kids }}
                 </p>
+                <p class="mt-2" v-if="data.oyo">OYO ID: {{ data.oyo_id }}</p>
               </div>
             </div>
 

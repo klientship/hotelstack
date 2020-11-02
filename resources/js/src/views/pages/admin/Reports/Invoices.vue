@@ -6,9 +6,9 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="invoiceDetails.total_invoices"
           statisticTitle="Total invoices"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="invoiceDetails.invoices.series"
           type="area"
           color="success"
         ></statistics-card-line>
@@ -16,27 +16,27 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="invoiceDetails.monthly_invoices"
           statisticTitle="Monthly invoices"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="invoiceDetails.invoices.series"
           type="area"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="invoiceDetails.total_amount"
           statisticTitle="Total Amount"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="invoiceDetails.invoices.series"
           type="area"
         ></statistics-card-line>
       </div>
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
+          :statistic="invoiceDetails.monthly_total"
           statisticTitle="Monthly Total"
-          :chartData="dashboardDetails.payments.series"
+          :chartData="invoiceDetails.invoices.series"
           type="area"
         ></statistics-card-line>
       </div>
@@ -312,6 +312,7 @@ export default {
     ...mapGetters({ houseKeepings: "getHouseKeepings" }),
     ...mapGetters({ hotelDetails: "getHotelDetails" }),
     ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
+    ...mapGetters({ invoiceDetails: "getInvoiceCardDetails" }),
   },
   methods: {
     thisMonth() {
@@ -355,6 +356,7 @@ export default {
     this.$store.dispatch("retrieveTodaysCheckins");
     this.$store.dispatch("retrieveTodaysCheckouts");
     this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
+    this.$store.dispatch("RETRIEVE_INVOICE_CARD_DETAILS");
   },
 };
 </script>

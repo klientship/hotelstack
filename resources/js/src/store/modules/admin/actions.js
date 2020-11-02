@@ -461,7 +461,14 @@ const actions = {
             .then()
             .catch()
     },
+    RETRIEVE_INVOICE_CARD_DETAILS(context) {
+        axios
+            .get(`/api/invoices/card_details/get`)
+            .then(response => (context.commit('RETRIEVE_INVOICE_CARD_DETAILS', response.data)))
+            .catch(function (error) {
 
+            })
+    },
 }
 
 export default actions

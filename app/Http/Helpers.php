@@ -94,5 +94,21 @@ use Carbon\Carbon;
       return $total;
     }
 
+    public static function getSevenDays($array)
+    {
+  
+       $data =  array_fill(0, 7, 0);
+       for ($i=0; $i < 7; $i++) { 
+ 
+       if(isset($array[$i]))
+       {
+         $data[$i] = $array[$i];
+       }
+      }
+       return $data;
+ 
+      
+    }
+
 
  }

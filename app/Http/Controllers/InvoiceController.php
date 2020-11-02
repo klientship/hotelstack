@@ -178,13 +178,31 @@ class InvoiceController extends Controller
         $monthly_invoices = Invoice::where('created_at', 'like', $search .'%')->get();
         $monthly_total = Helpers::invoice_total($monthly_invoices);
 
-       
+        // 7 days array
+        $today =  Carbon::today()->format('Y-m-d');
+        $todays_invoice = Invoice::where('created_at', 'like', $today .'%')->get();
+        $invoice_array = [];
+
+        foreach ($todays_invoice as $key => $inv) {
+         array_push($invoice_array, $inv->reservation->total);
+        }
+
+        $LastSevenInvoice = Helpers::getSevenDays($invoice_array);
 
         return [
             'total_invoices' => $total_invoices,
             'monthly_invoices' => $monthly_invoices_count,
             'total_amount' => $total_amount,
-            'monthly total' => $monthly_total
+            'monthly_total' => $monthly_total,
+            'invoices' => [
+                'series'=> [
+                  [
+                    'name' => "Invoice",
+                    'data' =>  $LastSevenInvoice,
+                  ],
+                ],
+               
+            ],
         ];
     }
 }

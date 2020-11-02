@@ -159,6 +159,9 @@ const mutations = {
     RETRIEVE_RESERVATION_COLD_DRINKS(state, reservation_cold_drinks) {
         state.reservation_cold_drinks = reservation_cold_drinks;
     },
+    RETRIEVE_INVOICE_CARD_DETAILS(state, invoice_card_details) {
+        state.invoice_card_details = invoice_card_details;
+    },
 }
 
 export default mutations
