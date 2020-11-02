@@ -7,6 +7,7 @@ use App\Invoice;
 use Illuminate\Http\Request;
 use App\Http\Resources\Invoice as InvoiceResource;
 use Carbon\Carbon;
+use Helpers;
 
 class InvoiceController extends Controller
 {
@@ -39,7 +40,7 @@ class InvoiceController extends Controller
     public function last_month()
     {
         $date = Carbon::now();
-        $invoices = $this-> getLastMonth($date);
+        $invoices = $this->getLastMonth($date);
         return InvoiceResource::collection($invoices);
     }
 
@@ -151,5 +152,39 @@ class InvoiceController extends Controller
         $invoices = Invoice::where('created_at', 'like', $search .'%')->latest()->get();
 
         return $invoices;
+    }
+
+    public function card_details()
+    {
+        $date = Carbon::now();
+        $year = $date->year;
+        $month = $date->month;
+
+        if ($month < 10) {
+            $month = '0' . $month;
+        }
+
+        $search = $year . '-' . $month;
+
+        $total_invoices = Invoice::all()->count();
+        $monthly_invoices_count = Invoice::where('created_at', 'like', $search .'%')->count();
+    
+        // total invoice amount calculation
+        $invoices = Invoice::all();
+        $total_amount = Helpers::invoice_total($invoices);
+      
+
+        // Monthly total invoice amount calculation
+        $monthly_invoices = Invoice::where('created_at', 'like', $search .'%')->get();
+        $monthly_total = Helpers::invoice_total($monthly_invoices);
+
+       
+
+        return [
+            'total_invoices' => $total_invoices,
+            'monthly_invoices' => $monthly_invoices_count,
+            'total_amount' => $total_amount,
+            'monthly total' => $monthly_total
+        ];
     }
 }

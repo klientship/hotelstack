@@ -143,13 +143,21 @@ class PaymentController extends Controller
      $todays_future_bookings_business_array = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',0)->pluck('total')->toArray();
 
      $total_expense = Expense::where('date', 'like', $today .'%')->sum('amount');
+     
      $total_paid_service = ReservationPaidService::where('created_at', 'like', $today .'%')->sum('price');
+     
      $total_payment = Payment::where('created_at', 'like', $today .'%')->sum('amount');
-     $todays_walkin_business = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->sum('total');
+     
+     $todays_walkin_business = Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->sum('total') - Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->sum('discount');
+     
      $todays_cold_drink_business = ReservationColdDrink::where('created_at', 'like', $today .'%')->sum('total');
-     $todays_business = Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service + $todays_cold_drink_business;
+     
+     $todays_business = (Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service + $todays_cold_drink_business) - Reservation::where('created_at', 'like', $today .'%')->sum('discount');
+     
      $todays_pending_payment =  $todays_business - $total_payment;
-     $todays_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->sum('total');
+     
+     $todays_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->sum('total') - Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->sum('discount');
+     
      $total_cold_drinks =  ColdDrink::all()->count();
      $total_paid_services =  ReservationPaidService::all()->count();
      $total_no_walkin_business =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->count();

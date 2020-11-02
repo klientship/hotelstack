@@ -78,6 +78,7 @@ Route::get("/payments/todays/details", 'PaymentController@todays_details');
 Route::apiResource("invoices", 'InvoiceController');
 Route::get("/invoices/this_month/get", 'InvoiceController@this_month');
 Route::get("/invoices/last_month/get", 'InvoiceController@last_month');
+Route::get("/invoices/card_details/get", 'InvoiceController@card_details');
 // reports
 Route::get("/reports", 'ReportController@index');
 Route::get("/reports/this_month/get", 'ReportController@this_month');

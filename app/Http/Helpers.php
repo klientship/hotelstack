@@ -76,5 +76,23 @@ use Carbon\Carbon;
         return $data;
     }
 
+    public static function invoice_total($invoices)
+    {
+      $total = 0;
+      foreach($invoices as $invoice) 
+      {
+          $nights = self::getNights($invoice->reservation->check_in, $invoice->reservation->check_out);
+          for ($i = 0; $i < sizeof($invoice->reservation->rooms); $i++) {
+              if ($nights) {
+                     $total += +$invoice->reservation->rooms[$i]->price * +$nights;
+            }else {
+              $total += +$invoice->reservation->rooms[$i]->price;
+            }
+          }
+      }
+
+      return $total;
+    }
+
 
  }
