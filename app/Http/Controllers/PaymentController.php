@@ -158,14 +158,27 @@ class PaymentController extends Controller
      
      $todays_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->sum('total') - Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->sum('discount');
      
-     $total_cold_drinks =  ColdDrink::all()->count();
-     $total_paid_services =  ReservationPaidService::all()->count();
+     $todays_cold_drink_business =  ReservationColdDrink::where('created_at', 'like', $today .'%')->sum('total');
+     $todays_paid_service_business =  ReservationPaidService::where('created_at', 'like', $today .'%')->sum('price');
+     
+    //  payments
+     $total_payments_received =  Payment::all()->sum('amount');
+     $total_business = Reservation::all()->sum('total') - Reservation::all()->sum('discount');
+     $total_pending_payments =  $total_business - $total_payments_received;
+
+     
+
+
+
+    //  $total_cold_drinks =  ColdDrink::all()->count();
+    //  $total_paid_services =  ReservationPaidService::all()->count();
      $total_no_walkin_business =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->count();
      $total_no_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->count();
-     $total_no_total_checkin =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->count();
-     $total_no_total_checkout =  Reservation::where('created_at', 'like', $today .'%')->where('checked_out',1)->count();
+     $total_no_today_checkin =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->count();
+     $total_no_checkedin =  Reservation::where('checked_in',1)->where('checked_out',0)->count();
+     $total_no_today_checkout =  Reservation::where('created_at', 'like', $today .'%')->where('checked_out',1)->count();
      $total_no_future_bookings =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',0)->count();
-
+     $total_no_checkin =  Reservation::where('checked_in',1)->count();
 
      $income = (($todays_business) - $total_expense);
 
@@ -202,18 +215,24 @@ class PaymentController extends Controller
 
      $o = [
          'total_payment' => $total_payment,
+         'total_payments_received'=> $total_payments_received,
+         'total_pending_payments'=> $total_pending_payments,
          'total_expense' => $total_expense,
          'todays_business' => $todays_business,
          'todays_pending_payment' => $todays_pending_payment,
          'todays_walkin_business' => $todays_walkin_business,
-         'total_cold_drinks' => $total_cold_drinks,
+        //  'total_cold_drinks' => $total_cold_drinks,
          'todays_oyo_business' => $todays_oyo_business,
-         'total_paid_services' => $total_paid_services,
+        //  'total_paid_services' => $total_paid_services,
          'total_no_walkin_business' => $total_no_walkin_business,
          'total_no_oyo_business' => $total_no_oyo_business,
-         'total_no_total_checkin' => $total_no_total_checkin,
-         'total_no_total_checkout' => $total_no_total_checkout,
+         'total_no_today_checkin' => $total_no_today_checkin,
+         'total_no_today_checkout' => $total_no_today_checkout,
          'total_no_future_bookings' => $total_no_future_bookings,
+         'total_no_checkedin' => $total_no_checkedin,
+         'todays_cold_drink_business' => $todays_cold_drink_business,
+         'todays_paid_service_business' => $todays_paid_service_business,
+         'total_no_checkin' => $total_no_checkin,
      
          'future_bookings_business' => [
             'series'=> [
