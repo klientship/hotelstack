@@ -163,8 +163,10 @@ const mutations = {
         state.invoice_card_details = invoice_card_details;
     },
     RETRIEVE_OYO_REPORTS(state, oyo_reports) {
-
         state.oyo_reports = oyo_reports;
+    },
+    RETRIEVE_OYO_CARD_DETAILS(state, oyo_card_details) {
+        state.oyo_card_details = oyo_card_details;
     },
 }
 

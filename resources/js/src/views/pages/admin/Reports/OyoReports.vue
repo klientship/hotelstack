@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <ReportCard :data="dashboardDetails"></ReportCard>
+    <OyoReportCard :data="oyo_card_details"></OyoReportCard>
     <div id="ag-grid-demo">
       <vx-card>
         <!-- TABLE ACTION ROW -->
@@ -141,13 +141,13 @@ import StatisticsCardLine from "@/components/statistics-cards/StatisticsCardLine
 
 import "@sass/vuexy/extraComponents/agGridStyleOverride.scss";
 import { mapGetters } from "vuex";
-import ReportCard from "./ReportCard";
+import OyoReportCard from "./OyoReportCard";
 
 export default {
   components: {
     AgGridVue,
     StatisticsCardLine,
-    ReportCard,
+    OyoReportCard,
   },
   data() {
     return {
@@ -266,6 +266,7 @@ export default {
     },
 
     ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
+    ...mapGetters({ oyo_card_details: "getOyoCardDetails" }),
   },
   methods: {
     thisMonth() {
@@ -306,6 +307,7 @@ export default {
   },
   created() {
     this.$store.dispatch("RETRIEVE_ALL_OYO_REPORTS");
+    this.$store.dispatch("RETRIEVE_OYO_CARD_DETAILS");
   },
 };
 </script>

@@ -51,6 +51,36 @@ class ReportController extends Controller
         return ReportResource::collection($reservations);
     }
 
+    public function oyo_card_details()
+    {
+       
+        $total_bookings = Reservation::where('oyo',1)->count();
+        $monthly_bookings = Reservation::where('oyo',1)->where('created_at', 'like', Helpers::calculateLastMonth() .'%')->count();
+        $total_amount = Reservation::where('oyo',1)->sum('total') - Reservation::where('oyo',1)->sum('discount');
+        $monthly_total = Reservation::where('oyo',1)->where('created_at', 'like', Helpers::calculateLastMonth() .'%')->sum('total') - Reservation::where('oyo',1)->where('created_at', 'like', Helpers::calculateLastMonth() .'%')->sum('discount');
+
+        $todays_oyo_business_array = Reservation::where('oyo',1)->pluck('total')->toArray();
+        $LastSevenOyoBusiness = Helpers::getSevenDays($todays_oyo_business_array);
+        
+        return [
+            'total_bookings' => $total_bookings,
+            'monthly_bookings' => $monthly_bookings,
+            'total_amount' => $total_amount,
+            'monthly_total' => $monthly_total,
+            'oyo_business' => [
+                'series'=> [
+                  [
+                    'name' => "Oyo Business",
+                    'data' =>  $LastSevenOyoBusiness,
+                  ],
+                ],
+                'analyticsData' => [
+                  'orders'=> 97500,
+             ],
+            ],
+        ];
+    }
+
     /**
      * Show the form for creating a new resource.
      *

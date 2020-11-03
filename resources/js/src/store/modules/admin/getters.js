@@ -94,6 +94,9 @@ const getters = {
     getOyoReports(state) {
         return state.oyo_reports
     },
+    getOyoCardDetails(state) {
+        return state.oyo_card_details
+    },
 
 }
 

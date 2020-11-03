@@ -501,6 +501,14 @@ const actions = {
 
             })
     },
+    RETRIEVE_OYO_CARD_DETAILS(context) {
+        axios
+            .get(`/api/reports/oyo_card_details`)
+            .then(response => (context.commit('RETRIEVE_OYO_CARD_DETAILS', response.data)))
+            .catch(function (error) {
+
+            })
+    },
 }
 
 export default actions
