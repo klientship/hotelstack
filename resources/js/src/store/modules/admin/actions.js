@@ -469,6 +469,38 @@ const actions = {
 
             })
     },
+    RETRIEVE_ALL_OYO_REPORTS(context) {
+        axios
+            .get(`/api/reports/oyo_reports`)
+            .then(response => (context.commit('RETRIEVE_OYO_REPORTS', response.data.data)))
+            .catch(function (error) {
+
+            })
+    },
+    RETRIEVE_THIS_MONTH_OYO_REPORTS(context) {
+        axios
+            .get(`/api/reports/oyo_reports/this_month`)
+            .then(response => (context.commit('RETRIEVE_OYO_REPORTS', response.data.data)))
+            .catch(function (error) {
+
+            })
+    },
+    RETRIEVE_LAST_MONTH_OYO_REPORTS(context) {
+        axios
+            .get(`/api/reports/oyo_reports/last_month`)
+            .then(response => (context.commit('RETRIEVE_OYO_REPORTS', response.data.data)))
+            .catch(function (error) {
+
+            })
+    },
+    RETRIEVE_PRESENT_CHECKED_IN_OYO_REPORTS(context) {
+        axios
+            .get(`/api/reports/oyo_reports/present_checkins`)
+            .then(response => (context.commit('RETRIEVE_OYO_REPORTS', response.data.data)))
+            .catch(function (error) {
+
+            })
+    },
 }
 
 export default actions

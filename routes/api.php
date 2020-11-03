@@ -79,11 +79,18 @@ Route::apiResource("invoices", 'InvoiceController');
 Route::get("/invoices/this_month/get", 'InvoiceController@this_month');
 Route::get("/invoices/last_month/get", 'InvoiceController@last_month');
 Route::get("/invoices/card_details/get", 'InvoiceController@card_details');
+
 // reports
 Route::get("/reports", 'ReportController@index');
 Route::get("/reports/this_month/get", 'ReportController@this_month');
 Route::get("/reports/last_month/get", 'ReportController@last_month');
 Route::get("/reports/present_checkins", 'ReportController@present_checkins');
+Route::get("/reports/oyo_reports", 'ReportController@oyo_bookings');
+Route::get("/reports/oyo_reports/this_month", 'ReportController@this_month_oyo_bookings');
+Route::get("/reports/oyo_reports/last_month", 'ReportController@last_month_oyo_bookings');
+Route::get("/reports/oyo_reports/present_checkins", 'ReportController@present_checkedin_oyo_bookings');
+
+
 // expense_categories
 Route::apiResource("expense_categories", 'ExpenseCategoryController');
 // expenses

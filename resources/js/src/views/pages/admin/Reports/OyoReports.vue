@@ -2,45 +2,7 @@
 
 <template>
   <div>
-    <div class="vx-row mt-4">
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Total Bookings"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-          color="success"
-        ></statistics-card-line>
-      </div>
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Monthly Bookings"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-        ></statistics-card-line>
-      </div>
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Total Amount"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-        ></statistics-card-line>
-      </div>
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.total_payment"
-          statisticTitle="Monthly Total"
-          :chartData="dashboardDetails.payments.series"
-          type="area"
-        ></statistics-card-line>
-      </div>
-    </div>
+    <ReportCard :data="dashboardDetails"></ReportCard>
     <div id="ag-grid-demo">
       <vx-card>
         <!-- TABLE ACTION ROW -->
@@ -179,11 +141,13 @@ import StatisticsCardLine from "@/components/statistics-cards/StatisticsCardLine
 
 import "@sass/vuexy/extraComponents/agGridStyleOverride.scss";
 import { mapGetters } from "vuex";
+import ReportCard from "./ReportCard";
 
 export default {
   components: {
     AgGridVue,
     StatisticsCardLine,
+    ReportCard,
   },
   data() {
     return {
@@ -203,6 +167,13 @@ export default {
         {
           headerName: "Booking ID",
           field: "uid",
+          filter: true,
+          width: 175,
+          pinned: "left",
+        },
+        {
+          headerName: "OYO ID",
+          field: "oyo_id",
           filter: true,
           width: 175,
           pinned: "left",
@@ -274,7 +245,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ reports: "getReports" }),
+    ...mapGetters({ reports: "getOyoReports" }),
 
     paginationPageSize() {
       if (this.gridApi) return this.gridApi.paginationGetPageSize();
@@ -293,30 +264,24 @@ export default {
         this.gridApi.paginationGoToPage(val - 1);
       },
     },
-    ...mapGetters({ roomTypes: "getRoomTypesWithRooms" }),
-    ...mapGetters({ recent_checkins: "getRecentCheckins" }),
-    ...mapGetters({ todays_checkins: "getTodaysCheckins" }),
-    ...mapGetters({ todays_checkouts: "getTodaysCheckouts" }),
-    ...mapGetters({ availableRooms: "getAvailableRoomsToday" }),
-    ...mapGetters({ houseKeepings: "getHouseKeepings" }),
-    ...mapGetters({ hotelDetails: "getHotelDetails" }),
+
     ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
   },
   methods: {
     thisMonth() {
-      this.$store.dispatch("RETRIEVE_THIS_MONTH_REPORTS");
+      this.$store.dispatch("RETRIEVE_THIS_MONTH_OYO_REPORTS");
       this.filter = "this_month";
     },
     lastMonth() {
-      this.$store.dispatch("RETRIEVE_LAST_MONTH_REPORTS");
+      this.$store.dispatch("RETRIEVE_LAST_MONTH_OYO_REPORTS");
       this.filter = "last_month";
     },
     all() {
-      this.$store.dispatch("RETRIEVE_ALL_REPORTS");
+      this.$store.dispatch("RETRIEVE_ALL_OYO_REPORTS");
       this.filter = "all";
     },
     presentCheckins() {
-      this.$store.dispatch("RETRIEVE_PRESENT_CHECKINS");
+      this.$store.dispatch("RETRIEVE_PRESENT_CHECKED_IN_OYO_REPORTS");
       this.filter = "present_checkins";
     },
     updateSearchQuery(val) {
@@ -336,16 +301,11 @@ export default {
         Number(header.style.transform.slice(11, -3)) + 9
       )}px`;
     }
-    this.$store.dispatch("retrieveAvailableRoomsToday");
-    this.$store.dispatch("retrieveHouseKeepingRooms");
-    this.$store.dispatch("retrieveRoomTypesWithRooms");
-    this.$store.dispatch("retrieveRecentCheckins");
-    this.$store.dispatch("retrieveTodaysCheckins");
-    this.$store.dispatch("retrieveTodaysCheckouts");
+
     this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
   },
   created() {
-    this.$store.dispatch("RETRIEVE_ALL_REPORTS");
+    this.$store.dispatch("RETRIEVE_ALL_OYO_REPORTS");
   },
 };
 </script>

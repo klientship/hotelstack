@@ -162,6 +162,10 @@ const mutations = {
     RETRIEVE_INVOICE_CARD_DETAILS(state, invoice_card_details) {
         state.invoice_card_details = invoice_card_details;
     },
+    RETRIEVE_OYO_REPORTS(state, oyo_reports) {
+
+        state.oyo_reports = oyo_reports;
+    },
 }
 
 export default mutations

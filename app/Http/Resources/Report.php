@@ -45,6 +45,8 @@ class Report extends JsonResource
         // guest
         'name' => $this->guest->name,
 
+        'oyo_id' => $this->oyo_id,
+
         ];
     }
 }

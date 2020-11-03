@@ -110,5 +110,34 @@ use Carbon\Carbon;
       
     }
 
+    public static function calculateThisMonth()
+    {
+      $date = Carbon::now();
+      $year = $date->year;
+      $month = $date->month;
+
+      if ($month < 10) {
+          $month = '0' . $month;
+      }
+
+      $formatedDate = $year . '-' . $month;
+ 
+      return $formatedDate;
+    }
+    public static function calculateLastMonth()
+    {
+      $date = Carbon::now();
+      $year = $date->year;
+      $month = $date->month - 1;
+
+      if ($month < 10) {
+          $month = '0' . $month;
+      }
+
+      $formatedDate = $year . '-' . $month;
+ 
+      return $formatedDate;
+    }
+
 
  }

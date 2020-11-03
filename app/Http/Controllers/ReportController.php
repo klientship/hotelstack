@@ -8,6 +8,7 @@ use App\Http\Resources\Report as ReportResource;
 use App\Reservation;
 
 use Carbon\Carbon;
+use Helpers;
 
 class ReportController extends Controller
 {
@@ -19,6 +20,34 @@ class ReportController extends Controller
     public function index()
     {
         $reservations = Reservation::latest()->get();
+        return ReportResource::collection($reservations);
+    }
+
+    public function oyo_bookings()
+    {
+       
+        $reservations = Reservation::where('oyo',1)->latest()->get();
+        return ReportResource::collection($reservations);
+    }
+
+    public function this_month_oyo_bookings()
+    {
+       
+        $reservations = Reservation::where('oyo',1)->where('created_at', 'like', Helpers::calculateThisMonth() .'%')->latest()->get();
+        return ReportResource::collection($reservations);
+    }
+
+    public function last_month_oyo_bookings()
+    {
+       
+        $reservations = Reservation::where('oyo',1)->where('created_at', 'like', Helpers::calculateLastMonth() .'%')->latest()->get();
+        return ReportResource::collection($reservations);
+    }
+
+    public function present_checkedin_oyo_bookings()
+    {
+       
+        $reservations = Reservation::where('oyo',1)->where('checked_in',1)->where('checked_out',0)->latest()->get();
         return ReportResource::collection($reservations);
     }
 
@@ -101,6 +130,8 @@ class ReportController extends Controller
     {
         //
     }
+
+
 
     public function getMonthly($date)
     {

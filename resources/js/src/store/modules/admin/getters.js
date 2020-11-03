@@ -91,6 +91,9 @@ const getters = {
     getInvoiceCardDetails(state) {
         return state.invoice_card_details
     },
+    getOyoReports(state) {
+        return state.oyo_reports
+    },
 
 }
 
