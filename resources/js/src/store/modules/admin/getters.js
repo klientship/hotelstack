@@ -97,6 +97,15 @@ const getters = {
     getOyoCardDetails(state) {
         return state.oyo_card_details
     },
+    getAwaitingCheckoutId(state) {
+        return state.awaiting_checkout_id
+    },
+    getOyoBookingsId(state) {
+        return state.oyo_bookings_id
+    },
+    getTotalRooms(state) {
+        return state.total_rooms
+    },
 
 }
 

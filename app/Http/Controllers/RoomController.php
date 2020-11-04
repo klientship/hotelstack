@@ -8,6 +8,7 @@ use App\ReservationRoom;
 use Carbon\Carbon;
 use App\RoomType;
 use App\HouseKeeping;
+use Helpers;
 use Illuminate\Http\Request;
 use App\Http\Resources\Room as RoomResource;
 use App\Http\Resources\AvailableRoom as AvailableRoomResource;
@@ -213,6 +214,18 @@ class RoomController extends Controller
           
             }
             return $availableRooms;
+    }
+
+    public function awaitingCheckoutId() {
+        return Helpers::getAwaitingCheckout();
+    }
+
+    public function oyoCheckinId() {
+        return Helpers::getOyoCheckinsRooms();
+    }
+    public function total_rooms() {
+        return Room::all()->count();
+
     }
 
 }

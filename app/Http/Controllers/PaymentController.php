@@ -204,7 +204,7 @@ class PaymentController extends Controller
      $LastSevenFutureBookingsBusiness = Helpers::getSevenDays($todays_future_bookings_business_array);
 
 
-     $awaiting_checkout = Helpers::getNoAwaitingCheckout()->count();
+     $awaiting_checkout = count(Helpers::getAwaitingCheckout());
 
      if($yesterday_income){
       $gain_perc = (100*$income)/$yesterday_income;

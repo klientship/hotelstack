@@ -509,6 +509,30 @@ const actions = {
 
             })
     },
+    RETRIEVE_AWAITING_CHECKOUTS(context) {
+        axios
+            .get(`/api/awaiting_checkout_id`)
+            .then(response => (context.commit('RETRIEVE_AWAITING_CHECKOUTS', response.data)))
+            .catch(function (error) {
+
+            })
+    },
+    RETRIEVE_OYO_BOOKINGS_ID(context) {
+        axios
+            .get(`/api/oyo_checkins_id`)
+            .then(response => (context.commit('RETRIEVE_OYO_BOOKINGS_ID', response.data)))
+            .catch(function (error) {
+
+            })
+    },
+    RETRIEVE_TOTAL_ROOMS(context) {
+        axios
+            .get(`/api/total_rooms`)
+            .then(response => (context.commit('RETRIEVE_TOTAL_ROOMS', response.data)))
+            .catch(function (error) {
+
+            })
+    },
 }
 
 export default actions

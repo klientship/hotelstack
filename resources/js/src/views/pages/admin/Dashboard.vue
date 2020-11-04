@@ -22,6 +22,11 @@
       </vs-popup>
     </div>
     <!-- end view booking -->
+    <div class="vx-row mb-4">
+      <div class="vx-col">
+        <DashboardDetails></DashboardDetails>
+      </div>
+    </div>
 
     <div class="vx-row">
       <!-- CARD 1: CONGRATS -->
@@ -256,6 +261,7 @@ import CreateBooking from "./booking/sub-components/CreateBooking";
 import ViewBooking from "./booking/sub-components/ViewBooking";
 import StatisticsCardLine from "@/components/statistics-cards/StatisticsCardLine.vue";
 import DashboardCard from "./DashboardCard";
+import DashboardDetails from "./DashboardDetails";
 
 export default {
   data() {
@@ -266,29 +272,6 @@ export default {
       isAddNewPopup: false,
       isViewPopup: false,
       data: {},
-
-      subscribersGained: {
-        series: [
-          {
-            name: "Income",
-            data: [28, 40, 36, 52, 38, 60, 55],
-          },
-        ],
-        analyticsData: {
-          subscribers: 92600,
-        },
-      },
-      ordersRecevied: {
-        series: [
-          {
-            name: "Expense",
-            data: [10, 15, 8, 15, 7, 12, 8],
-          },
-        ],
-        analyticsData: {
-          orders: 97500,
-        },
-      },
     };
   },
   components: {
@@ -296,6 +279,7 @@ export default {
     ViewBooking,
     StatisticsCardLine,
     DashboardCard,
+    DashboardDetails,
   },
   methods: {
     getStatusColor(data) {
@@ -339,17 +323,48 @@ export default {
     },
 
     getColor(id) {
-      if (this.houseKeepings.length) {
-        if (this.houseKeepings.includes(id)) {
-          return "warning";
-        }
-      }
-      if (this.availableRooms.length) {
-        if (!this.availableRooms.includes(id)) {
-          return "danger";
-        } else {
-          return "success";
-        }
+      // if (this.houseKeepings.length) {
+      //   if (this.houseKeepings.includes(id)) {
+      //     return "dark";
+      //   }
+      // }
+
+      // if (this.awaitingCheckouts.length) {
+      //   if (this.awaitingCheckouts.includes(id)) {
+      //     return "warning";
+      //   }
+      // }
+
+      // if (this.oyoBookings.length) {
+      //   if (this.oyoBookings.includes(id)) {
+      //     return "primary";
+      //   }
+      // }
+
+      // if (this.availableRooms.length) {
+      //   if (!this.availableRooms.includes(id)) {
+      //     return "danger";
+      //   } else {
+      //     return "success";
+      //   }
+      // } else {
+      //   return "danger";
+      // }
+
+      if (this.houseKeepings.length && this.houseKeepings.includes(id)) {
+        return "dark";
+      } else if (
+        this.awaitingCheckouts.length &&
+        this.awaitingCheckouts.includes(id)
+      ) {
+        return "warning";
+      } else if (this.oyoBookings.length && this.oyoBookings.includes(id)) {
+        return "primary";
+      } else if (
+        this.availableRooms.length &&
+        this.availableRooms.includes(id)
+      ) {
+        return "success";
       } else {
         return "danger";
       }
@@ -368,9 +383,13 @@ export default {
               this.$store.dispatch("retrieveAvailableRoomsToday");
               this.$store.dispatch("retrieveHouseKeepingRooms");
               this.$store.dispatch("retrieveRoomTypesWithRooms");
+              this.$store.dispatch("RETRIEVE_AWAITING_CHECKOUTS");
+              this.$store.dispatch("RETRIEVE_OYO_BOOKINGS_ID");
               this.$store.dispatch("retrieveRecentCheckins");
               this.$store.dispatch("retrieveTodaysCheckins");
               this.$store.dispatch("retrieveTodaysCheckouts");
+              this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
+              this.$store.dispatch("RETRIEVE_TOTAL_ROOMS");
 
               this.$vs.notify({
                 title: "Removed from keeping",
@@ -422,6 +441,8 @@ export default {
     ...mapGetters({ todays_checkouts: "getTodaysCheckouts" }),
     ...mapGetters({ availableRooms: "getAvailableRoomsToday" }),
     ...mapGetters({ houseKeepings: "getHouseKeepings" }),
+    ...mapGetters({ awaitingCheckouts: "getAwaitingCheckoutId" }),
+    ...mapGetters({ oyoBookings: "getOyoBookingsId" }),
     ...mapGetters({ hotelDetails: "getHotelDetails" }),
     ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
     greeting() {
@@ -442,10 +463,13 @@ export default {
     this.$store.dispatch("retrieveAvailableRoomsToday");
     this.$store.dispatch("retrieveHouseKeepingRooms");
     this.$store.dispatch("retrieveRoomTypesWithRooms");
+    this.$store.dispatch("RETRIEVE_AWAITING_CHECKOUTS");
+    this.$store.dispatch("RETRIEVE_OYO_BOOKINGS_ID");
     this.$store.dispatch("retrieveRecentCheckins");
     this.$store.dispatch("retrieveTodaysCheckins");
     this.$store.dispatch("retrieveTodaysCheckouts");
     this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
+    this.$store.dispatch("RETRIEVE_TOTAL_ROOMS");
   },
   created() {
     this.openLoadingDiv();

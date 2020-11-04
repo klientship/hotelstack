@@ -32,6 +32,9 @@ const state = {
     invoice_card_details: [],
     oyo_reports: [],
     oyo_card_details: [],
+    awaiting_checkout_id: [],
+    oyo_bookings_id: [],
+    total_rooms: [],
     // hotelDetails: {
     //     name: "Shri Sai Palace",
     //     addressLine1: "Kankanady pumpwell",

@@ -140,7 +140,7 @@ use App\Reservation;
       return $formatedDate;
     }
 
-    public static function getNoAwaitingCheckout()
+    public static function getAwaitingCheckout()
     {
       $now = Carbon::now();
       $checkins =  Reservation::where('checked_in', 1)
@@ -148,8 +148,38 @@ use App\Reservation;
       ->where(Reservation::raw("(STR_TO_DATE(check_out,'%Y-%m-%d %H:%i'))"), '<', $now)->get();
 
       // $date_check_out = Carbon::parse($this->check_out);
-  
-      return $checkins;
+
+       
+      $awaiting_checkouts = [];
+
+      foreach($checkins as $checkin)
+              {
+                foreach ($checkin->rooms as $key => $room) {
+                    array_push($awaiting_checkouts, $room->room_id);
+                }
+              }
+
+      return $awaiting_checkouts;
+    
+    }
+
+    public static function getOyoCheckinsRooms()
+    {
+      $now = Carbon::now();
+      $oyo_checkins =  Reservation::where('oyo', 1)->where('checked_in', 1)
+      ->where('checked_out',0)->with('rooms')->get();
+
+      
+      $bookedRooms = [];
+
+      foreach($oyo_checkins as $oyo_checkin)
+              {
+                foreach ($oyo_checkin->rooms as $key => $room) {
+                    array_push($bookedRooms, $room->room_id);
+                }
+              }
+
+      return $bookedRooms;
     
     }
 

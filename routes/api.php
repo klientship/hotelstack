@@ -102,6 +102,9 @@ Route::apiResource("expenses", 'ExpenseController');
 Route::apiResource("house_keepings", 'HouseKeepingController');
 // get available Rooms
 Route::post('/available_rooms', 'RoomController@availableRooms');
+// total rooms
+Route::get('/total_rooms','RoomController@total_rooms');
+
 // get invoice
 Route::get('/reservations/{reservation}/invoice', 'ReservationController@getInvoice');
 // check in & check out
@@ -123,6 +126,9 @@ Route::get('/reservations/checkouts/today', 'ReservationController@todays_checko
 
 Route::get("/room_types/rooms/get", 'RoomTypeController@room_types_with_rooms');
 Route::get("/rooms/booked_rooms/today", 'RoomController@available_rooms_id');
+// get awaiting checkouts
+Route::get('/awaiting_checkout_id', 'RoomController@awaitingCheckoutId');
+Route::get('/oyo_checkins_id', 'RoomController@oyoCheckinId');
 
 // transaction
 Route::apiResource("transactions", 'TransactionController');

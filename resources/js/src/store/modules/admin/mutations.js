@@ -168,6 +168,15 @@ const mutations = {
     RETRIEVE_OYO_CARD_DETAILS(state, oyo_card_details) {
         state.oyo_card_details = oyo_card_details;
     },
+    RETRIEVE_AWAITING_CHECKOUTS(state, awaiting_checkout_id) {
+        state.awaiting_checkout_id = awaiting_checkout_id;
+    },
+    RETRIEVE_OYO_BOOKINGS_ID(state, oyo_bookings_id) {
+        state.oyo_bookings_id = oyo_bookings_id;
+    },
+    RETRIEVE_TOTAL_ROOMS(state, total_rooms) {
+        state.total_rooms = total_rooms;
+    },
 }
 
 export default mutations

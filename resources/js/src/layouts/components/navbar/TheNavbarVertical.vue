@@ -1,12 +1,4 @@
-<!-- =========================================================================================
-  File Name: TheNavbar.vue
-  Description: Navbar component
-  Component Name: TheNavbar
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-========================================================================================== -->
+
 
 
 <template>
@@ -45,6 +37,7 @@ import Bookmarks from "./components/Bookmarks.vue";
 import SearchBar from "./components/SearchBar.vue";
 import NotificationDropDown from "./components/NotificationDropDown.vue";
 import ProfileDropDown from "./components/ProfileDropDown.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "the-navbar-vertical",
@@ -163,6 +156,7 @@ export default {
       this.$store.commit("TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE", true);
     },
   },
+  created() {},
 };
 </script>
 

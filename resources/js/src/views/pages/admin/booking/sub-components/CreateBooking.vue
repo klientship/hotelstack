@@ -408,6 +408,12 @@ export default {
     this.form.check_in = moment().format("DD-MM-YYYY HH:mm");
   },
   methods: {
+    openLoadingDiv() {
+      this.$vs.loading({ color: this.colorLoading });
+      setTimeout(() => {
+        this.$vs.loading.close();
+      }, 2000);
+    },
     reset() {
       this.form.check_in = this.form.check_out = this.form.adults = this.form.kids = this.form.name = this.form.phone = this.form.email =
         "";
@@ -418,6 +424,7 @@ export default {
     },
 
     onSubmit() {
+      this.openLoadingDiv();
       this.form.rooms = this.selectedRooms;
       this.form.total = this.total;
       this.form.balance = this.balance;
