@@ -85,6 +85,7 @@ export default {
         .then(() => {
           this.reset();
           this.$store.dispatch("RETRIEVE_ALL_COLD_DRINKS");
+          this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
           this.$vs.notify({
             color: "success",
             title: "Created",

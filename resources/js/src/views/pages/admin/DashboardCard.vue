@@ -113,8 +113,8 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_no_checkin"
-          statisticTitle="Total Checkins (All)"
+          :statistic="dashboardDetails.awaiting_checkout"
+          statisticTitle="Total Awaiting checkout"
           :chartData="dashboardDetails.checkin_business.series"
           type="area"
           color="warning"

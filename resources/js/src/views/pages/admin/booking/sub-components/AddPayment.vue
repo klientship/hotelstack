@@ -8,13 +8,21 @@
       <div class="p-4">
         <div class="vx-row mb-4">
           <div class="vx-col w-full">
-            <vs-input class="w-full" label-placeholder="Amount" v-model="form.amount" />
+            <vs-input
+              class="w-full"
+              label-placeholder="Amount"
+              v-model="form.amount"
+            />
           </div>
         </div>
         <div class="vx-row mb-4">
           <div class="vx-col w-full">
             Payment Type
-            <v-select v-model="form.type" :options="options" :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+            <v-select
+              v-model="form.type"
+              :options="options"
+              :dir="$vs.rtl ? 'rtl' : 'ltr'"
+            />
             <br />
           </div>
         </div>
@@ -30,9 +38,12 @@
             <vs-button
               class="mr-3 mb-4"
               @click.prevent="onSubmit"
-              :disabled="!form.amount && form.amount<1"
-            >Submit</vs-button>
-            <vs-button color="warning" type="border" class="mb-4" @click="reset">Reset</vs-button>
+              :disabled="!form.amount && form.amount < 1"
+              >Submit</vs-button
+            >
+            <vs-button color="warning" type="border" class="mb-4" @click="reset"
+              >Reset</vs-button
+            >
           </div>
         </div>
       </div>
@@ -83,6 +94,7 @@ export default {
             this.$store.dispatch("retrieveCheckIns");
           }
           this.$store.dispatch("retrieveAllReservationPayments", this.id);
+          this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
 
           this.$vs.notify({
             color: "success",

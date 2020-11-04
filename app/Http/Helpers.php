@@ -1,5 +1,6 @@
 <?php
 use Carbon\Carbon;
+use App\Reservation;
 
  class Helpers {
 
@@ -137,6 +138,19 @@ use Carbon\Carbon;
       $formatedDate = $year . '-' . $month;
  
       return $formatedDate;
+    }
+
+    public static function getNoAwaitingCheckout()
+    {
+      $now = Carbon::now();
+      $checkins =  Reservation::where('checked_in', 1)
+      ->where('checked_out',0)
+      ->where(Reservation::raw("(STR_TO_DATE(check_out,'%Y-%m-%d %H:%i'))"), '<', $now)->get();
+
+      // $date_check_out = Carbon::parse($this->check_out);
+  
+      return $checkins;
+    
     }
 
 

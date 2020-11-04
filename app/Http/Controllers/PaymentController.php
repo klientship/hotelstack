@@ -175,7 +175,7 @@ class PaymentController extends Controller
      $total_no_walkin_business =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->where('oyo',0)->count();
      $total_no_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->count();
      $total_no_today_checkin =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->count();
-     $total_no_checkedin =  Reservation::where('checked_in',1)->where('checked_out',0)->count();
+     $total_no_checkedin =  Reservation::where('checked_in',1)->where('checked_out',0)->sum('number_of_room');
      $total_no_today_checkout =  Reservation::where('created_at', 'like', $today .'%')->where('checked_out',1)->count();
      $total_no_future_bookings =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',0)->count();
      $total_no_checkin =  Reservation::where('checked_in',1)->count();
@@ -204,6 +204,7 @@ class PaymentController extends Controller
      $LastSevenFutureBookingsBusiness = Helpers::getSevenDays($todays_future_bookings_business_array);
 
 
+     $awaiting_checkout = Helpers::getNoAwaitingCheckout()->count();
 
      if($yesterday_income){
       $gain_perc = (100*$income)/$yesterday_income;
@@ -233,6 +234,8 @@ class PaymentController extends Controller
          'todays_cold_drink_business' => $todays_cold_drink_business,
          'todays_paid_service_business' => $todays_paid_service_business,
          'total_no_checkin' => $total_no_checkin,
+
+         'awaiting_checkout' => $awaiting_checkout,
      
          'future_bookings_business' => [
             'series'=> [

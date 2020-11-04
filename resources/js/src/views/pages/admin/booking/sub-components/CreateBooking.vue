@@ -258,7 +258,7 @@
             <div class="vx-col w-1/3">
               <p class="text-xs text-opacity-25s">Payment type</p>
               <v-select
-                :options="['Cash', 'Card']"
+                :options="['Cash', 'Card', 'UPI', 'Online']"
                 :dir="$vs.rtl ? 'rtl' : 'ltr'"
                 v-model="form.payment_type"
                 class="mt-2"
@@ -404,6 +404,9 @@ export default {
       return `${this.title} Details`;
     },
   },
+  mounted() {
+    this.form.check_in = moment().format("DD-MM-YYYY HH:mm");
+  },
   methods: {
     reset() {
       this.form.check_in = this.form.check_out = this.form.adults = this.form.kids = this.form.name = this.form.phone = this.form.email =
@@ -444,11 +447,12 @@ export default {
           this.$store.dispatch("retrieveRecentCheckins");
           this.$store.dispatch("retrieveTodaysCheckins");
           this.$store.dispatch("retrieveTodaysCheckouts");
+          this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
 
           this.$vs.notify({
             color: "success",
             title: "Created",
-            text: `${label} created successfully.`,
+            text: `Created successfully.`,
           });
         })
         .catch();

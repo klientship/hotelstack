@@ -8,12 +8,21 @@
       <div class="p-4">
         <div class="vx-row mb-4">
           <div class="vx-col w-full">
-            <vs-input class="w-full" label-placeholder="Description" v-model="form.description" />
+            <vs-input
+              class="w-full"
+              label-placeholder="Description"
+              v-model="form.description"
+            />
           </div>
         </div>
         <div class="vx-row mb-4">
           <div class="vx-col w-full">
-            <vs-input type="text" class="w-full" label-placeholder="Price" v-model="form.price" />
+            <vs-input
+              type="text"
+              class="w-full"
+              label-placeholder="Price"
+              v-model="form.price"
+            />
           </div>
         </div>
 
@@ -23,8 +32,11 @@
               class="mr-3 mb-4"
               @click.prevent="onSubmit"
               :disabled="form.errors.any()"
-            >Submit</vs-button>
-            <vs-button color="warning" type="border" class="mb-4" @click="reset">Reset</vs-button>
+              >Submit</vs-button
+            >
+            <vs-button color="warning" type="border" class="mb-4" @click="reset"
+              >Reset</vs-button
+            >
           </div>
         </div>
       </div>
@@ -58,7 +70,7 @@ export default {
         .submit("post", "/api/reservation_paid_services")
         .then(() => {
           this.$store.dispatch("retrieveReservationPaidServices", this.id);
-
+          this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
           this.$vs.notify({
             color: "success",
             title: "Created",
