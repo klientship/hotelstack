@@ -533,6 +533,14 @@ const actions = {
 
             })
     },
+    RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID(context) {
+        axios
+            .get(`/api/walkin_checkins_id`)
+            .then(response => (context.commit('RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID', response.data)))
+            .catch(function (error) {
+
+            })
+    },
 }
 
 export default actions

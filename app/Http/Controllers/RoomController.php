@@ -223,9 +223,12 @@ class RoomController extends Controller
     public function oyoCheckinId() {
         return Helpers::getOyoCheckinsRooms();
     }
+
+    public function walkinCheckinId() {
+        return Helpers::getWalkinRooms();
+    }
     public function total_rooms() {
         return Room::all()->count();
-
     }
 
 }

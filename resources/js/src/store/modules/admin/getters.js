@@ -106,6 +106,9 @@ const getters = {
     getTotalRooms(state) {
         return state.total_rooms
     },
+    getWalkinBookingsRoomId(state) {
+        return state.walkin_rooms_id
+    },
 
 }
 

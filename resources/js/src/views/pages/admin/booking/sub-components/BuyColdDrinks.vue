@@ -92,6 +92,18 @@ export default {
         .then(() => {
           this.$store.dispatch("RETRIEVE_RESERVATION_COLD_DRINKS", this.id);
 
+          this.$store.dispatch("retrieveAvailableRoomsToday");
+          this.$store.dispatch("retrieveHouseKeepingRooms");
+          this.$store.dispatch("retrieveRoomTypesWithRooms");
+          this.$store.dispatch("RETRIEVE_AWAITING_CHECKOUTS");
+          this.$store.dispatch("RETRIEVE_OYO_BOOKINGS_ID");
+          this.$store.dispatch("retrieveRecentCheckins");
+          this.$store.dispatch("retrieveTodaysCheckins");
+          this.$store.dispatch("retrieveTodaysCheckouts");
+          this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
+          this.$store.dispatch("RETRIEVE_TOTAL_ROOMS");
+          this.$store.dispatch("RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID");
+
           this.$vs.notify({
             color: "success",
             title: "Created",

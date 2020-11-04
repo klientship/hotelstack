@@ -35,6 +35,7 @@ const state = {
     awaiting_checkout_id: [],
     oyo_bookings_id: [],
     total_rooms: [],
+    walkin_rooms_id: [],
     // hotelDetails: {
     //     name: "Shri Sai Palace",
     //     addressLine1: "Kankanady pumpwell",
@@ -44,16 +45,16 @@ const state = {
     //     mobile: "+91 900 883 5974",
     //     gst: "29AEEFS3771A1Z2",
     // },
-    // hotelDetails: {
-    //     name: "White House Inn",
-    //     addressLine1: "336-1 To 336-7/V, White House Inn, Veenu Complex",
-    //     addressLine2: "Main Road, Kudapura, Udupi, Karnataka",
-    //     zipcode: "576201",
-    //     mailId: "contact@whitehouseinn.in",
-    //     mobile: "+91 91485 08737",
-    //     gst: "29AFFPP5198E1Z0",
+    hotelDetails: {
+        name: "White House Inn",
+        addressLine1: "336-1 To 336-7/V, White House Inn, Veenu Complex",
+        addressLine2: "Main Road, Kudapura, Udupi, Karnataka",
+        zipcode: "576201",
+        mailId: "contact@whitehouseinn.in",
+        mobile: "+91 91485 08737",
+        gst: "29AFFPP5198E1Z0",
 
-    // },
+    },
     // hotelDetails: {
     //     name: "Hotel Kalyani International",
     //     addressLine1: "Near Mulky Bus Station, Bappanad Temple Road",
@@ -72,15 +73,15 @@ const state = {
     //     mobile: "0824 0000000",
     //     gst: "NULL",
     // },
-    hotelDetails: {
-        name: "Sai Arya",
-        addressLine1: "Lodging and Party Hall",
-        addressLine2: "Opp Ganesh Medicals, Pumpwell, Mangalore",
-        zipcode: "575002",
-        mailId: "saiarya@gmail.com",
-        mobile: "0824-2433644, 2435644",
-        gst: "29ADPFS5012G1ZV",
-    },
+    // hotelDetails: {
+    //     name: "Sai Arya",
+    //     addressLine1: "Lodging and Party Hall",
+    //     addressLine2: "Opp Ganesh Medicals, Pumpwell, Mangalore",
+    //     zipcode: "575002",
+    //     mailId: "saiarya@gmail.com",
+    //     mobile: "0824-2433644, 2435644",
+    //     gst: "29ADPFS5012G1ZV",
+    // },
 }
 
 export default state

@@ -130,6 +130,9 @@ Route::get("/rooms/booked_rooms/today", 'RoomController@available_rooms_id');
 Route::get('/awaiting_checkout_id', 'RoomController@awaitingCheckoutId');
 Route::get('/oyo_checkins_id', 'RoomController@oyoCheckinId');
 
+// walkin id
+Route::get('/walkin_checkins_id', 'RoomController@walkinCheckinId');
+
 // transaction
 Route::apiResource("transactions", 'TransactionController');
 Route::post("/transactions/initiate_payment", 'TransactionController@initiate');

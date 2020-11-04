@@ -4,7 +4,9 @@
       >Available Rooms:
       {{ availableRooms.length - houseKeepings.length }}</vs-chip
     >
-    <vs-chip color="danger" class="ml-2">Walkin: {{ walkin_rooms }}</vs-chip>
+    <vs-chip color="danger" class="ml-2"
+      >Walkin: {{ walkinRooms.length }}</vs-chip
+    >
     <vs-chip color="primary" class="ml-2"
       >Oyo Bookings: {{ oyoBookings.length }}</vs-chip
     >
@@ -27,15 +29,7 @@ export default {
     ...mapGetters({ awaitingCheckouts: "getAwaitingCheckoutId" }),
     ...mapGetters({ oyoBookings: "getOyoBookingsId" }),
     ...mapGetters({ totalRooms: "getTotalRooms" }),
-
-    walkin_rooms() {
-      return (
-        +this.totalRooms -
-        (+(+this.oyoBookings.length) +
-          +this.availableRooms.length +
-          +this.houseKeepings.length)
-      );
-    },
+    ...mapGetters({ walkinRooms: "getWalkinBookingsRoomId" }),
   },
   created() {},
 };

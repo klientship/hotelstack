@@ -390,6 +390,7 @@ export default {
               this.$store.dispatch("retrieveTodaysCheckouts");
               this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
               this.$store.dispatch("RETRIEVE_TOTAL_ROOMS");
+              this.$store.dispatch("RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID");
 
               this.$vs.notify({
                 title: "Removed from keeping",
@@ -470,6 +471,7 @@ export default {
     this.$store.dispatch("retrieveTodaysCheckouts");
     this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
     this.$store.dispatch("RETRIEVE_TOTAL_ROOMS");
+    this.$store.dispatch("RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID");
   },
   created() {
     this.openLoadingDiv();

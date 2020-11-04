@@ -69,7 +69,7 @@ export default {
         created_at: moment().format("DD-MM-YYYY h:mm a"),
       }),
 
-      options: ["CASH", "CARD", "OTHER"],
+      options: ["CASH", "CARD", "UPI", "ONLINE", "OTHER"],
     };
   },
   methods: {
@@ -94,7 +94,17 @@ export default {
             this.$store.dispatch("retrieveCheckIns");
           }
           this.$store.dispatch("retrieveAllReservationPayments", this.id);
+          this.$store.dispatch("retrieveAvailableRoomsToday");
+          this.$store.dispatch("retrieveHouseKeepingRooms");
+          this.$store.dispatch("retrieveRoomTypesWithRooms");
+          this.$store.dispatch("RETRIEVE_AWAITING_CHECKOUTS");
+          this.$store.dispatch("RETRIEVE_OYO_BOOKINGS_ID");
+          this.$store.dispatch("retrieveRecentCheckins");
+          this.$store.dispatch("retrieveTodaysCheckins");
+          this.$store.dispatch("retrieveTodaysCheckouts");
           this.$store.dispatch("RETRIEVE_DASHBOARD_DETAILS");
+          this.$store.dispatch("RETRIEVE_TOTAL_ROOMS");
+          this.$store.dispatch("RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID");
 
           this.$vs.notify({
             color: "success",

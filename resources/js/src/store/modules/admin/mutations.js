@@ -177,6 +177,9 @@ const mutations = {
     RETRIEVE_TOTAL_ROOMS(state, total_rooms) {
         state.total_rooms = total_rooms;
     },
+    RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID(state, walkin_rooms_id) {
+        state.walkin_rooms_id = walkin_rooms_id;
+    },
 }
 
 export default mutations

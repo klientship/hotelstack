@@ -183,5 +183,25 @@ use App\Reservation;
     
     }
 
+    public static function getWalkinRooms()
+    {
+      $now = Carbon::now();
+      $checkins =  Reservation::where('oyo', 0)->where('checked_in', 1)
+      ->where('checked_out',0)->with('rooms')->get();
+
+      
+      $bookedRooms = [];
+
+      foreach($checkins as $checkin)
+              {
+                foreach ($checkin->rooms as $key => $room) {
+                    array_push($bookedRooms, $room->room_id);
+                }
+              }
+
+      return $bookedRooms;
+    
+    }
+
 
  }
