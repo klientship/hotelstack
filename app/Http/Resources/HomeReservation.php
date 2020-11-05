@@ -23,7 +23,7 @@ class HomeReservation extends JsonResource
         'kids' => $this->kids,
         'check_in' => $this->check_in,
         'check_out' => $this->check_out,
-        'total' => $this->total,
+        'total' => $this->total - $this->discount,
         'number_of_room' => $this->number_of_room,
 
         'name' => $this->guest->name

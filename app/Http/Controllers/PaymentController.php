@@ -176,7 +176,7 @@ class PaymentController extends Controller
      $total_no_oyo_business =  Reservation::where('created_at', 'like', $today .'%')->where('oyo',1)->count();
      $total_no_today_checkin =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',1)->count();
      $total_no_checkedin =  Reservation::where('checked_in',1)->where('checked_out',0)->sum('number_of_room');
-     $total_no_today_checkout =  Reservation::where('created_at', 'like', $today .'%')->where('checked_out',1)->count();
+     $total_no_today_checkout =  Reservation::where('check_out', 'like', $today .'%')->where('checked_out',1)->count();
      $total_no_future_bookings =  Reservation::where('created_at', 'like', $today .'%')->where('checked_in',0)->count();
      $total_no_checkin =  Reservation::where('checked_in',1)->count();
 

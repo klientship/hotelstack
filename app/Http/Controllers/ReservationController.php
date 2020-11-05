@@ -389,13 +389,13 @@ class ReservationController extends Controller
     public function todays_checkins()
     {
          $today = strval(Carbon::now()->format('Y-m-d'));
-        $reservations = Reservation::where('checked_in', 1)->where('check_in', 'like', $today.'%' )->get();
+        $reservations = Reservation::where('checked_in', 1)->where('check_in', 'like', $today.'%' )->latest()->get();
         return HomeReservationResource::collection($reservations);
     }
     public function todays_checkouts()
     {
         $today = strval(Carbon::now()->format('Y-m-d'));
-        $reservations = Reservation::where('checked_out', 1)->where('check_in', 'like', $today.'%' )->get();
+        $reservations = Reservation::where('checked_out', 1)->where('check_out', 'like', $today.'%' )->latest()->get();
         return HomeReservationResource::collection($reservations);
     }
 

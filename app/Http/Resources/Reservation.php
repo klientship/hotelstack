@@ -63,7 +63,7 @@ class Reservation extends JsonResource
         'nights' => $nights,
      
         'number_of_room' => $this->number_of_room,
-        'total' => $this->total,
+        'total' => $this->total - $this->discount,
         'discount' => $this->discount,
         'rooms' => ReservationRoomResource::collection($this->rooms),
         'payments' => PaymentResource::collection($this->payments),
