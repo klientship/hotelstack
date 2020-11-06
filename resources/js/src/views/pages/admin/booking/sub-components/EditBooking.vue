@@ -170,14 +170,14 @@
                 v-model="data.uid"
               />
             </div>
-            <div class="vx-col w-1/2">
+            <!-- <div class="vx-col w-1/2">
               <vs-input
                 type="text"
                 class="w-full"
                 label-placeholder="Discount"
                 v-model="data.discount"
               />
-            </div>
+            </div> -->
           </div>
 
           <div class="vx-row mt-4">
