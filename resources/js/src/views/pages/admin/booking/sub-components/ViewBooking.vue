@@ -37,9 +37,9 @@
                 >Paid Service Bill</vs-button
               >
 
-              <vs-button color="primary" type="filled" size="small" class="mt-2"
+              <!-- <vs-button color="primary" type="filled" size="small" class="mt-2"
                 >Edit</vs-button
-              >
+              > -->
             </div>
           </div>
           <div id="printMe">

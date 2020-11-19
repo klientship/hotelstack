@@ -152,15 +152,16 @@ class PaymentController extends Controller
      
      $todays_cold_drink_business = ReservationColdDrink::where('created_at', 'like', $today .'%')->sum('total');
      
-    //  $todays_business = (Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service + $todays_cold_drink_business) - Reservation::where('created_at', 'like', $today .'%')->sum('discount');
+    //  $todays_business = ((Reservation::where('created_at', 'like', $today .'%')->sum('total') + $total_paid_service + $todays_cold_drink_business) - Reservation::where('created_at', 'like', $today .'%')->sum('discount')) - $total_expense;
+     $todays_business =(($total_payment + $todays_cold_drink_business + $total_paid_service) - $total_expense);
      
-    $current_checkedins = Reservation::where('checked_in',1)->where('checked_out',0)->get();
+    $current_checkedins = Reservation::where('checked_in',1)->where('checked_out',0)->orWhere('check_out', 'like', $today .'%')->get();
 
-    $todays_business = 0;
+    // $todays_business = 0;
 
-      foreach ($current_checkedins as $key => $checkedin) {
-        $todays_business += $checkedin->rooms->sum('price');
-      }
+    //   foreach ($current_checkedins as $key => $checkedin) {
+    //     $todays_business += $checkedin->rooms->sum('price');
+    //   }
     
      $todays_pending_payment =  $todays_business - $total_payment;
      

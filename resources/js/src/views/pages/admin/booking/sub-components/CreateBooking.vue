@@ -301,7 +301,8 @@
             <div class="vx-col">
               <div class="mt-4">
                 <h5>
-                  Total: &#8377; {{ total }} |&nbsp;&nbsp;Balance: &#8377;
+                  Nights: {{ nights }} |&nbsp;&nbsp;Total: &#8377;
+                  {{ total }} |&nbsp;&nbsp;Balance: &#8377;
                   {{ balance }}
                 </h5>
               </div>
@@ -402,6 +403,13 @@ export default {
     },
     label() {
       return `${this.title} Details`;
+    },
+    nights() {
+      if (this.form.check_in && this.form.check_out) {
+        return this.getNights(this.form.check_in, this.form.check_out);
+      } else {
+        return 1;
+      }
     },
   },
   mounted() {

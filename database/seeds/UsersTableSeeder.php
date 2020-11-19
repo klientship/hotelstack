@@ -43,6 +43,13 @@ class UsersTableSeeder extends Seeder
             'password' => 'Saiarya123#',
             'role' => 'admin'
         ]);
+
+        User::create([
+            'name' => 'padma',
+            'email' => 'admin@hotelpadmaindia.com',
+            'password' => 'Padma123#',
+            'role' => 'admin'
+        ]);
        
     }
 }

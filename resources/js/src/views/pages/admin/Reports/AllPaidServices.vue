@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <div class="vx-row mt-4">
+    <!-- <div class="vx-row mt-4">
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
@@ -40,7 +40,7 @@
           type="area"
         ></statistics-card-line>
       </div>
-    </div>
+    </div> -->
 
     <div id="ag-grid-demo">
       <vx-card>
