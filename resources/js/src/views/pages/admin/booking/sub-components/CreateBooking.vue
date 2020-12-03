@@ -18,7 +18,7 @@
               <vs-input
                 :danger="form.errors.has('oyo_id')"
                 class="w-full"
-                label-placeholder="Oyo ID"
+                label-placeholder="OTA ID"
                 v-model="form.oyo_id"
                 v-show="display_oyo_id"
               />
@@ -340,7 +340,7 @@ export default {
       options: [
         { label: "AC", value: "ac_price" },
         { label: "NON AC", value: "price" },
-        { label: "OYO", value: "oyo_price" },
+        { label: "OTA", value: "oyo_price" },
         { label: "OTHER", value: "other_price" },
       ],
       form: new Form({

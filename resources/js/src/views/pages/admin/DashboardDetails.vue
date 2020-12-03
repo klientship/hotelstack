@@ -8,7 +8,7 @@
       >Walkin: {{ walkinRooms.length }}</vs-chip
     >
     <vs-chip color="primary" class="ml-2"
-      >Oyo Bookings: {{ oyoBookings.length }}</vs-chip
+      >OTA Bookings: {{ oyoBookings.length }}</vs-chip
     >
     <vs-chip color="warning" class="ml-2"
       >Awaiting Checkouts: {{ awaitingCheckouts.length }}</vs-chip

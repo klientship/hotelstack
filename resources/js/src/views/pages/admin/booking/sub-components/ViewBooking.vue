@@ -52,7 +52,7 @@
             <div class="vx-row mt-2" v-if="data.oyo">
             
               <div class="vx-col w-full">
-                     <vs-chip color="danger text-center">OYO BOOKING</vs-chip></br>
+                     <vs-chip color="danger text-center">OTA BOOKING</vs-chip></br>
               </div>
             </div>
             <div class="vx-row mb-4 mt-2">
@@ -68,7 +68,7 @@
                 <p class="mt-2">
                   Adults: {{ data.adults }} &amp; Kids: {{ data.kids }}
                 </p>
-                <p class="mt-2" v-if="data.oyo">OYO ID: {{ data.oyo_id }}</p>
+                <p class="mt-2" v-if="data.oyo">OTA ID: {{ data.oyo_id }}</p>
               </div>
             </div>
 
