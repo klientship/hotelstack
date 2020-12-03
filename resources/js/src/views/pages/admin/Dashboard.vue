@@ -75,7 +75,7 @@
           type="area"
         ></statistics-card-line>
       </div> -->
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+      <!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
           :statistic="dashboardDetails.todays_business"
@@ -84,8 +84,17 @@
           type="area"
           color="success"
         ></statistics-card-line>
+      </div> -->
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.total_no_today_checkin"
+          statisticTitle="Todays Total Checkins"
+          :chartData="dashboardDetails.checkin_business.series"
+          type="area"
+          color="success"
+        ></statistics-card-line>
       </div>
-
       <!-- total expense -->
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
