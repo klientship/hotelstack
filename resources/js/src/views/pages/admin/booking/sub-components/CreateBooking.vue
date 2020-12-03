@@ -226,7 +226,7 @@
           </div>
 
           <div class="vx-row mb-4">
-            <!-- <div class="vx-col w-1/3">
+            <div class="vx-col w-1/3">
               <vs-input
                 :danger="form.errors.has('discount')"
                 type="text"
@@ -239,7 +239,7 @@
                 v-show="form.errors.has('discount')"
                 >{{ form.errors.get("discount") }}</span
               >
-            </div> -->
+            </div>
 
             <div class="vx-col w-1/3">
               <vs-input

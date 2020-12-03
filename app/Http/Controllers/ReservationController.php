@@ -58,7 +58,7 @@ class ReservationController extends Controller
             'check_in'=>'required|date',
             'check_out'=>'required|date',
             'total'=>'required|numeric',
-            // 'discount'=>'required|numeric',
+            'discount'=>'required|numeric',
             'advance'=>'required|numeric',
             'balance'=>'required|numeric',
             'email'=>'nullable|email|max:255',
@@ -84,7 +84,7 @@ class ReservationController extends Controller
         $user->role = 'customer';
         $user->save();
 
-        $request->discount = 0;
+       
 
         $reservation = new Reservation;
         $reservation->uid = sprintf("%06d", mt_rand(1, 999999));
@@ -167,7 +167,7 @@ class ReservationController extends Controller
             'check_in'=>'nullable|date',
             'check_out'=>'nullable|date',
             'total'=>'required|numeric',
-            // 'discount'=>'required|numeric',
+            'discount'=>'required|numeric',
             'balance'=>'required|numeric',
             'email'=>'nullable|email|max:255',
             'name'=>'required|max:255',
@@ -222,7 +222,7 @@ class ReservationController extends Controller
             }
         }
 
-        $request->discount = 0;
+  
 
         $reservation->number_of_room = count($request->rooms);
         $reservation->total = $request->total;
