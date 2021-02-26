@@ -92,35 +92,35 @@ export default [
             icon: 'LayersIcon',
             i18n: 'cold-drinks'
           },
-          {
-            url: '/admin/restaurant_pos',
-            name: 'POS',
-            slug: 'check-in',
-            icon: 'LayersIcon',
-            i18n: 'floors'
-          },
-          {
-            url: '/admin/food_list',
-            name: 'Food List',
-            slug: 'check-in',
-            icon: 'LayersIcon',
-            i18n: 'floors'
-          },
-          {
-            url: '/admin/restaurant_settings',
-            name: 'Settings',
-            slug: 'check-in',
-            icon: 'LayersIcon',
-            i18n: 'floors'
-          },
+          // {
+          //   url: '/admin/restaurant_pos',
+          //   name: 'POS',
+          //   slug: 'check-in',
+          //   icon: 'LayersIcon',
+          //   i18n: 'floors'
+          // },
+          // {
+          //   url: '/admin/food_list',
+          //   name: 'Food List',
+          //   slug: 'check-in',
+          //   icon: 'LayersIcon',
+          //   i18n: 'floors'
+          // },
+          // {
+          //   url: '/admin/restaurant_settings',
+          //   name: 'Settings',
+          //   slug: 'check-in',
+          //   icon: 'LayersIcon',
+          //   i18n: 'floors'
+          // },
 
-          {
-            url: '/admin/restaurant_reports',
-            name: 'Reports',
-            slug: 'check-in',
-            icon: 'LayersIcon',
-            i18n: 'floors'
-          },
+          // {
+          //   url: '/admin/restaurant_reports',
+          //   name: 'Reports',
+          //   slug: 'check-in',
+          //   icon: 'LayersIcon',
+          //   i18n: 'floors'
+          // },
         ]
       },
 

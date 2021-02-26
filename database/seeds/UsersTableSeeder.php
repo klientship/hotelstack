@@ -13,6 +13,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
+            'name' => 'va',
+            'email' => 'admin@vawebsites.in',
+            'password' => 'VA123#',
+            'role' => 'admin'
+        ]);
+        User::create([
             'name' => 'srisai',
             'email' => 'admin@srisaipalace.com',
             'password' => 'Sri123#',
@@ -48,6 +54,12 @@ class UsersTableSeeder extends Seeder
             'name' => 'padma',
             'email' => 'admin@hotelpadmaindia.com',
             'password' => 'Padma123#',
+            'role' => 'admin'
+        ]);
+        User::create([
+            'name' => 'summer sands',
+            'email' => 'admin@summersands.in',
+            'password' => 'Summer123#',
             'role' => 'admin'
         ]);
        

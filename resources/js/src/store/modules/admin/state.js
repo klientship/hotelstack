@@ -36,6 +36,16 @@ const state = {
     oyo_bookings_id: [],
     total_rooms: [],
     walkin_rooms_id: [],
+    // hotelDetails:
+    // {
+    //     name: "VAwebsites",
+    //     addressLine1: "Raj Towers, Ground, Balmatta Rd",
+    //     addressLine2: "Hampankatta, Mangalore",
+    //     zipcode: "575007",
+    //     mailId: "contact@vawebsites.in",
+    //     mobile: "+91 797 5503 096",
+    //     gst: "29AEEFS00000002",
+    // },
     // hotelDetails: {
     //     name: "Shri Sai Palace",
     //     addressLine1: "Kankanady pumpwell",
@@ -82,14 +92,23 @@ const state = {
     //     mobile: "0824-2433644, 2435644",
     //     gst: "29ADPFS5012G1ZV",
     // },
+    // hotelDetails: {
+    //     name: "Hotel Padma India",
+    //     addressLine1: "Padma Complex, B C Road, Bantwal",
+    //     addressLine2: "Opposite SBI BC ROAD BRANCH, Mangalore",
+    //     zipcode: "574187",
+    //     mailId: "contact@padmahotelindia.com",
+    //     mobile: "+91 900 4718 157",
+    //     gst: "29ADPFS5xxxxx",
+    // },
     hotelDetails: {
-        name: "Hotel Padma India",
-        addressLine1: "Padma Complex, B C Road, Bantwal",
-        addressLine2: "Opposite SBI BC ROAD BRANCH, Mangalore",
-        zipcode: "574187",
-        mailId: "contact@padmahotelindia.com",
-        mobile: "+91 900 4718 157",
-        gst: "29ADPFS5xxxxx",
+        name: "Summer sands",
+        addressLine1: "Chotamangalore, After Nirmala Hospital",
+        addressLine2: ", Ullal, Karnataka",
+        zipcode: "575020",
+        mailId: "contact@vawebsites.in",
+        mobile: "+91 948 0048 888",
+        gst: "NOTVALID",
     },
 }
 
