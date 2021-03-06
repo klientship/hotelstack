@@ -1,4 +1,3 @@
 # hotelstack_with_pos
 
 
-testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
