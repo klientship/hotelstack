@@ -34,13 +34,15 @@
         <div class="vx-col w-1/2 mt-base">
           <!-- <img src="@assets/images/logo/logo.png" alt="vuexy-logo" />
           -->
-          <h1>{{ hotelDetails.name.toUpperCase() }}</h1>
+          <h1>{{ hotelDetails.invoiceTitle.toUpperCase() }}</h1>
+          <p>{{ hotelDetails.name.toUpperCase() }}</p>
         </div>
         <div class="vx-col w-1/2 text-right">
           <h1>Invoice</h1>
           <div class="invoice__invoice-detail mt-6">
             <h6>INVOICE NO.</h6>
-            <p>{{ invoice.invoice_no }}</p>
+            <p>6652</p>
+            <!-- <p>{{ invoice.invoice_no }}</p> -->
 
             <h6 class="mt-4">INVOICE DATE</h6>
             <p>{{ invoice.created_at }}</p>
@@ -152,22 +154,33 @@
             <vs-td>&#8377; {{ total }}</vs-td>
           </vs-tr>
           <vs-tr>
-            <vs-th class="pointer-events-none">TOTAL TAX</vs-th>
-            <vs-td>&#8377; {{ total_tax }}</vs-td>
+            <vs-th class="pointer-events-none">CGST + SGST</vs-th>
+            <vs-td>&#8377; {{ total_tax / 2 }} + {{ total_tax / 2 }}</vs-td>
           </vs-tr>
           <vs-tr>
             <vs-th class="pointer-events-none">DISCOUNT</vs-th>
             <vs-td>&#8377; {{ invoice.discount }}</vs-td>
           </vs-tr>
           <vs-tr>
-            <vs-th class="pointer-events-none">PAYABLE AMOUNT</vs-th>
+            <vs-th class="pointer-events-none">GRAND TOTAL</vs-th>
             <vs-td>&#8377; {{ total + total_tax - invoice.discount }}</vs-td>
           </vs-tr>
         </vs-table>
       </div>
 
       <div class="invoice__footer text-right p-base">
-        <p class="mb-4">Hand Crafted by VAwebsites</p>
+        <p class="mb-4 text-xs">Hand Crafted by VAwebsites</p>
+      </div>
+
+      <div class="vx-row">
+        <div class="vx-col w-1/4">
+          <p>__________________</p>
+          <p>Checked By</p>
+        </div>
+        <div class="vx-col w-1/4">
+          <p>__________________</p>
+          <p>Manager</p>
+        </div>
       </div>
     </vx-card>
   </div>
@@ -292,6 +305,7 @@ export default {
 <style lang="scss">
 @media print {
   .invoice-page {
+    color: #000;
     * {
       visibility: hidden;
     }

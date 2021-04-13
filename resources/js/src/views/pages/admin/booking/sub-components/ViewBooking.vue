@@ -116,7 +116,7 @@
             </div>
             <div class="vx-row mt-4">
               <div class="vx-col text-center">
-                <p class="text-center">Powered by VAwebsites.</p>
+                <p class="text-center text-xs">Powered by VAwebsites.</p>
               </div>
             </div>
           </div>
@@ -194,6 +194,22 @@ export default {
     ...mapGetters({ selectedPayments: "getSelectedPayments" }),
     ...mapGetters({ hotelDetails: "getHotelDetails" }),
     ...mapGetters({ cold_drinks: "getReservationColdDrinks" }),
+
+    total_tax() {
+      let total = 0;
+      if (this.selectedRooms) {
+        this.selectedRooms.forEach((room) => {
+          let room_total = +room.price * +this.data.nights;
+          if (+room_total > 999 && +room_total < 2500) {
+            total = total + (parseInt(room_total) * parseInt(room.tax_1)) / 100;
+          } else if (+room_total > 2499) {
+            total = total + (parseInt(room_total) * parseInt(room.tax_2)) / 100;
+          }
+        });
+      }
+      return total;
+    },
+
     total() {
       // return this.selectedRooms.reduce(
       //   (prev, next) => prev + +next[this.type],
@@ -209,11 +225,12 @@ export default {
             total += +this.selectedRooms[i][this.type];
           }
         }
-        return total;
+        return total + this.total_tax;
       } else {
         return 0;
       }
     },
+
     extra() {
       if (this.paidServices && this.paidServices.length) {
         return this.paidServices.reduce((prev, next) => prev + +next.price, 0);

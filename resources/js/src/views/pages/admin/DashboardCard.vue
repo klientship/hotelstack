@@ -34,11 +34,11 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
-          :statistic="dashboardDetails.total_pending_payments"
-          statisticTitle="Total Pending Payments"
+          :statistic="dashboardDetails.income"
+          statisticTitle="Profit"
           :chartData="dashboardDetails.payments.series"
           type="area"
-          color="dark"
+          color="success"
         ></statistics-card-line>
       </div>
     </div>
@@ -121,7 +121,7 @@
         ></statistics-card-line>
       </div>
 
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+      <!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
         <statistics-card-line
           icon="BarChartIcon"
           :statistic="dashboardDetails.income"
@@ -129,6 +129,16 @@
           :chartData="dashboardDetails.payments.series"
           type="area"
           color="success"
+        ></statistics-card-line>
+      </div> -->
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          icon="BarChartIcon"
+          :statistic="dashboardDetails.todays_paid_service_business"
+          statisticTitle="Paid Services"
+          :chartData="dashboardDetails.paid_services.series"
+          type="area"
+          color="danger"
         ></statistics-card-line>
       </div>
     </div>
@@ -162,16 +172,6 @@
           :chartData="dashboardDetails.cold_drinks.series"
           type="area"
           color="success"
-        ></statistics-card-line>
-      </div>
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-        <statistics-card-line
-          icon="BarChartIcon"
-          :statistic="dashboardDetails.todays_paid_service_business"
-          statisticTitle="Paid Services"
-          :chartData="dashboardDetails.paid_services.series"
-          type="area"
-          color="danger"
         ></statistics-card-line>
       </div>
     </div>

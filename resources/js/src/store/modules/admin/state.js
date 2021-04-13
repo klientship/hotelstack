@@ -102,13 +102,14 @@ const state = {
     //     gst: "29ADPFS5xxxxx",
     // },
     hotelDetails: {
-        name: "Summer sands",
-        addressLine1: "Chotamangalore, After Nirmala Hospital",
-        addressLine2: ", Ullal, Karnataka",
+        name: "Summer Sands Beach Resort",
+        invoiceTitle: "ALBUQUERQUE HOTELS (P) LTD",
+        addressLine1: "Chotamangalore, Ullal - 575 020",
+        addressLine2: "Mangaluru, Karnataka, India",
         zipcode: "575020",
-        mailId: "contact@vawebsites.in",
-        mobile: "+91 948 0048 888",
-        gst: "NOTVALID",
+        mailId: "fo@summersands.in",
+        mobile: "+91 824 2467690 / 1 / 2",
+        gst: "29AABCA7600C1Z5",
     },
 }
 

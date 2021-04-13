@@ -62,6 +62,12 @@ class UsersTableSeeder extends Seeder
             'password' => 'Summer123#',
             'role' => 'admin'
         ]);
+        User::create([
+            'name' => 'Vedantabiz',
+            'email' => 'admin@vedantabiz.com',
+            'password' => 'Vedanta123#',
+            'role' => 'admin'
+        ]);
        
     }
 }
