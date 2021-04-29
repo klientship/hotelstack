@@ -1,7 +1,7 @@
 <template>
   <div class="the-navbar__user-meta flex items-center" v-if="hotelDetails.name">
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{hotelDetails.name }}</p>
+      <p class="font-semibold">{{ hotelDetails.name }}</p>
       <small>Available</small>
     </div>
 
@@ -20,6 +20,15 @@
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
         <ul style="min-width: 9rem">
+          <li
+            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+            @click="$router.push({ name: 'profile' })"
+            v-if="isLogged"
+          >
+            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+            <span class="ml-2">Profile</span>
+          </li>
+
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
             @click="logout"

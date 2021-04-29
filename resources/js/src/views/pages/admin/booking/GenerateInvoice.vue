@@ -41,8 +41,8 @@
           <h1>Invoice</h1>
           <div class="invoice__invoice-detail mt-6">
             <h6>INVOICE NO.</h6>
-            <p>6652</p>
-            <!-- <p>{{ invoice.invoice_no }}</p> -->
+
+            <p>{{ invoice.invoice_no }}</p>
 
             <h6 class="mt-4">INVOICE DATE</h6>
             <p>{{ invoice.created_at }}</p>

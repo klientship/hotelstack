@@ -1,6 +1,7 @@
 
 
 const state = {
+
     floors: [],
     floor: {},
     room_types: [],
@@ -36,6 +37,8 @@ const state = {
     oyo_bookings_id: [],
     total_rooms: [],
     walkin_rooms_id: [],
+    windowWidth: null,
+
     // hotelDetails:
     // {
     //     name: "VAwebsites",
@@ -111,6 +114,7 @@ const state = {
         mobile: "+91 824 2467690 / 1 / 2",
         gst: "29AABCA7600C1Z5",
     },
+
 }
 
 export default state

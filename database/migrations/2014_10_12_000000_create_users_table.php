@@ -20,8 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('role');
             $table->string('phone')->nullable();
             $table->string('company_name')->nullable();
-            $table->text('address')->nullable();
             $table->string('gst_no')->nullable();
+            $table->text('address')->nullable();
+            $table->string('zipcode')->nullable();
+            $table->text('address_line_1')->nullable();
+            $table->text('address_line_2')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -143,3 +143,7 @@ Route::post("/transactions/complete", 'TransactionController@Complete');
 Route::apiResource('/cold_drinks', 'ColdDrinkController');
 Route::apiResource('/reservation_cold_drinks', 'ReservationColdDrinkController');
 Route::get('/reservation/{id}/cold_drinks', 'ReservationColdDrinkController@reservation_cold_drinks');
+// user
+// Route::apiResource("/user", 'UserController');
+// Route::middleware('auth:sanctum')->apiResource("/user/{user}", 'UserController@update');
+Route::patch("/user/{user}", 'UserController@update');

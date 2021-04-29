@@ -87,7 +87,8 @@ class ReservationController extends Controller
        
 
         $reservation = new Reservation;
-        $reservation->uid = sprintf("%06d", mt_rand(1, 999999));
+        // $reservation->uid = sprintf("%06d", mt_rand(1, 999999));
+        $reservation->uid = Helpers::generateInvoiceNumber();
         $reservation->guest_id = $user->id;
         $reservation->adults = $request->adults;
         $reservation->kids = $request->kids;
@@ -103,8 +104,8 @@ class ReservationController extends Controller
         $reservation->save();
         
 
-        $reservation->uid = Helpers::createUid($reservation->id);
-        $reservation->save();
+        // $reservation->uid = Helpers::createUid($reservation->id);
+        // $reservation->save();
         // advance
         if( $request->advance> 0) {
             $payment = new Payment;

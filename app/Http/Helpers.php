@@ -1,6 +1,7 @@
 <?php
 use Carbon\Carbon;
 use App\Reservation;
+use App\UidCount;
 
  class Helpers {
 
@@ -201,6 +202,14 @@ use App\Reservation;
 
       return $bookedRooms;
     
+    }
+
+    public static function generateInvoiceNumber()
+    {
+      $uid  = UidCount::first();
+      $uid->count++;
+      $uid->save();
+      return $uid->count;
     }
 
 

@@ -183,6 +183,14 @@ const router = new Router({
             requiresAuth: true
           }
         },
+        {
+          path: '/admin/profile',
+          name: 'profile',
+          component: () => import('@/views/pages/admin/user/Profile.vue'),
+          meta: {
+            requiresAuth: true
+          }
+        },
 
       ]
     },
