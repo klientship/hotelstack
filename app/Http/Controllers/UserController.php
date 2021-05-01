@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use \stdClass;
 
 class UserController extends Controller
 {
@@ -72,7 +74,6 @@ class UserController extends Controller
         $this->validate($request,[
             'name'=>'required|string|max:255',
             'email'=>'required|string|max:255|email|unique:users,email,'.$user->id,
-            // 'password' => ['required', 'string', 'min:4'],
             'phone' => ['string', 'max:255'],
             'gst_no' => ['string', 'max:255'],
             'address_line_1' => ['string', 'max:1000'],
@@ -92,6 +93,40 @@ class UserController extends Controller
         }
         $user->fill($input)->save();
         return $user;
+    }
+    
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function reset_password(Request $request, User $user)
+    {
+        $this->validate($request,[
+            'password'=>'required|string|max:255',
+            'new_password'=>'required|string|max:255',
+
+        ]);
+     
+        if (Hash::check($request->password, $user->password)) { 
+            $user->fill([
+             'password' => Hash::make($request->new_password)
+             ])->save();
+         
+            return 'Password changed';
+         
+         } else {
+            $returnData = new stdClass;
+            $returnData->message = "The given data was invalid.";
+            $returnData->errors = array(
+                'password' => ["Old password did not match."]
+            );
+            
+           
+             return \Response::json($returnData, 500);
+         }
     }
 
     /**
