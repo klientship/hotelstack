@@ -10,6 +10,10 @@ export default {
             state.user = userData
             localStorage.setItem('user', JSON.stringify(userData))
             axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`
+            console.log(state.user)
+        },
+        updateUserData(state, userData) {
+            state.user.user = userData
         },
 
         clearUserData() {
@@ -29,7 +33,16 @@ export default {
 
         logout({ commit }) {
             commit('clearUserData')
-        }
+        },
+        RETRIEVE_ACTIVE_USER_DETAILS(context) {
+
+            axios
+                .get(`/api/user/${context.state.user.user.id}`)
+                .then(response => (context.commit('updateUserData', response.data.data)))
+                .catch(function (error) {
+
+                })
+        },
     },
 
     getters: {

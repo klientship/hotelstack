@@ -1,11 +1,3 @@
-/*=========================================================================================
-  File Name: main.js
-  Description: main vue(js) file
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
 
 
 import Vue from 'vue'
@@ -60,6 +52,8 @@ import moment from 'moment'
 window.moment = moment
 
 
+
+
 new Vue({
   store,
   router,
@@ -84,6 +78,8 @@ new Vue({
 }).$mount('#app')
 
 
+
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
@@ -101,4 +97,3 @@ router.beforeEach((to, from, next) => {
     next() // make sure to always call next()!
   }
 })
-

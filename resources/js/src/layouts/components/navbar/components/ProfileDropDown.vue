@@ -1,16 +1,20 @@
 <template>
-  <div class="the-navbar__user-meta flex items-center" v-if="hotelDetails.name">
+  <div
+    class="the-navbar__user-meta flex items-center"
+    v-if="activeUserInfo.user.name"
+  >
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{ hotelDetails.name }}</p>
-      <small>Available</small>
+      <p class="font-semibold">{{ activeUserInfo.user.name }}</p>
+      <!-- <small v-if="this.$online">Online</small> -->
+      <!-- <small v-else>Offline</small> -->
     </div>
 
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
       <div class="con-img ml-3">
         <img
-          v-if="activeUserInfo.photoURL"
+          v-if="photoURL"
           key="onlineImg"
-          :src="activeUserInfo.photoURL"
+          :src="photoURL"
           alt="user-img"
           width="40"
           height="40"
@@ -47,14 +51,16 @@
 import { mapGetters } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      photoURL: require("@assets/images/portrait/small/favicon.png"), // From Auth
+    };
   },
   computed: {
     activeUserInfo() {
       return this.$store.state.AppActiveUser;
     },
     ...mapGetters(["isLogged"]),
-    ...mapGetters({ hotelDetails: "getHotelDetails" }),
+    ...mapGetters({ activeUserInfo: "getUserData" }),
   },
   methods: {
     logout() {
@@ -63,6 +69,9 @@ export default {
         this.$router.push({ name: "login" }).catch(() => {});
       });
     },
+  },
+  created() {
+    // this.$store.dispatch("RETRIEVE_ACTIVE_USER_DETAILS");
   },
 };
 </script>

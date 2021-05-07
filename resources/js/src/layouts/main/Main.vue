@@ -1,21 +1,25 @@
-<!-- =========================================================================================
-    File Name: Main.vue
-    Description: Main layout
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-    Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
-========================================================================================== -->
 
 
 <template>
   <div
     class="layout--main"
-    :class="[layoutTypeClass, navbarClasses, footerClasses, {'no-scroll': isAppPage}]"
+    :class="[
+      layoutTypeClass,
+      navbarClasses,
+      footerClasses,
+      { 'no-scroll': isAppPage },
+    ]"
   >
-    <v-nav-menu :navMenuItems="navMenuItems" title="HotelStack" parent=".layout--main" />
+    <v-nav-menu
+      :navMenuItems="navMenuItems"
+      title="HotelStack"
+      parent=".layout--main"
+    />
 
-    <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
+    <div
+      id="content-area"
+      :class="[contentAreaClass, { 'show-overlay': bodyOverlay }]"
+    >
       <div id="content-overlay" />
 
       <!-- Navbar -->
@@ -23,18 +27,18 @@
         <the-navbar-horizontal
           :navbarType="navbarType"
           :class="[
-          {'text-white' : isNavbarDark  && !isThemeDark},
-          {'text-base'  : !isNavbarDark && isThemeDark}
-        ]"
+            { 'text-white': isNavbarDark && !isThemeDark },
+            { 'text-base': !isNavbarDark && isThemeDark },
+          ]"
         />
 
         <div style="height: 62px" v-if="navbarType === 'static'"></div>
 
         <h-nav-menu
           :class="[
-          {'text-white' : isNavbarDark  && !isThemeDark},
-          {'text-base'  : !isNavbarDark && isThemeDark}
-        ]"
+            { 'text-white': isNavbarDark && !isThemeDark },
+            { 'text-base': !isNavbarDark && isThemeDark },
+          ]"
           :navMenuItems="navMenuItems"
         />
       </template>
@@ -43,9 +47,9 @@
         <the-navbar-vertical
           :navbarColor="navbarColor"
           :class="[
-          {'text-white' : isNavbarDark  && !isThemeDark},
-          {'text-base'  : !isNavbarDark && isThemeDark}
-        ]"
+            { 'text-white': isNavbarDark && !isThemeDark },
+            { 'text-base': !isNavbarDark && isThemeDark },
+          ]"
         />
       </template>
       <!-- /Navbar -->
@@ -60,7 +64,10 @@
               >
                 <div
                   class="content-area__heading"
-                  :class="{'pr-4 border-0 md:border-r border-solid border-grey-light' : $route.meta.breadcrumb}"
+                  :class="{
+                    'pr-4 border-0 md:border-r border-solid border-grey-light':
+                      $route.meta.breadcrumb,
+                  }"
                 >
                   <h2 class="mb-1">{{ routeTitle }}</h2>
                 </div>
@@ -74,7 +81,10 @@
                 />
 
                 <!-- DROPDOWN -->
-                <vs-dropdown vs-trigger-click class="ml-auto md:block hidden cursor-pointer">
+                <vs-dropdown
+                  vs-trigger-click
+                  class="ml-auto md:block hidden cursor-pointer"
+                >
                   <vs-button radius icon="icon-settings" icon-pack="feather" />
 
                   <vs-dropdown-menu class="w-32">
@@ -140,7 +150,9 @@
                 <router-view
                   :key="$route.fullPath"
                   @changeRouteTitle="changeRouteTitle"
-                  @setAppClasses="(classesStr) => $emit('setAppClasses', classesStr)"
+                  @setAppClasses="
+                    (classesStr) => $emit('setAppClasses', classesStr)
+                  "
                 />
               </transition>
             </div>

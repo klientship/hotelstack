@@ -53,7 +53,7 @@
             svgClasses="h-8 w-8"
           ></feather-icon>
           <h1 class="mb-6 text-white">
-            {{ greeting }} {{ hotelDetails.name }},
+            {{ greeting }} {{ activeUserDetails.user.name }},
           </h1>
           <p class="xl:w-3/4 lg:w-4/5 md:w-2/3 w-4/5 mx-auto text-white">
             You have gained
@@ -463,7 +463,7 @@ export default {
     ...mapGetters({ houseKeepings: "getHouseKeepings" }),
     ...mapGetters({ awaitingCheckouts: "getAwaitingCheckoutId" }),
     ...mapGetters({ oyoBookings: "getOyoBookingsId" }),
-    ...mapGetters({ hotelDetails: "getHotelDetails" }),
+    ...mapGetters({ activeUserDetails: "getUserData" }),
     ...mapGetters({ dashboardDetails: "getDashboardDetails" }),
     greeting() {
       const today = new Date();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use \stdClass;
+use App\Http\Resources\User as UserResource;
 
 class UserController extends Controller
 {
@@ -37,30 +38,43 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required|string|max:255',
+            'email'=>'required|string|max:255|email|unique:users,email,',
+            'phone' => ['string', 'max:255'],
+            'gst_no' => ['string', 'max:255'],
+            'address_line_1' => ['string', 'max:1000'],
+            'address_line_2' => ['string', 'max:1000'],
+            'zipcode' => ['string', 'max:255'],
+        ]);
+     
+        // dont allow user to update role & password
+        $input = $request->all();
+        if($input['role'])
+        {
+            unset($input['role']);
+        }
+        if($input['password'])
+        {
+            unset($input['password']);
+        }
+        $user->fill($input)->save();
+        return new UserResource($user);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+
+        return new UserResource($user);
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
      /**
      * Update the specified resource in storage.
@@ -92,7 +106,7 @@ class UserController extends Controller
             unset($input['password']);
         }
         $user->fill($input)->save();
-        return $user;
+        return new UserResource($user);
     }
     
      /**
@@ -125,7 +139,7 @@ class UserController extends Controller
             );
             
            
-             return \Response::json($returnData, 500);
+             return \Response::json($returnData, 422);
          }
     }
 
@@ -137,6 +151,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room->delete();
+        return response()->json(null,204);
     }
 }

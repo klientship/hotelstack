@@ -70,6 +70,12 @@ class UsersTableSeeder extends Seeder
             'password' => 'Vedanta123#',
             'role' => 'admin'
         ]);
+        User::create([
+            'name' => 'Hotelstack',
+            'email' => 'demo@hotelstack.in',
+            'password' => 'demo123@',
+            'role' => 'admin'
+        ]);
        
     }
 }

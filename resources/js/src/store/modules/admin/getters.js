@@ -109,6 +109,9 @@ const getters = {
     getWalkinBookingsRoomId(state) {
         return state.walkin_rooms_id
     },
+    // getActiveUserInfo(state) {
+    //     return state.activeUserInfo;
+    // }
 
 }
 

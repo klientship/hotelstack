@@ -2,7 +2,11 @@
   <vx-card no-shadow>
     <!-- Img Row -->
     <div class="flex flex-wrap items-center mb-base">
-      <vs-avatar :src="activeUserInfo.photoURL" size="70px" class="mr-4 mb-4" />
+      <vs-avatar
+        :src="activeUserInfo.user.photoURL"
+        size="70px"
+        class="mr-4 mb-4"
+      />
       <div>
         <vs-button class="mr-4 sm:mb-0 mb-2">Upload photo</vs-button>
         <vs-button type="border" color="danger">Remove</vs-button>
@@ -17,14 +21,14 @@
         <vs-input
           class="w-full"
           label-placeholder="Name"
-          v-model="name"
+          v-model="activeUserInfo.user.name"
         ></vs-input>
       </div>
       <div class="vx-col w-1/2">
         <vs-input
           class="w-full"
           label-placeholder="Email"
-          v-model="email"
+          v-model="activeUserInfo.user.email"
         ></vs-input>
       </div>
     </div>
@@ -34,42 +38,42 @@
         <vs-input
           class="w-full"
           label-placeholder="Mobile"
-          v-model="mobile"
+          v-model="activeUserInfo.user.phone"
         ></vs-input>
       </div>
       <div class="vx-col w-1/3">
         <vs-input
           class="w-full"
           label-placeholder="GST"
-          v-model="gst_no"
+          v-model="activeUserInfo.user.gst_no"
         ></vs-input>
       </div>
       <div class="vx-col w-1/3">
         <vs-input
           class="w-full"
           label-placeholder="Zipcode"
-          v-model="zipcode"
+          v-model="activeUserInfo.user.zipcode"
         ></vs-input>
       </div>
     </div>
     <vs-input
       class="w-full mb-base"
       label-placeholder="Invoice Title"
-      v-model="invoiceTitle"
+      v-model="activeUserInfo.user.invoice_title"
     ></vs-input>
     <div class="vx-row">
       <div class="vx-col w-1/2">
         <vs-textarea
           class="w-full"
           placeholder="Address Line 1"
-          v-model="addressLine1"
+          v-model="activeUserInfo.user.address_line_1"
         ></vs-textarea>
       </div>
       <div class="vx-col w-1/2">
         <vs-textarea
           class="w-full"
           placeholder="Address Line 2"
-          v-model="addressLine2"
+          v-model="activeUserInfo.user.address_line_2"
         ></vs-textarea>
       </div>
     </div>
@@ -85,21 +89,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
-    return {
-      username: "johny_01",
-      name: this.$store.state.AppActiveUser.displayName,
-      email: "john@admin.com",
-      invoiceTitle: "",
-      addressLine1: "",
-      addressLine2: "",
-    };
+    return {};
   },
   computed: {
-    activeUserInfo() {
-      return this.$store.state.AppActiveUser;
-    },
+    ...mapGetters({ activeUserInfo: "getUserData" }),
+  },
+  created() {
+    this.$store.dispatch("RETRIEVE_ACTIVE_USER_DETAILS");
   },
 };
 </script>

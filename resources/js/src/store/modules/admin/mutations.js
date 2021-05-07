@@ -180,6 +180,9 @@ const mutations = {
     RETRIEVE_WALKIN_BOOKINGS_ROOMS_ID(state, walkin_rooms_id) {
         state.walkin_rooms_id = walkin_rooms_id;
     },
+    // RETRIEVE_ACTIVE_USER_DETAILS(state, active_user) {
+    //     state.activeUserInfo = active_user
+    // }
 }
 
 export default mutations

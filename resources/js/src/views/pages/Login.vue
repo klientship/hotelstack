@@ -18,7 +18,11 @@
         <div slot="no-body" class="full-page-bg-color">
           <div class="vx-row no-gutter justify-center items-center">
             <div class="vx-col hidden lg:block lg:w-1/2">
-              <img src="@assets/images/pages/login.png" alt="login" class="mx-auto" />
+              <img
+                src="@assets/images/pages/login.png"
+                alt="login"
+                class="mx-auto"
+              />
             </div>
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
@@ -31,9 +35,13 @@
                     closable
                     close-icon="close"
                     color="danger"
-                  >Oops..Make sure you have entered correct email and password</vs-alert>
+                    >Oops..Make sure you have entered correct email and
+                    password</vs-alert
+                  >
 
-                  <p class="mt-4 mb-4">Welcome back, please login to your account.</p>
+                  <p class="mt-4 mb-4">
+                    Welcome back, please login to your account.
+                  </p>
                 </div>
 
                 <div>
@@ -60,11 +68,22 @@
                   />
 
                   <div class="flex flex-wrap justify-between my-5">
-                    <vs-checkbox v-model="checkbox_remember_me" class="mb-3">Remember Me</vs-checkbox>
+                    <vs-checkbox v-model="checkbox_remember_me" class="mb-3"
+                      >Remember Me</vs-checkbox
+                    >
                     <!-- <router-link to>Forgot Password?</router-link> -->
                   </div>
                   <!-- <vs-button type="border">Register</vs-button> -->
-                  <vs-button class="float-right" @click="login">Login</vs-button>
+                  <vs-button
+                    class="float-left"
+                    color="success"
+                    type="border"
+                    @click="demoLogin"
+                    >Demo Login</vs-button
+                  >
+                  <vs-button class="float-right" @click="login"
+                    >Login</vs-button
+                  >
 
                   <vs-divider>HotelStack</vs-divider>
                 </div>
@@ -86,7 +105,7 @@ export default {
       password: "",
       errorMsg: "",
       isError: false,
-      checkbox_remember_me: false
+      checkbox_remember_me: false,
     };
   },
   methods: {
@@ -95,7 +114,7 @@ export default {
       this.$store
         .dispatch("login", {
           email: this.email,
-          password: this.password
+          password: this.password,
         })
         .then(() => {
           this.email = "";
@@ -109,10 +128,15 @@ export default {
           //   window.location = "/customer";
           // }
         })
-        .catch(err => {
+        .catch((err) => {
           this.isError = true;
           // this.errorMsg = err.message;
         });
+    },
+    demoLogin() {
+      this.email = "demo@hotelstack.in";
+      this.password = "demo123@";
+      this.login();
     },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
@@ -127,8 +151,8 @@ export default {
       } else {
         x.type = "password";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
