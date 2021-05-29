@@ -153,4 +153,7 @@ Route::group([], function()
     Route::apiResource("/user", 'UserController');
     Route::patch("/user/{user}/reset_password", 'UserController@reset_password');
 
+    // file upload
+    Route::post('/upload/{user}', "FileController@upload");
+
 });

@@ -12,9 +12,9 @@
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
       <div class="con-img ml-3">
         <img
-          v-if="photoURL"
+          v-if="activeUserInfo.user.profile_img"
           key="onlineImg"
-          :src="photoURL"
+          :src="activeUserInfo.user.profile_img"
           alt="user-img"
           width="40"
           height="40"

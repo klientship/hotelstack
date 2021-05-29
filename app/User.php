@@ -56,4 +56,7 @@ class User extends Authenticatable
     public function reservation() {
         return $this->hasMany(Reservation::class,'guest_id','id');
     }
+    public function profile_img() {
+        return $this->hasOne(FileUpload::class,'id', 'profile_img_id');
+    }
 }

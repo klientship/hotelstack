@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->text('address_line_1')->nullable();
             $table->text('address_line_2')->nullable();
             $table->text('invoice_title')->nullable();
+            $table->text('profile_img_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -27,6 +27,7 @@ class User extends JsonResource
             'address_line_1' => $this->address_line_1,
             'address_line_2' => $this->address_line_2,
             'invoice_title' => $this->invoice_title,
+            'profile_img' => env('APP_URL')."".$this->profile_img->path,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

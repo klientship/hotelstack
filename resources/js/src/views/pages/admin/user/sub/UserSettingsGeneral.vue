@@ -5,10 +5,18 @@
     <!-- End ERRORS -->
     <!-- Img Row -->
     <div class="flex flex-wrap items-center mb-base">
-      <vs-avatar :src="form.photoURL" size="70px" class="mr-4 mb-4" />
+      <vs-avatar :src="form.profile_img" size="70px" class="mr-4 mb-4" />
       <div>
-        <vs-button class="mr-4 sm:mb-0 mb-2">Upload photo</vs-button>
-        <vs-button type="border" color="danger">Remove</vs-button>
+        <vs-upload
+          fileName="file"
+          automatic
+          :action="uploadUrl"
+          @on-success="successUpload"
+          @on-error="errorUpload"
+          accept="png"
+        />
+
+        <!-- <vs-button type="border" color="danger">Remove</vs-button> -->
         <p class="text-sm mt-2">Allowed JPG, GIF or PNG. Max size of 800kB</p>
       </div>
     </div>
@@ -101,6 +109,7 @@ export default {
         invoice_title: "",
         address_line_1: "",
         address_line_2: "",
+        profile_img: "",
       }),
     };
   },
@@ -118,8 +127,24 @@ export default {
         })
         .catch();
     },
+    successUpload() {
+      this.$store.dispatch("RETRIEVE_ACTIVE_USER_DETAILS");
+      const user = this.$store.getters.getUserData.user;
+      this.form.profile_img = user.profile_img;
+    },
+    errorUpload() {
+      this.$vs.notify({
+        color: "danger",
+        title: "Failed",
+        text: `Something went wrong.`,
+      });
+    },
   },
-  computed: {},
+  computed: {
+    uploadUrl() {
+      return `/api/upload/${this.form.id}`;
+    },
+  },
   created() {
     this.$store.dispatch("RETRIEVE_ACTIVE_USER_DETAILS");
     const user = this.$store.getters.getUserData.user;
