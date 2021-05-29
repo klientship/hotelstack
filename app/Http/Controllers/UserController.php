@@ -88,23 +88,23 @@ class UserController extends Controller
         $this->validate($request,[
             'name'=>'required|string|max:255',
             'email'=>'required|string|max:255|email|unique:users,email,'.$user->id,
-            'phone' => ['string', 'max:255'],
-            'gst_no' => ['string', 'max:255'],
-            'address_line_1' => ['string', 'max:1000'],
-            'address_line_2' => ['string', 'max:1000'],
-            'zipcode' => ['string', 'max:255'],
+            'phone' => 'required|string|max:255',
+            'gst_no' => 'required|string|max:255',
+            'address_line_1' => 'required|string|max:1000',
+            'address_line_2' => 'required|string|max:1000',
+            'zipcode' => 'required|string|max:255',
         ]);
      
         // dont allow user to update role & password
         $input = $request->all();
-        if($input['role'])
-        {
-            unset($input['role']);
-        }
-        if($input['password'])
-        {
-            unset($input['password']);
-        }
+        // if($input['role'])
+        // {
+        //     unset($input['role']);
+        // }
+        // if($input['password'])
+        // {
+        //     unset($input['password']);
+        // }
         $user->fill($input)->save();
         return new UserResource($user);
     }

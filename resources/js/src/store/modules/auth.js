@@ -10,10 +10,14 @@ export default {
             state.user = userData
             localStorage.setItem('user', JSON.stringify(userData))
             axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`
-            console.log(state.user)
         },
         updateUserData(state, userData) {
             state.user.user = userData
+            let userLocalData = localStorage.getItem('user');
+            console.log(userLocalData)
+            userLocalData = JSON.parse(userLocalData)
+            userLocalData.user = userData
+            localStorage.setItem('user', JSON.stringify(userLocalData))
         },
 
         clearUserData() {
