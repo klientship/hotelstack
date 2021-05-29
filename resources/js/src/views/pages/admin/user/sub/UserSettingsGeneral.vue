@@ -13,7 +13,7 @@
           :action="uploadUrl"
           @on-success="successUpload"
           @on-error="errorUpload"
-          accept="png"
+          limit="1"
         />
 
         <!-- <vs-button type="border" color="danger">Remove</vs-button> -->

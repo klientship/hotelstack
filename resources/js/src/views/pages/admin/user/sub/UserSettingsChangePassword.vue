@@ -1,31 +1,68 @@
 <template>
   <vx-card no-shadow>
-
-    <vs-input class="w-full mb-base" label-placeholder="Old Password" v-model="old_password" />
-    <vs-input class="w-full mb-base" label-placeholder="New Password" v-model="new_password" />
-    <vs-input class="w-full mb-base" label-placeholder="Confirm Password" v-model="confirm_new_password" />
+    <!-- ERRORS -->
+    <display-error :form="form"></display-error>
+    <!-- End ERRORS -->
+    <vs-input
+      class="w-full mb-base"
+      label-placeholder="Old Password"
+      v-model="form.password"
+    />
+    <vs-input
+      class="w-full mb-base"
+      label-placeholder="New Password"
+      v-model="form.new_password"
+    />
+    <vs-input
+      class="w-full mb-base"
+      label-placeholder="Confirm Password"
+      v-model="form.confirm_new_password"
+    />
 
     <!-- Save & Reset Button -->
     <div class="flex flex-wrap items-center justify-end">
-      <vs-button class="ml-auto mt-2">Save Changes</vs-button>
-      <vs-button class="ml-4 mt-2" type="border" color="warning">Reset</vs-button>
+      <vs-button class="ml-auto mt-2" @click="update">Update</vs-button>
     </div>
   </vx-card>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      old_password: '',
-      new_password: '',
-      confirm_new_password: ''
-    }
+      form: new Form({
+        password: "",
+        new_password: "",
+        confirm_new_password: "",
+      }),
+    };
   },
   computed: {
-    activeUserInfo () {
-      return this.$store.state.AppActiveUser
-    }
-  }
-}
+    activeUserInfo() {
+      return this.$store.state.AppActiveUser;
+    },
+    user() {
+      return this.$store.getters.getUserData.user;
+    },
+  },
+  methods: {
+    update() {
+      this.form
+        .submit("patch", `/api/user/${this.user.id}/reset_password`)
+        .then(() => {
+          this.$store.dispatch("RETRIEVE_ACTIVE_USER_DETAILS");
+          this.$vs.notify({
+            color: "success",
+            title: "Updated",
+            text: `User password updated successfully.`,
+          });
+        })
+        .catch();
+    },
+  },
+
+  created() {
+    this.$store.dispatch("RETRIEVE_ACTIVE_USER_DETAILS");
+  },
+};
 </script>
