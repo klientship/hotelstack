@@ -8,7 +8,7 @@ Hotelstack is a Complete Hotel Room Booking system comes with a unique, gorgeous
 + TailwindCSS
 + Vuex
 
-![](https://i.ibb.co/8K9nqWn/work-5.jpg)
+![](https://raw.githubusercontent.com/klientship/hotelstack/master/work-5.jpg)
 
 ### Author
 
